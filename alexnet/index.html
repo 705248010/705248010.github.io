@@ -26,7 +26,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/705248010.github.io\/alexnet\/"
-        },"genre": "posts","keywords": "CNN, AlexNet, 卷积神经网络","wordcount":  7476 ,
+        },"genre": "posts","keywords": "CNN, AlexNet, 卷积神经网络","wordcount":  7740 ,
         "url": "https:\/\/705248010.github.io\/alexnet\/","datePublished": "2021-11-27T15:26:07+08:00","dateModified": "2021-11-27T15:26:07+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -112,8 +112,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">AlexNet</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/705248010" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>Kurong123</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"><i class="far fa-folder fa-fw"></i>卷积神经网络</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar fa-fw"></i>&nbsp;<time datetime="2021-11-27">2021-11-27</time>&nbsp;<i class="far fa-calendar-plus fa-fw"></i>&nbsp;<time datetime="2021-11-27">2021-11-27</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 7476 字&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 15 分钟&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar fa-fw"></i>&nbsp;<time datetime="2021-11-27">2021-11-27</time>&nbsp;<i class="far fa-calendar-plus fa-fw"></i>&nbsp;<time datetime="2021-11-27">2021-11-27</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 7740 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 16 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
                     <span>目录</span>
@@ -232,6 +232,19 @@ b^i_{x,y}=a^i_{x,y}/(k+α\sum_{j=max(0,i−n/2)}^{min(N−1,i+n/2)}(a^i_{x,y})^2
 $$
 求和运算在$n$个“毗邻的”核映射的同一位置上执行，$N$是本层的卷积核数目。核映射的顺序当然是任意的，在训练开始前确定。响应归一化的顺序实现了一种侧抑制形式，灵感来自于真实神经元中发现的类型，为使用不同核进行神经元输出计算的较大活动创造了竞争。常量$k$，$n$，$α$，$β$是超参数，它们的值通过验证集确定。在本文中，设$k=2$，$n=5$，$α=0.0001$，$β=0.75$。在特定的层使用的ReLU非线性之后应用了这种归一化。</p>
 <p>这个方案与Jarrett等人[11]的局部对比度归一化方案有一定的相似性，但更恰当的称其为“亮度归一化”，因此没有减去均值。响应归一化分别减少了top-1：1.4%，top-5：1.2%的错误率。之后在CIFAR-10数据集上验证了这个方案的有效性：一个四层CNN取得了13%的错误率，而使用归一化取得了11%的错误率。</p>
+<div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw"></i>信息<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>Local Response Normalization(LRN)，局部响应归一化层。</p>
+<p>首先要引入一个神经生物学的概念：<strong>侧抑制（lateral inhibitio），即指被激活的神经元抑制相邻的神经元。<strong>归一化（normaliazation）的目的就是</strong>“抑制”</strong>，LRN就是借鉴这种侧抑制来实现局部抑制，尤其是我们使用RELU的时候，这种“侧抑制”很有效 ，因而在alexnet里使用有较好的效果。</p>
+<p>LRN的好处？</p>
+<p><strong>1.归一化有助于快速收敛；
+2.对局部神经元的活动创建竞争机制，使得其中响应比较大的值变得相对更大，并抑制其他反馈较小的神经元，增强了模型的泛化能力。</strong></p>
+</div>
+        </div>
+    </div>
 <h3 id="34-overlapping-pooling">3.4 Overlapping Pooling</h3>
 <p>CNN中的池化层归纳了同一核映射上相邻组神经元的输出。习惯上，相邻池化单元归纳的区域是不重叠的（例如[17, 11, 4]）。更确切的说，池化层可看作由池化单元网格组成，网格间距为$s$个像素，每个网格归纳池化单元中心位置$z\times z$大小的邻居。如果设置$s=z$，会得到通常在CNN中采用的传统局部池化。如果设置$s&lt;z$，会得到重叠池化。这就是本文网络中使用的方法，设置$s=2$，$z=3$。这个方案分别降低了top-1：0.4%，top-5：0.3%的错误率，与非重叠方案$s=2$，$z=2$相比，输出的维度是相等的。在训练过程中通常观察采用重叠池化的模型，发现它更难过拟合。</p>
 <div class="details admonition info open">
