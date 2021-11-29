@@ -12,6 +12,6 @@
     <pubDate>Sat, 27 Nov 2021 15:26:07 &#43;0800</pubDate>
     <author>作者</author>
     <guid>https://705248010.github.io/alexnet/</guid>
-    <description><![CDATA[AlexNet Notes Abstract 在2010的ImageNet LSVRC比赛上取得了第一，TOP-1：37.5%，TOP-5：15.3%，远远超过第二名的TOP-5：2]]></description>
+    <description><![CDATA[AlexNet Notes Abstract 本文模型在2010的ImageNet LSVRC比赛数据集上取得了第一，top-1：37.5%，top-5：15.3%，远远超过第二名的]]></description>
 </item></channel>
 </rss>
