@@ -1,0 +1,15 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>炼丹方要 - 分类 - Kurong123&#39;s Blog</title>
+        <link>https://705248010.github.io/categories/%E7%82%BC%E4%B8%B9%E6%96%B9%E8%A6%81/</link>
+        <description>炼丹方要 - 分类 - Kurong123&#39;s Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>705248010@qq.com (Kurong123)</managingEditor>
+            <webMaster>705248010@qq.com (Kurong123)</webMaster><lastBuildDate>Mon, 29 Nov 2021 22:17:06 &#43;0800</lastBuildDate><atom:link href="https://705248010.github.io/categories/%E7%82%BC%E4%B8%B9%E6%96%B9%E8%A6%81/" rel="self" type="application/rss+xml" /><item>
+    <title>AlexNet_tricks</title>
+    <link>https://705248010.github.io/alexnet_tricks/</link>
+    <pubDate>Mon, 29 Nov 2021 22:17:06 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://705248010.github.io/alexnet_tricks/</guid>
+    <description><![CDATA[AlexNet_tricks 1. ReLU 使用ReLU一样的非饱和激活函数加速网络的收敛。 2. LRN 局部响应归一化层 归一化层的一种，效果类似BN，同样可以加速收敛、提高泛化。 3. 亮度增]]></description>
+</item></channel>
+</rss>

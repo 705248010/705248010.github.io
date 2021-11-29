@@ -17,7 +17,7 @@
 <meta name="twitter:title" content="AlexNet"/>
 <meta name="twitter:description" content="AlexNet Notes Abstract 本文模型在2010的ImageNet LSVRC比赛数据集上取得了第一，top-1：37.5%，top-5：15.3%，远远超过第二名的"/>
 <meta name="application-name" content="LoveIt">
-<meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="canonical" href="https://705248010.github.io/alexnet/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+<meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="canonical" href="https://705248010.github.io/alexnet/" /><link rel="next" href="https://705248010.github.io/alexnet_tricks/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
@@ -26,7 +26,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/705248010.github.io\/alexnet\/"
-        },"genre": "posts","keywords": "CNN, AlexNet, 卷积神经网络","wordcount":  7740 ,
+        },"genre": "posts","keywords": "CNN, AlexNet, 卷积神经网络","wordcount":  7734 ,
         "url": "https:\/\/705248010.github.io\/alexnet\/","datePublished": "2021-11-27T15:26:07+08:00","dateModified": "2021-11-27T15:26:07+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -112,7 +112,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">AlexNet</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/705248010" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>Kurong123</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"><i class="far fa-folder fa-fw"></i>卷积神经网络</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar fa-fw"></i>&nbsp;<time datetime="2021-11-27">2021-11-27</time>&nbsp;<i class="far fa-calendar-plus fa-fw"></i>&nbsp;<time datetime="2021-11-27">2021-11-27</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 7740 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar fa-fw"></i>&nbsp;<time datetime="2021-11-27">2021-11-27</time>&nbsp;<i class="far fa-calendar-plus fa-fw"></i>&nbsp;<time datetime="2021-11-27">2021-11-27</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 7734 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 16 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -273,7 +273,7 @@ $$
 <h3 id="41-data-augmentation">4.1 Data Augmentation</h3>
 <p>图像数据上最简单常用的用来减少过拟合的方法是使用标签保留变换（例如[25, 4, 5]）来人工增大数据集。这里使用了两种独特的数据增强方式，这两种方式都可以从原始图像通过非常少的计算量产生变换的图像。在本文的实现中，变换图像通过CPU的Python代码生成，而此时GPU正在训练前一批图像。</p>
 <p>一种数据增强方式包括产生图像变换和水平翻转。先从256×256图像上通过随机提取224 × 224的图像块，然后在这些提取的图像块上进行训练。这使训练集的规模增加了2048倍，当然，由此产生的训练实例是高度相互依赖的。没有这个方案，网络会有大量的过拟合。在测试时，网络会提取5个224 × 224的图像块（四个角上的图像块和中心的图像块）和它们的水平翻转（因此总共10个图像块）进行预测，然后对网络在10个图像块上的softmax层进行平均。</p>
-<p>第二种数据增强方式包括改变训练图像的RGB通道的强度。具体地，我们在整个ImageNet训练集上对RGB像素值集合执行PCA。对于每幅训练图像，我们加上多倍找到的主成分，大小成正比的对应特征值乘以一个随机变量，随机变量通过均值为0，标准差为0.1的高斯分布得到。因此对于每幅RGB图像像素$I_{x}y=[I^R_{xy},I^G_{xy},I^B_{xy}]^T$，我们加上下面的数量：
+<p>第二种数据增强方式包括改变训练图像的RGB通道的强度。具体地，在整个ImageNet训练集上对RGB像素值集合执行PCA。对于每幅训练图像，加上多倍找到的主成分，大小成正比的对应特征值乘以一个随机变量，随机变量通过均值为0，标准差为0.1的高斯分布得到。因此对于每幅RGB图像像素$I_{x}y=[I^R_{xy},I^G_{xy},I^B_{xy}]^T$，加上下面的数量：
 $$
 [p_1,p_2,p_3][\alpha_1\lambda_1,\alpha_2\lambda_2,\alpha_3\lambda_3]^T
 $$
@@ -410,7 +410,8 @@ $p_i$，$λ_i$分别是RGB像素值3 × 3协方差矩阵的第$i$个特征向量
         </section>
     </div>
 
-    <div class="post-nav"></div>
+    <div class="post-nav">
+            <a href="/alexnet_tricks/" class="next" rel="next" title="AlexNet_tricks">AlexNet_tricks<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
 </article></div>
             </main><footer class="footer">
