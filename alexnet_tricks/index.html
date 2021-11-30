@@ -17,7 +17,7 @@
 <meta name="twitter:title" content="AlexNet_tricks"/>
 <meta name="twitter:description" content="AlexNet_tricks 1. ReLU 使用ReLU一样的非饱和激活函数加速网络的收敛。 2. LRN 局部响应归一化层 归一化层的一种，效果类似BN，同样可以加速收敛、提高泛化。 3. 亮度增"/>
 <meta name="application-name" content="LoveIt">
-<meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="canonical" href="https://705248010.github.io/alexnet_tricks/" /><link rel="prev" href="https://705248010.github.io/alexnet/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+<meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="canonical" href="https://705248010.github.io/alexnet_tricks/" /><link rel="prev" href="https://705248010.github.io/alexnet/" /><link rel="next" href="https://705248010.github.io/vgg/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
@@ -26,7 +26,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/705248010.github.io\/alexnet_tricks\/"
-        },"genre": "posts","keywords": "CNN, AlexNet, 卷积神经网络, Tricks","wordcount":  359 ,
+        },"genre": "posts","keywords": "CNN, AlexNet, 卷积神经网络, Tricks, Image Classification","wordcount":  359 ,
         "url": "https:\/\/705248010.github.io\/alexnet_tricks\/","datePublished": "2021-11-29T22:17:06+08:00","dateModified": "2021-11-29T22:17:06+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -153,19 +153,20 @@ $p_i$，$λ_i$分别是RGB像素值3 × 3协方差矩阵的第$i$个特征向量
                             <a class="link-to-markdown" href="/alexnet_tricks/index.md" target="_blank">阅读原始文档</a>
                         </span></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://705248010.github.io/alexnet_tricks/" data-title="AlexNet_tricks" data-via="xxxx" data-hashtags="CNN,AlexNet,卷积神经网络,Tricks"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://705248010.github.io/alexnet_tricks/" data-hashtag="CNN"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://705248010.github.io/alexnet_tricks/" data-title="AlexNet_tricks"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://705248010.github.io/alexnet_tricks/" data-title="AlexNet_tricks" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></i></a><a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://705248010.github.io/alexnet_tricks/" data-title="AlexNet_tricks" data-description=""><i class="fab fa-blogger fa-fw"></i></a><a href="javascript:void(0);" title="分享到 百度" data-sharer="baidu" data-url="https://705248010.github.io/alexnet_tricks/" data-title="AlexNet_tricks"><i data-svg-src="/lib/simple-icons/icons/baidu.min.svg"></i></a></span>
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://705248010.github.io/alexnet_tricks/" data-title="AlexNet_tricks" data-via="xxxx" data-hashtags="CNN,AlexNet,卷积神经网络,Tricks,Image Classification"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://705248010.github.io/alexnet_tricks/" data-hashtag="CNN"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://705248010.github.io/alexnet_tricks/" data-title="AlexNet_tricks"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://705248010.github.io/alexnet_tricks/" data-title="AlexNet_tricks" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></i></a><a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://705248010.github.io/alexnet_tricks/" data-title="AlexNet_tricks" data-description=""><i class="fab fa-blogger fa-fw"></i></a><a href="javascript:void(0);" title="分享到 百度" data-sharer="baidu" data-url="https://705248010.github.io/alexnet_tricks/" data-title="AlexNet_tricks"><i data-svg-src="/lib/simple-icons/icons/baidu.min.svg"></i></a></span>
             </div>
         </div>
     </div>
 
     <div class="post-info-more">
-        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/cnn/">CNN</a>,&nbsp;<a href="/tags/alexnet/">AlexNet</a>,&nbsp;<a href="/tags/%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/">卷积神经网络</a>,&nbsp;<a href="/tags/tricks/">Tricks</a></section>
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/cnn/">CNN</a>,&nbsp;<a href="/tags/alexnet/">AlexNet</a>,&nbsp;<a href="/tags/%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/">卷积神经网络</a>,&nbsp;<a href="/tags/tricks/">Tricks</a>,&nbsp;<a href="/tags/image-classification/">Image Classification</a></section>
         <section>
             <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
         </section>
     </div>
 
-    <div class="post-nav"><a href="/alexnet/" class="prev" rel="prev" title="AlexNet"><i class="fas fa-angle-left fa-fw"></i>AlexNet</a></div>
+    <div class="post-nav"><a href="/alexnet/" class="prev" rel="prev" title="AlexNet"><i class="fas fa-angle-left fa-fw"></i>AlexNet</a>
+            <a href="/vgg/" class="next" rel="next" title="VGG">VGG<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
 </article></div>
             </main><footer class="footer">
