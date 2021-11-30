@@ -12,7 +12,7 @@
     <pubDate>Tue, 30 Nov 2021 13:46:57 &#43;0800</pubDate>
     <author>作者</author>
     <guid>https://705248010.github.io/vgg/</guid>
-    <description><![CDATA[技巧 下采样步骤：给定一个矩形图像，首先缩放图像短边长度为256，然后从结果图像中裁剪中心的256×256大小的图像块。 VGG ABSTRACT 1 INTRODUCTION 2 CONVNET CONFIGURATIONS 2.1 ARCHITECTURE 2.2 CONFIGURATIONS]]></description>
+    <description><![CDATA[VGG ABSTRACT 本文研究了卷积网络深度在大规模的图像识别环境下对准确性的影响。主要贡献是使用非常小的（3×3）卷积滤波器架构对网络深度的增加进行了全面评]]></description>
 </item><item>
     <title>AlexNet_tricks</title>
     <link>https://705248010.github.io/alexnet_tricks/</link>
