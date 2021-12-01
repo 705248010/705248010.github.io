@@ -162,17 +162,9 @@ $Q=S−32,S,S+32$。同时，训练时的尺度抖动允许网络在测试时应
 
 
 
-{{< admonition tip>}}
-
-下采样步骤：给定一个矩形图像，首先缩放图像短边长度为256，然后从结果图像中裁剪中心的`256×256`大小的图像块。
-
-{{< /admonition >}}
-
-
-
 ## REFERENCES
 
-{{< admonition quote false>}}
+{{< admonition quote "引用" false>}}
 
 Bell, S., Upchurch, P., Snavely, N., and Bala, K. Material recognition in the wild with the materials in context database. CoRR, abs/1412.0623, 2014.
 
