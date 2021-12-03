@@ -26,7 +26,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/705248010.github.io\/googlenetv1\/"
-        },"genre": "posts","keywords": "CNN, GoogleNet, 卷积神经网络, Image Classification","wordcount":  4311 ,
+        },"genre": "posts","keywords": "CNN, GoogleNet, 卷积神经网络, Image Classification","wordcount":  10694 ,
         "url": "https:\/\/705248010.github.io\/googlenetv1\/","datePublished": "2021-12-01T21:04:34+08:00","dateModified": "2021-12-01T21:04:34+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -112,8 +112,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">GoogleNetV1</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/705248010" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>Kurong123</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"><i class="far fa-folder fa-fw"></i>卷积神经网络</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar fa-fw"></i>&nbsp;<time datetime="2021-12-01">2021-12-01</time>&nbsp;<i class="far fa-calendar-plus fa-fw"></i>&nbsp;<time datetime="2021-12-01">2021-12-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 4311 字&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 9 分钟&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar fa-fw"></i>&nbsp;<time datetime="2021-12-01">2021-12-01</time>&nbsp;<i class="far fa-calendar-plus fa-fw"></i>&nbsp;<time datetime="2021-12-01">2021-12-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 10694 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 22 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
                     <span>目录</span>
@@ -140,12 +140,38 @@
 <h2 id="1-introduction">1. Introduction</h2>
 <p>过去三年中，由于深度学习和卷积网络的发展[10]，目标分类和检测能力得到了显著提高。一个令人鼓舞的消息是，大部分的进步不仅仅是更强大硬件、更大数据集、更大模型的结果，而主要是新的想法、算法和网络结构改进的结果。例如，ILSVRC 2014竞赛中最靠前的输入除了用于检测目的的分类数据集之外，没有使用新的数据资源。本文在ILSVRC 2014中的GoogLeNet提交实际使用的参数只有两年前Krizhevsky等人[9]获胜结构参数的1/12，而结果明显更准确。在目标检测前沿，最大的收获不是来自于越来越大的深度网络的简单应用，而是来自于深度架构和经典计算机视觉的协同，像Girshick等人[6]的R-CNN算法那样。</p>
 <p>**另一个显著因素是随着移动和嵌入式设备的推动，算法的效率很重要——尤其是它们的电力和内存使用。值得注意的是，正是包含了这个因素的考虑才得出了本文中呈现的深度架构设计，而不是单纯的为了提高准确率。**对于大多数实验来说，模型被设计为在一次推断中保持15亿乘加的计算预算，所以最终它们不是单纯的学术好奇心，而是能在现实世界中应用，甚至是以合理的代价在大型数据集上使用。</p>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw"></i>技巧<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">本文作者考虑到在终端设备上的应用所以才提出了Inception，这也影响了后续的Xception和MobileNet。（猜测）</div>
+        </div>
+    </div>
 <p>在本文中将关注一个高效的计算机视觉深度神经网络架构，代号为Inception，它的名字来自于Lin等人[12]网络论文中的Network与著名的“we need to go deeper”网络梗图[1]的结合。在本文的案例中，单词“deep”用在两个不同的含义中：首先，在某种意义上，以“Inception module”的形式引入了一种新层次的组织方式，在更直接的意义上增加了网络的深度。一般来说，可以把Inception模型看作论文[12]的逻辑顶点同时从Arora等人[2]的理论工作中受到了鼓舞和引导。这种架构的好处在ILSVRC 2014分类和检测挑战赛中通过实验得到了验证，它明显优于目前的最好水平。</p>
 <h2 id="2-related-work">2. Related Work</h2>
 <p>从LeNet-5 [10]开始，卷积神经网络（CNN）通常有一个标准结构——堆叠的卷积层（后面可以选择有对比归一化和最大池化）后面是一个或更多的全连接层。这个基本设计的变种在图像分类论文中流行，并且目前为止在MNIST，CIFAR和更著名的ImageNet分类挑战赛中[9, 21]的已经取得了最佳结果。对于更大的数据集例如ImageNet来说，最近的趋势是增加层的数目[12]和层的大小[21, 14]，同时使用dropout[7]来解决过拟合问题。</p>
 <p>尽管担心最大池化层会引起准确空间信息的损失，但与[9]相同的卷积网络结构也已经成功的应用于定位[9, 14]，目标检测[6, 14, 18, 5]和行人姿态估计[19]。</p>
 <p>**受灵长类视觉皮层神经科学模型的启发，Serre等人[15]使用了一系列固定的不同大小的Gabor滤波器来处理多尺度。本文使用一个了类似的策略。**然而，与[15]的固定的2层深度模型相反，Inception结构中所有的滤波器是学习到的。此外，Inception层重复了很多次，在GoogLeNet模型中得到了一个22层的深度模型。</p>
 <p>Network-in-Network是Lin等人[12]为了增加神经网络表现能力而提出的一种方法。在他们的模型中，网络中添加了额外的1 × 1卷积层，增加了网络的深度。本文的架构中大量的使用了这个方法。<strong>但是，在本文的设置中，1 × 1卷积有两个目的：最关键的是，它们主要是用来作为降维模块来移除卷积瓶颈，否则将会限制网络的大小。这不仅允许了深度的增加，而且允许网络的宽度增加但没有明显的性能损失。</strong></p>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw"></i>1×1卷积解释<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>1×1 的卷积层的作用：</p>
+<ol>
+<li>
+<p>在相同尺寸的感受野中叠加更多的卷积，能提取到更丰富的特征。</p>
+</li>
+<li>
+<p>使用1x1卷积进行降维，降低了计算复杂度。</p>
+</li>
+</ol>
+<p>1×1 卷积没有识别高和宽维度上相邻元素构成的模式的功能。实际上，1×1 卷积的作用主要发生在 Channel 维上。值得注意的是，输入和输出具有相同的高和宽。输出中的每个元素来自输入中在高和宽上相同位置的元素在不同通道之间的按权重累加。假设我们将 Channel 维当作特征维，将高和宽维度上的元素当成数据样本，那么 1×1 卷积层的作用与全连接层等价。</p>
+</div>
+        </div>
+    </div>
 <p>最后，目前最好的目标检测是Girshick等人[6]的基于区域的卷积神经网络（R-CNN）方法。R-CNN将整个检测问题分解为两个子问题：利用低层次的信号例如颜色，纹理以跨类别的方式来产生目标位置候选区域，然后用CNN分类器来识别那些位置上的对象类别。这样Two-Stage的方法利用了低层特征分割边界框的准确性，也利用了目前的CNN非常强大的分类能力。我们在我们的检测提交中采用了类似的方式，但探索增强这两个阶段，例如对于更高的目标边界框召回使用多盒[5]预测，并融合了更好的边界框候选区域分类方法。</p>
 <div class="details admonition info open">
         <div class="details-summary admonition-title">
@@ -178,11 +204,40 @@
 <p>均匀增加网络尺寸的另一个缺点是计算资源使用的显著增加。例如，在一个深度视觉网络中，如果两个卷积层相连，它们的滤波器数目的任何均匀增加都会引起计算量以平方增加。如果增加的能力使用时效率低下（例如，如果大多数权重结束时接近于0），那么会浪费大量的计算能力。由于计算预算总是有限的，计算资源的有效分布更偏向于尺寸无差别的增加，即使主要目标是增加性能的质量。</p>
 </li>
 </ol>
-<p>**解决这两个问题的一个基本的方式就是引入稀疏性并将全连接层替换为稀疏的全连接层，甚至是卷积层。**他们的主要成果说明如果数据集的概率分布可以通过一个大型稀疏的深度神经网络表示，则最优的网络拓扑结构可以通过分析前一层激活的相关性统计和聚类高度相关的神经元来一层层的构建。虽然严格的数学证明需要在很强的条件下，但事实上这个声明与著名的赫布理论产生共鸣：神经元一起激发，一起连接。实践表明，基础概念甚至适用于不严格的条件下。</p>
+<p>**解决这两个问题的一个基本的方式就是引入稀疏性并将全连接层替换为稀疏的全连接层，甚至是卷积层。**除了模仿生物系统之外，由于Arora等人[2]的开创性工作，这也具有更坚固的理论基础优势。他们的主要成果说明如果数据集的概率分布可以通过一个大型稀疏的深度神经网络表示，则最优的网络拓扑结构可以通过分析前一层激活的相关性统计和聚类高度相关的神经元来一层层的构建。虽然严格的数学证明需要在很强的条件下，但事实上这个声明与著名的赫布理论产生共鸣：神经元一起激发，一起连接。实践表明，基础概念甚至适用于不严格的条件下。</p>
 <p>遗憾的是，当碰到在非均匀的稀疏数据结构上进行数值计算时，以现在的计算架构效率会非常低下。即使算法运算的数量减少100倍，查询和缓存丢失上的开销仍占主导地位：切换到稀疏矩阵可能是不可行的。随着稳定提升和高度调整的数值库的应用，差距仍在进一步扩大，数值库要求极度快速密集的矩阵乘法，利用底层的CPU或GPU硬件[16, 9]的微小细节。非均匀的稀疏模型也要求更多的复杂工程和计算基础结构。目前大多数面向视觉的机器学习系统通过采用卷积的优点来利用空域的稀疏性。然而，卷积被实现为对上一层块的密集连接的集合。为了打破对称性，提高学习水平，从论文[11]开始，ConvNets习惯上在特征维度使用随机的稀疏连接表，然而为了进一步优化并行计算，论文[9]中趋向于变回全连接。目前最新的计算机视觉架构有统一的结构。更多的滤波器和更大的批大小要求密集计算的有效使用。</p>
 <p>这提出了下一个中间步骤是否有希望的问题：一个架构能利用滤波器水平的稀疏性，正如理论所认为的那样，但能通过利用密集矩阵计算来利用目前的硬件。稀疏矩阵乘法的大量文献（例如[3]）认为对于稀疏矩阵乘法，将稀疏矩阵聚类为相对密集的子矩阵会有更佳的性能。在不久的将来会利用类似的方法来进行非均匀深度学习架构的自动构建，这样的想法似乎并不牵强。</p>
 <p>Inception架构开始作为案例研究，用于评估一个复杂网络拓扑构建算法的假设输出，该算法试图近似[2]中所示的视觉网络的稀疏结构，并通过密集的、容易获得的组件来覆盖假设结果。尽管是一个非常投机的事情，但与基于[12]的参考网络相比，早期可以观测到适度的收益。随着一点点调整加宽差距，作为[6]和[5]的基础网络，Inception被证明在定位上下文和目标检测中尤其有用。有趣的是，虽然大多数最初的架构选择已被质疑并分离开进行全面测试，但结果证明它们是局部最优的。然而必须谨慎：尽管Inception架构在计算机上领域取得成功，但这是否可以归因于构建其架构的指导原则仍是有疑问的。确保这一点将需要更彻底的分析和验证。</p>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw"></i>稀疏性解释<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><figure><a class="lightgallery" href="https://github.com/705248010/notes_images/blob/master/GoogleNet/V1/Sparse%20Matrix%20transformed%20to%20Dense%20Matrix%20Multipled.png?raw=true" title="https://github.com/705248010/notes_images/blob/master/GoogleNet/V1/Sparse%20Matrix%20transformed%20to%20Dense%20Matrix%20Multipled.png?raw=true" data-thumbnail="https://github.com/705248010/notes_images/blob/master/GoogleNet/V1/Sparse%20Matrix%20transformed%20to%20Dense%20Matrix%20Multipled.png?raw=true" data-sub-html="<h2>图2</h2>">
+        <img
+            class="lazyload"
+            src="/svg/loading.min.svg"
+            data-src="https://github.com/705248010/notes_images/blob/master/GoogleNet/V1/Sparse%20Matrix%20transformed%20to%20Dense%20Matrix%20Multipled.png?raw=true"
+            data-srcset="https://github.com/705248010/notes_images/blob/master/GoogleNet/V1/Sparse%20Matrix%20transformed%20to%20Dense%20Matrix%20Multipled.png?raw=true, https://github.com/705248010/notes_images/blob/master/GoogleNet/V1/Sparse%20Matrix%20transformed%20to%20Dense%20Matrix%20Multipled.png?raw=true 1.5x, https://github.com/705248010/notes_images/blob/master/GoogleNet/V1/Sparse%20Matrix%20transformed%20to%20Dense%20Matrix%20Multipled.png?raw=true 2x"
+            data-sizes="auto"
+            alt="https://github.com/705248010/notes_images/blob/master/GoogleNet/V1/Sparse%20Matrix%20transformed%20to%20Dense%20Matrix%20Multipled.png?raw=true" />
+    </a><figcaption class="image-caption">图2</figcaption>
+    </figure>
+<p>如上图，将稀疏矩阵转换为密集矩阵乘法能有效降低计算量。</p>
+<p>**这个原理应用到inception上就是要在特征维度上进行分解。**传统的卷积层的输入数据只和一种尺度（比如3x3）的卷积核进行卷积，输出固定维度（比如256个特征）的数据，所有256个输出特征基本上是均匀分布在3x3尺度范围上，这可以理解成输出了一个稀疏分布的特征集；而inception模块在多个尺度上提取特征（比如1x1，3x3，5x5），输出的256个特征就不再是均匀分布，而是相关性强的特征聚集在一起（比如1x1的的96个特征聚集在一起，3x3的96个特征聚集在一起，5x5的64个特征聚集在一起），这可以理解成多个密集分布的子特征集。这样的特征集中因为相关性较强的特征聚集在了一起，不相关的非关键特征就被弱化，同样是输出256个特征，inception方法输出的特征“冗余”的信息较少。用这样的“纯”的特征集层层传递最后作为反向计算的输入，自然收敛的速度更快。</p>
+</div>
+        </div>
+    </div>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw"></i>Hebbin<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">Hebbin赫布原理。Hebbin原理是神经科学上的一个理论，解释了在学习的过程中脑中的神经元所发生的变化，用一句话概括就是<em>fire togethter, wire together</em>。赫布认为“两个神经元或者神经元系统，如果总是同时兴奋，就会形成一种‘组合’，其中一个神经元的兴奋会促进另一个的兴奋”。比如狗看到肉会流口水，反复刺激后，脑中识别肉的神经元会和掌管唾液分泌的神经元会相互促进，“缠绕”在一起，以后再看到肉就会更快流出口水。用在inception结构中就是要把相关性强的特征汇聚到一起。这有点类似上面的解释2，把1x1，3x3，5x5的特征分开。因为训练收敛的最终目的就是要提取出独立的特征，所以预先把相关性强的特征汇聚，就能起到加速收敛的作用。</div>
+        </div>
+    </div>
 <h2 id="4-architectural-details">4. Architectural Details</h2>
+<p>**Inception架构的主要想法是考虑怎样近似卷积视觉网络的最优稀疏结构并用容易获得的密集组件进行覆盖。**注意假设转换不变性，这意味着网络将以卷积构建块为基础。Arora等人[2]提出了一个层次结构，其中应该分析最后一层的相关统计并将它们聚集成具有高相关性的单元组。这些聚类形成了下一层的单元并与前一层的单元连接。本文假设较早层的每个单元都对应输入层的某些区域，并且这些单元被分成滤波器组。在较低的层（接近输入的层）相关单元集中在局部区域。因此，如[12]所示，最终会有许多聚类集中在单个区域，它们可以通过下一层的1×1卷积层覆盖。然而也可以预期，将存在更小数目的在更大空间上扩展的聚类，其可以被更大块上的卷积覆盖，在越来越大的区域上块的数量将会下降。为了避免块校正的问题，目前Inception架构形式的滤波器的尺寸仅限于1×1、3×3、5×5，这个决定更多的是基于便易性而不是必要性。这也意味着提出的架构是所有这些层的组合，其输出滤波器组连接成单个输出向量形成了下一阶段的输入。另外，由于池化操作对于目前卷积网络的成功至关重要，因此建议在每个这样的阶段添加一个替代的并行池化路径应该也应该具有额外的有益效果（看图2(a)）。</p>
 <figure><a class="lightgallery" href="https://github.com/705248010/notes_images/blob/master/GoogleNet/V1/Figure_2.png?raw=true" title="https://github.com/705248010/notes_images/blob/master/GoogleNet/V1/Figure_2.png?raw=true" data-thumbnail="https://github.com/705248010/notes_images/blob/master/GoogleNet/V1/Figure_2.png?raw=true" data-sub-html="<h2>图2</h2>">
         <img
             class="lazyload"
@@ -193,7 +248,14 @@
             alt="https://github.com/705248010/notes_images/blob/master/GoogleNet/V1/Figure_2.png?raw=true" />
     </a><figcaption class="image-caption">图2</figcaption>
     </figure>
+<p>由于这些“Inception模块”在彼此的顶部堆叠，其输出相关统计必然有变化：由于较高层会捕获较高的抽象特征，其空间集中度预计会减少。这表明随着转移到更高层，3×3和5×5卷积的比例应该会增加。</p>
+<p>上述模块的一个大问题是在具有大量滤波器的卷积层之上，即使适量的5×5卷积也可能是非常昂贵的，至少在这种朴素形式中有这个问题。一旦池化单元添加到混合中，这个问题甚至会变得更明显：输出滤波器的数量等于前一阶段滤波器的数量。<strong>池化层输出和卷积层输出的合并会导致这一阶段到下一阶段输出数量不可避免的增加。虽然这种架构可能会覆盖最优稀疏结构，但它会非常低效，导致在几个阶段内计算量爆炸。</strong></p>
+<p>**这导致了Inception架构的第二个想法：在计算要求会增加太多的地方，明智地减少维度。**这是基于嵌入的成功：甚至低维嵌入可能包含大量关于较大图像块的信息。然而嵌入以密集、压缩形式表示信息并且压缩信息更难处理。这种表示应该在大多数地方保持稀疏（根据[2]中条件的要求】）并且仅在它们必须汇总时才压缩信号。也就是说，在昂贵的3×3和5×5卷积之前，1×1卷积用来计算降维。除了用来降维之外，它们也包括使用线性修正单元使其两用。最终的结果如图2(b)所示。</p>
+<p>通常，Inception网络是一个由上述类型的模块互相堆叠组成的网络，偶尔会有步长为2的最大池化层将网络分辨率减半。出于技术原因（训练过程中内存效率），只在更高层开始使用Inception模块而在更低层仍保持传统的卷积形式似乎是有益的。这不是绝对必要的，只是反映了目前实现中的一些基础结构效率低下。</p>
+<p>该架构的一个有用的方面是它允许显著增加每个阶段的单元数量，而不会在后面的阶段出现计算复杂度不受控制的爆炸。这是在尺寸较大的块进行昂贵的卷积之前通过普遍使用降维实现的。此外，设计遵循了实践直觉，即视觉信息应该在不同的尺度上处理然后聚合，为的是下一阶段可以从不同尺度同时抽象特征。</p>
+<p>计算资源的改善使用允许增加每个阶段的宽度和阶段的数量，而不会陷入计算困境。可以利用Inception架构创建略差一些但计算成本更低的版本。</p>
 <h2 id="5-googlenet">5. GoogLeNet</h2>
+<p>通过“GoogLeNet”这个名字，本文提到了在ILSVRC 2014竞赛的提交中使用的Inception架构的特例。本文作者团队也使用了一个稍微优质的更深更宽的Inception网络，但将其加入到组合中似乎只稍微提高了结果。其中忽略了该网络的细节，因为经验证据表明确切架构的参数影响相对较小。表1说明了竞赛中使用的最常见的Inception实例。这个网络（用不同的图像块采样方法训练的）使用了组合中7个模型中的6个。</p>
 <figure><a class="lightgallery" href="https://github.com/705248010/notes_images/blob/master/GoogleNet/V1/Table_1.png?raw=true" title="https://github.com/705248010/notes_images/blob/master/GoogleNet/V1/Table_1.png?raw=true" data-thumbnail="https://github.com/705248010/notes_images/blob/master/GoogleNet/V1/Table_1.png?raw=true" data-sub-html="<h2>表1</h2>">
         <img
             class="lazyload"
@@ -204,6 +266,26 @@
             alt="https://github.com/705248010/notes_images/blob/master/GoogleNet/V1/Table_1.png?raw=true" />
     </a><figcaption class="image-caption">表1</figcaption>
     </figure>
+<p>所有的卷积都使用了修正线性激活，包括Inception模块内部的卷积。在我们的网络中感受野是在均值为0的RGB颜色空间中，大小是224×224。“#3×3 reduce”和“#5×5 reduce”表示在3×3和5×5卷积之前，降维层使用的1×1滤波器的数量。在pool proj列可以看到内置的最大池化之后，投影层中1×1滤波器的数量。所有的这些降维/投影层也都使用了线性修正激活。</p>
+<p>**网络的设计考虑了计算效率和实用性，因此推断可以单独的设备上运行，甚至包括那些计算资源有限的设备，尤其是低内存占用的设备。**当只计算有参数的层时，网络有22层（如果我们也计算池化层是27层）。构建网络的全部层（独立构建块）的数目大约是100。确切的数量取决于机器学习基础设施对层的计算方式。分类器之前的平均池化是基于[12]的，尽管我们的实现有一个额外的线性层。**线性层使我们的网络能很容易地适应其它的标签集，但它主要是为了方便使用，不期望它有重大的影响。**我们发现从全连接层变为平均池化，提高了大约<code>top-1 %0.6</code>的准确率，然而即使在移除了全连接层之后，dropout的使用还是必不可少的。</p>
+<p>给定深度相对较大的网络，有效传播梯度反向通过所有层的能力是一个问题。在这个任务上，更浅网络的强大性能表明网络中部层产生的特征应该是非常有识别力的。通过将辅助分类器添加到这些中间层，可以期望较低阶段分类器的判别力。这被认为是在提供正则化的同时克服梯度消失问题。这些分类器采用较小卷积网络的形式，放置在Inception (4a)和Inception (4b)模块的输出之上。在训练期间，它们的损失以折扣权重（辅助分类器损失的权重是0.3）加到网络的整个损失上。在推断时，这些辅助网络被丢弃。后面的控制实验表明辅助网络的影响相对较小（约0.5），只需要其中一个就能取得同样的效果。</p>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw"></i>技巧<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">inception结构在在某些层级上加了分支分类器，输出的loss乘以个系数再加到总的loss上，作者认为可以防止梯度消失问题（事实上在较低的层级上这样处理基本没作用，作者在后来的inception v3论文中做了澄清）。</div>
+        </div>
+    </div>
+<p>包括辅助分类器在内的附加网络的具体结构如下：</p>
+<ul>
+<li>一个滤波器大小5×5，步长为3的平均池化层，导致(4a)阶段的输出为4×4×512，(4d)的输出为4×4×528。</li>
+<li>具有128个滤波器的1×1卷积，用于降维和修正线性激活。</li>
+<li>一个全连接层，具有1024个单元和修正线性激活。</li>
+<li>丢弃70%输出的丢弃层。</li>
+<li>使用带有softmax损失的线性层作为分类器（作为主分类器预测同样的1000类，但在推断时移除）。</li>
+</ul>
+<p>最终的网络模型图如图3所示。</p>
 <figure><a class="lightgallery" href="https://github.com/705248010/notes_images/blob/master/GoogleNet/V1/Figure_3.png?raw=true" title="https://github.com/705248010/notes_images/blob/master/GoogleNet/V1/Figure_3.png?raw=true" data-thumbnail="https://github.com/705248010/notes_images/blob/master/GoogleNet/V1/Figure_3.png?raw=true" data-sub-html="<h2>图3</h2>">
         <img
             class="lazyload"
@@ -214,8 +296,21 @@
             alt="https://github.com/705248010/notes_images/blob/master/GoogleNet/V1/Figure_3.png?raw=true" />
     </a><figcaption class="image-caption">图3</figcaption>
     </figure>
+<blockquote>
+<p>含有的所有结构的GoogLeNet网络。</p>
+</blockquote>
 <h2 id="6-training-methodology">6. Training Methodology</h2>
+<p>GoogLeNet网络使用DistBelief[4]分布式机器学习系统进行训练，该系统使用适量的模型和数据并行。尽管本文仅使用一个基于CPU的实现，但粗略的估计表明GoogLeNet网络可以用更少的高端GPU在一周之内训练到收敛，主要的限制是内存使用。本文训练使用异步随机梯度下降，动量参数为0.9[17]，固定的学习率计划（每8次遍历下降学习率4%）。Polyak平均[13]在推断时用来创建最终的模型。</p>
+<p>图像采样方法在过去几个月的竞赛中发生了重大变化，并且已收敛的模型在其他选项上进行了训练，有时还结合着超参数的改变，例如丢弃和学习率。因此，很难对训练这些网络的最有效的单一方式给出明确指导。让事情更复杂的是，受[8]的启发，一些模型主要是在相对较小的裁剪图像进行训练，其它模型主要是在相对较大的裁剪图像上进行训练。然而，一个经过验证的方案在竞赛后工作地很好，包括各种尺寸的图像块的采样，它的尺寸均匀分布在图像区域的8%——100%之间，方向角限制为$[\frac{3}{4},\frac{4}{3}]$之间。另外发现Andrew Howard[8]的光度扭曲对于克服训练数据成像条件的过拟合是有用的。</p>
 <h2 id="7-ilsvrc-2014-classification-challenge-setup-and-results">7. ILSVRC 2014 Classification Challenge Setup and Results</h2>
+<p>ILSVRC 2014分类挑战赛包括将图像分类到ImageNet层级中1000个叶子结点类别的任务。训练图像大约有120万张，验证图像有5万张，测试图像有10万张。每一张图像与一个实际类别相关联，性能度量基于分类器预测的最高分。通常报告两个数字：top-1准确率，比较实际类别和第一个预测类别，top-5错误率，比较实际类别与前5个预测类别：如果图像实际类别在top-5中，则认为图像分类正确，不管它在top-5中的排名。挑战赛使用top-5错误率来进行排名。</p>
+<p>参加竞赛时没有使用外部数据来训练。除了本文中前面提到的训练技术之外，在获得更高性能的测试中采用了一系列技巧，描述如下。</p>
+<ol>
+<li>独立训练了7个版本的相同的GoogLeNet模型（包括一个更广泛的版本），并用它们进行了整体预测。这些模型的训练具有相同的初始化（甚至具有相同的初始权重，由于监督）和学习率策略。它们仅在采样方法和随机输入图像顺序方面不同。</li>
+<li>在测试中，采用比Krizhevsky等人[9]更积极的裁剪方法。具体来说，是将图像归一化为四个尺度，其中较短维度（高度或宽度）分别为256，288，320和352，取这些归一化的图像的左，中，右方块（在肖像图片中，我们采用顶部，中心和底部方块）。对于每个方块，采用4个角以及中心224×224裁剪图像以及方块尺寸归一化为224×224，以及它们的镜像版本。这导致每张图像会得到4×3×6×2 = 144的裁剪图像。前一年的输入中，Andrew Howard[8]采用了类似的方法，经过实证验证，其方法略差于我们提出的方案。要注意到，在实际应用中，这种积极裁剪可能是不必要的，因为存在合理数量的裁剪图像后，更多裁剪图像的好处会变得很微小（正如后面展示的那样）。</li>
+<li>softmax概率在多个裁剪图像上和所有单个分类器上进行平均，然后获得最终预测。在实验中，本文分析了验证数据的替代方法，例如裁剪图像上的最大池化和分类器的平均，但是它们比简单平均的性能略逊。</li>
+</ol>
+<p>竞赛中我们的最终提交在验证集和测试集上得到了<code>top-5 6.67%</code>的错误率，在其它的参与者中排名第一。与2012年的SuperVision方法相比相对减少了56.5%，与前一年的最佳方法（Clarifai）相比相对减少了约40%，这两种方法都使用了外部数据训练分类器。表2显示了过去三年中一些表现最好的方法的统计。</p>
 <figure><a class="lightgallery" href="https://github.com/705248010/notes_images/blob/master/GoogleNet/V1/Table_2.png?raw=true" title="https://github.com/705248010/notes_images/blob/master/GoogleNet/V1/Table_2.png?raw=true" data-thumbnail="https://github.com/705248010/notes_images/blob/master/GoogleNet/V1/Table_2.png?raw=true" data-sub-html="<h2>表2</h2>">
         <img
             class="lazyload"
@@ -226,6 +321,7 @@
             alt="https://github.com/705248010/notes_images/blob/master/GoogleNet/V1/Table_2.png?raw=true" />
     </a><figcaption class="image-caption">表2</figcaption>
     </figure>
+<p>我们也分析报告了多种测试选择的性能，当预测图像时通过改变表3中使用的模型数目和裁剪图像数目。</p>
 <figure><a class="lightgallery" href="https://github.com/705248010/notes_images/blob/master/GoogleNet/V1/Table_3.png?raw=true" title="https://github.com/705248010/notes_images/blob/master/GoogleNet/V1/Table_3.png?raw=true" data-thumbnail="https://github.com/705248010/notes_images/blob/master/GoogleNet/V1/Table_3.png?raw=true" data-sub-html="<h2>表3</h2>">
         <img
             class="lazyload"
@@ -237,6 +333,8 @@
     </a><figcaption class="image-caption">表3</figcaption>
     </figure>
 <h2 id="8-ilsvrc-2014-detection-challenge-setup-and-results">8. ILSVRC 2014 Detection Challenge Setup and Results</h2>
+<p>ILSVRC检测任务是为了在200个可能的类别中生成图像中目标的边界框。如果检测到的对象匹配的它们实际类别并且它们的边界框重叠至少50%（使用Jaccard索引），则将检测到的对象记为正确。无关的检测记为假阳性且被惩罚。与分类任务相反，每张图像可能包含多个对象或没有对象，并且它们的尺度可能是变化的。报告的结果使用平均精度均值（mAP）。GoogLeNet检测采用的方法类似于R-CNN[6]，但用Inception模块作为区域分类器进行了增强。此外，为了更高的目标边界框召回率，通过选择搜索[20]方法和多箱[5]预测相结合改进了区域生成步骤。为了减少假阳性的数量，超分辨率的尺寸增加了2倍。这将选择搜索算法的区域生成减少了一半。我们总共补充了200个来自多盒结果的区域生成，大约60%的区域生成用于[6]，同时将覆盖率从92%提高到93%。减少区域生成的数量，增加覆盖率的整体影响是对于单个模型的情况平均精度均值增加了1%。最后，等分类单个区域时，使用了6个GoogLeNets的组合。这导致准确率从40%提高到43.9%。注意，与R-CNN相反，由于缺少时间没有使用边界框回归。</p>
+<p>本文首先报告了最好检测结果，并显示了从第一版检测任务以来的进展。与2013年的结果相比，准确率几乎翻了一倍。所有表现最好的团队都使用了卷积网络。在表4中报告了官方的分数和每个队伍的常见策略：使用外部数据、集成模型或上下文模型。外部数据通常是ILSVRC12的分类数据，用来预训练模型，后面在检测数据集上进行改善。一些团队也提到使用定位数据。由于定位任务的边界框很大一部分不在检测数据集中，所以可以用该数据预训练一般的边界框回归器，这与分类预训练的方式相同。GoogLeNet输入没有使用定位数据进行预训练。</p>
 <figure><a class="lightgallery" href="https://github.com/705248010/notes_images/blob/master/GoogleNet/V1/Table_4.png?raw=true" title="https://github.com/705248010/notes_images/blob/master/GoogleNet/V1/Table_4.png?raw=true" data-thumbnail="https://github.com/705248010/notes_images/blob/master/GoogleNet/V1/Table_4.png?raw=true" data-sub-html="<h2>表4</h2>">
         <img
             class="lazyload"
@@ -247,6 +345,7 @@
             alt="https://github.com/705248010/notes_images/blob/master/GoogleNet/V1/Table_4.png?raw=true" />
     </a><figcaption class="image-caption">表4</figcaption>
     </figure>
+<p>在表5中，仅比较了单个模型的结果。最好性能模型是Deep Insight的，令人惊讶的是3个模型的集合仅提高了0.3个点，而GoogLeNet在模型集成时明显获得了更好的结果。</p>
 <figure><a class="lightgallery" href="https://github.com/705248010/notes_images/blob/master/GoogleNet/V1/Table_5.png?raw=true" title="https://github.com/705248010/notes_images/blob/master/GoogleNet/V1/Table_5.png?raw=true" data-thumbnail="https://github.com/705248010/notes_images/blob/master/GoogleNet/V1/Table_5.png?raw=true" data-sub-html="<h2>表5</h2>">
         <img
             class="lazyload"
@@ -258,6 +357,8 @@
     </a><figcaption class="image-caption">表5</figcaption>
     </figure>
 <h2 id="9-conclusions">9. Conclusions</h2>
+<p>本文结果取得了可靠的证据，即通过易获得的密集构造块来近似期望的最优稀疏结果是改善计算机视觉神经网络的一种可行方法。相比于较浅且较窄的架构，这个方法的主要优势是在计算需求适度增加的情况下有显著的质量收益。</p>
+<p>对于分类和检测，预期通过更昂贵的类似深度和宽度的非Inception类型网络可以实现类似质量的结果。 然而，本文方法取得了可靠的证据，即转向更稀疏的结构一般来说是可行有用的想法。这表明未来的工作将在[2]的基础上以自动化方式创建更稀疏更精细的结构，以及将Inception架构的思考应用到其他领域。</p>
 <h2 id="references">References</h2>
 <div class="details admonition quote">
         <div class="details-summary admonition-title">
