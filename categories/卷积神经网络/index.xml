@@ -4,7 +4,14 @@
         <link>https://705248010.github.io/categories/%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/</link>
         <description>卷积神经网络 - 分类 - Kurong123&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>705248010@qq.com (Kurong123)</managingEditor>
-            <webMaster>705248010@qq.com (Kurong123)</webMaster><lastBuildDate>Wed, 01 Dec 2021 21:04:34 &#43;0800</lastBuildDate><atom:link href="https://705248010.github.io/categories/%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>705248010@qq.com (Kurong123)</webMaster><lastBuildDate>Sat, 04 Dec 2021 22:23:31 &#43;0800</lastBuildDate><atom:link href="https://705248010.github.io/categories/%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" rel="self" type="application/rss+xml" /><item>
+    <title>GoogLeNetV2</title>
+    <link>https://705248010.github.io/googlenetv2/</link>
+    <pubDate>Sat, 04 Dec 2021 22:23:31 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://705248010.github.io/googlenetv2/</guid>
+    <description><![CDATA[GoogLeNet V2 Abstract 训练深度神经网络的复杂性在于，每层输入的分布在训练过程中会发生变化，因为前面的层的参数会发生变化。通过要求较低的学习率和仔细的参数初始]]></description>
+</item><item>
     <title>GoogleNetV1</title>
     <link>https://705248010.github.io/googlenetv1/</link>
     <pubDate>Wed, 01 Dec 2021 21:04:34 &#43;0800</pubDate>
