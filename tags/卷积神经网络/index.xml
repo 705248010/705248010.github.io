@@ -4,7 +4,14 @@
         <link>https://705248010.github.io/tags/%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/</link>
         <description>卷积神经网络 - 标签 - Kurong123&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>705248010@qq.com (Kurong123)</managingEditor>
-            <webMaster>705248010@qq.com (Kurong123)</webMaster><lastBuildDate>Sat, 04 Dec 2021 22:23:31 &#43;0800</lastBuildDate><atom:link href="https://705248010.github.io/tags/%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>705248010@qq.com (Kurong123)</webMaster><lastBuildDate>Wed, 08 Dec 2021 13:02:41 &#43;0800</lastBuildDate><atom:link href="https://705248010.github.io/tags/%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" rel="self" type="application/rss+xml" /><item>
+    <title>InceptionV3</title>
+    <link>https://705248010.github.io/inceptionv3/</link>
+    <pubDate>Wed, 08 Dec 2021 13:02:41 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://705248010.github.io/inceptionv3/</guid>
+    <description><![CDATA[Inception V3 Abstract 对许多任务而言，卷积网络是目前最新的计算机视觉解决方案的核心。从2014年开始，深度卷积网络开始变成主流，在各种基准数据集上都取得了实]]></description>
+</item><item>
     <title>GoogLeNetV2</title>
     <link>https://705248010.github.io/googlenetv2/</link>
     <pubDate>Sat, 04 Dec 2021 22:23:31 &#43;0800</pubDate>
