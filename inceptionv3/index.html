@@ -26,7 +26,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/705248010.github.io\/inceptionv3\/"
-        },"genre": "posts","keywords": "CNN, GoogleNet, 卷积神经网络, Image Classification","wordcount":  11630 ,
+        },"genre": "posts","keywords": "CNN, GoogleNet, 卷积神经网络, Image Classification","wordcount":  11682 ,
         "url": "https:\/\/705248010.github.io\/inceptionv3\/","datePublished": "2021-12-08T13:02:41+08:00","dateModified": "2021-12-08T13:02:41+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -112,7 +112,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">InceptionV3</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/705248010" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>Kurong123</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"><i class="far fa-folder fa-fw"></i>卷积神经网络</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar fa-fw"></i>&nbsp;<time datetime="2021-12-08">2021-12-08</time>&nbsp;<i class="far fa-calendar-plus fa-fw"></i>&nbsp;<time datetime="2021-12-08">2021-12-08</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 11630 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar fa-fw"></i>&nbsp;<time datetime="2021-12-08">2021-12-08</time>&nbsp;<i class="far fa-calendar-plus fa-fw"></i>&nbsp;<time datetime="2021-12-08">2021-12-08</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 11682 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 24 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -172,6 +172,7 @@
     </a><figcaption class="image-caption">图1</figcaption>
     </figure>
 <blockquote>
+<p>图1。</p>
 <p>Mini网络替换5×5卷积。</p>
 </blockquote>
 <p>在这里，我们将在各种设定中探索卷积分解的其它方法，特别是为了提高解决方案的计算效率。由于Inception网络是全卷积的，每个权重对应每个激活的一次乘法。因此，任何计算成本的降低会导致参数数量减少。这意味着，通过适当的分解，我们可以得到更多的解耦参数，从而加快训练。此外，我们可以使用计算和内存节省来增加我们网络的滤波器组的大小，同时保持我们在单个计算机上训练每个模型副本的能力。</p>
@@ -189,6 +190,7 @@
     </a><figcaption class="image-caption">图2</figcaption>
     </figure>
 <blockquote>
+<p>图2。</p>
 <p>两个Inception模型间几个控制实验中的一个，其中一个分解为线性层+ ReLU层，另一个使用两个ReLU层。在三亿八千六百万次运算后，在验证集上前者达到了<code>76.2% top-1</code>准确率，后者达到了<code>77.2% top-1</code>的准确率。</p>
 </blockquote>
 <h3 id="32-spatial-factorization-into-asymmetric-convolutions">3.2. Spatial Factorization into Asymmetric Convolutions</h3>
@@ -204,6 +206,7 @@
     </a><figcaption class="image-caption">图3</figcaption>
     </figure>
 <blockquote>
+<p>图3。</p>
 <p>替换3×3卷积的Mini网络。网络的更低层由带有3个输出单元的3×1构成。</p>
 </blockquote>
 <p>在理论上，我们可以进一步论证，可以通过1×n卷积和后面接一个n×1卷积替换任何n×n卷积，并且随着n增长，计算成本节省显著增加（见图6）。实际上，我们发现，采用这种分解在前面的层次上不能很好地工作，但是对于中等网格尺寸（在m×m特征图上，其中m范围在12到20之间），其给出了非常好的结果。在这个水平上，通过使用1×7卷积，然后是7×1卷积可以获得非常好的结果。</p>
@@ -218,6 +221,7 @@
     </a><figcaption class="image-caption">图4</figcaption>
     </figure>
 <blockquote>
+<p>图4。</p>
 <p>[20]中描述的最初的Inception模块.</p>
 </blockquote>
 <figure><a class="lightgallery" href="https://github.com/705248010/notes_images/blob/master/GoogleNet/V3/Figure_5.png?raw=true" title="https://github.com/705248010/notes_images/blob/master/GoogleNet/V3/Figure_5.png?raw=true" data-thumbnail="https://github.com/705248010/notes_images/blob/master/GoogleNet/V3/Figure_5.png?raw=true" data-sub-html="<h2>图5</h2>">
@@ -231,6 +235,7 @@
     </a><figcaption class="image-caption">图5</figcaption>
     </figure>
 <blockquote>
+<p>图5。</p>
 <p>Inception模块中每个5×5卷积由两个3×3卷积替换，正如第2小节中原则3建议的那样。</p>
 </blockquote>
 <h2 id="4-utility-of-auxiliary-classifiers">4. Utility of Auxiliary Classifiers</h2>
@@ -247,10 +252,11 @@
     </a><figcaption class="image-caption">图6</figcaption>
     </figure>
 <blockquote>
+<p>图6。</p>
 <p>n×n卷积分解后的Inception模块。在我们提出的架构中，对17×17的网格我们选择n=7。（滤波器尺寸可以通过原则3选择）</p>
 </blockquote>
 <h2 id="5-efficient-grid-size-reduction">5. Efficient Grid Size Reduction</h2>
-<p>传统上，卷积网络使用一些池化操作来缩减特征图的网格大小。为了避免表示瓶颈，在应用最大池化或平均池化之前，需要扩展网络滤波器的激活维度。例如，开始有一个带有kk个滤波器的$d×d$网格，如果我们想要达到一个带有$2k$个滤波器的$\frac{d}{2}×\frac{d}{2}$网格，我们首先需要用$2k$个滤波器计算步长为1的卷积，然后应用一个额外的池化步骤。这意味着总体计算成本由在较大的网格上使用$2d^2k^2$次运算的昂贵卷积支配。一种可能性是转换为带有卷积的池化，因此导致$2(\frac{d}{2})^2k^2$次运算，将计算成本降低为原来的四分之一。然而，由于表示的整体维度下降到$(\frac{d}{2})^2k$，会导致表示能力较弱的网络（参见图9），这会产生一个表示瓶颈。我们建议另一种变体，其甚至进一步降低了计算成本，同时消除了表示瓶颈（见图10），而不是这样做。我们可以使用两个平行的步长为2的块：$P$和$C$。$P$是一个池化层（平均池化或最大池化）的激活，两者都是步长为$2$，其滤波器组连接如图10所示。</p>
+<p>传统上，卷积网络使用一些池化操作来缩减特征图的网格大小。为了避免表示瓶颈，在应用最大池化或平均池化之前，需要扩展网络滤波器的激活维度。例如，开始有一个带有$k$个滤波器的$d×d$网格，如果我们想要达到一个带有$2k$个滤波器的$\frac{d}{2}×\frac{d}{2}$网格，我们首先需要用$2k$个滤波器计算步长为1的卷积，然后应用一个额外的池化步骤。这意味着总体计算成本由在较大的网格上使用$2d^2k^2$次运算的昂贵卷积支配。一种可能性是转换为带有卷积的池化，因此导致$2(\frac{d}{2})^2k^2$次运算，将计算成本降低为原来的四分之一。然而，由于表示的整体维度下降到$(\frac{d}{2})^2k$，会导致表示能力较弱的网络（参见图9），这会产生一个表示瓶颈。我们建议另一种变体，其甚至进一步降低了计算成本，同时消除了表示瓶颈（见图10），而不是这样做。我们可以使用两个平行的步长为2的块：$P$和$C$。$P$是一个池化层（平均池化或最大池化）的激活，两者都是步长为$2$，其滤波器组连接如图10所示。</p>
 <figure><a class="lightgallery" href="https://github.com/705248010/notes_images/blob/master/GoogleNet/V3/Figure_7.png?raw=true" title="https://github.com/705248010/notes_images/blob/master/GoogleNet/V3/Figure_7.png?raw=true" data-thumbnail="https://github.com/705248010/notes_images/blob/master/GoogleNet/V3/Figure_7.png?raw=true" data-sub-html="<h2>图7</h2>">
         <img
             class="lazyload"
@@ -262,6 +268,7 @@
     </a><figcaption class="image-caption">图7</figcaption>
     </figure>
 <blockquote>
+<p>图7。</p>
 <p>具有扩展的滤波器组输出的Inception模块。这种架构被用于最粗糙的（8×8）网格，以提升高维表示，如第2节原则2所建议的那样。我们仅在最粗的网格上使用了此解决方案，因为这是产生高维度的地方，稀疏表示是最重要的，因为与空间聚合相比，局部处理（1×11×1 卷积）的比率增加。</p>
 </blockquote>
 <figure><a class="lightgallery" href="https://github.com/705248010/notes_images/blob/master/GoogleNet/V3/Figure_8.png?raw=true" title="https://github.com/705248010/notes_images/blob/master/GoogleNet/V3/Figure_8.png?raw=true" data-thumbnail="https://github.com/705248010/notes_images/blob/master/GoogleNet/V3/Figure_8.png?raw=true" data-sub-html="<h2>图8</h2>">
@@ -275,6 +282,7 @@
     </a><figcaption class="image-caption">图8</figcaption>
     </figure>
 <blockquote>
+<p>图8。</p>
 <p>最后17×17层之上的辅助分类器。 侧头中的层的批标准化[7]导致<code>top-1 0.4％</code>的绝对收益。下轴显示执行的迭代次数，每个批次大小为32。</p>
 </blockquote>
 <figure><a class="lightgallery" href="https://github.com/705248010/notes_images/blob/master/GoogleNet/V3/Figure_9.png?raw=true" title="https://github.com/705248010/notes_images/blob/master/GoogleNet/V3/Figure_9.png?raw=true" data-thumbnail="https://github.com/705248010/notes_images/blob/master/GoogleNet/V3/Figure_9.png?raw=true" data-sub-html="<h2>图9</h2>">
@@ -288,6 +296,7 @@
     </a><figcaption class="image-caption">图9</figcaption>
     </figure>
 <blockquote>
+<p>图9。</p>
 <p>减少网格尺寸的两种替代方式。左边的解决方案违反了第2节中不引入表示瓶颈的原则1。右边的版本计算量昂贵3倍。</p>
 </blockquote>
 <figure><a class="lightgallery" href="https://github.com/705248010/notes_images/blob/master/GoogleNet/V3/Figure_10.png?raw=true" title="https://github.com/705248010/notes_images/blob/master/GoogleNet/V3/Figure_10.png?raw=true" data-thumbnail="https://github.com/705248010/notes_images/blob/master/GoogleNet/V3/Figure_10.png?raw=true" data-sub-html="<h2>图10</h2>">
@@ -301,6 +310,7 @@
     </a><figcaption class="image-caption">图10</figcaption>
     </figure>
 <blockquote>
+<p>图10。</p>
 <p>缩减网格尺寸的同时扩展滤波器组的Inception模块。它不仅廉价并且避免了原则1中提出的表示瓶颈。右侧的图表示相同的解决方案，但是从网格大小而不是运算的角度来看。</p>
 </blockquote>
 <h2 id="6-inception-v2">6. Inception-v2</h2>
@@ -316,12 +326,13 @@
     </a><figcaption class="image-caption">表1</figcaption>
     </figure>
 <blockquote>
+<p>表1。</p>
 <p>提出的网络架构的轮廓。每个模块的输出大小是下一模块的输入大小。我们正在使用图10所示的缩减技术的变种，以缩减应用时Inception块间的网格大小。我们用0填充标记了卷积，用于保持网格大小。这些Inception模块内部也使用0填充，不会减小网格大小。所有其它层不使用填充。选择各种滤波器组大小来观察第2节的原理4。</p>
 </blockquote>
 <h2 id="7-model-regularization-via-label-smoothing">7. Model Regularization via Label Smoothing</h2>
 <p>我们提出了一种通过估计训练期间标签丢弃的边缘化效应来对分类器层进行正则化的机制。</p>
-<p>对于每个训练样本xx，我们的模型计算每个标签的概率$k∈{1…K}: p(k|x)=\frac{exp(zk)}{∑^K_{i=1}exp(z_i)}$。这里，$z_i$是对数单位或未归一化的对数概率。考虑这个训练样本在标签上的实际分布$q(k|x)$，因此归一化后$∑_kq(k|x)=1$。为了简洁，我们省略$p$和$q$对样本$x$的依赖。我们将样本损失定义为交叉熵：$ℓ=−∑^K_{k=1}log(p(k))q(k)$。最小化交叉熵等价于最大化标签对数似然期望，其中标签是根据它的实际分布q(k)选择的。交叉熵损失对于$z_k$是可微的，因此可以用来进行深度模型的梯度训练。其梯度有一个更简单的形式：$\frac{∂ℓ}{∂z_k}=p(k)−q(k)$，它的范围在$−1$到$1$之间。</p>
-<p>考虑单个真实标签y的例子，对于所有$k≠y$，有$q(y)=1$，$q(k)=0$。在这种情况下，最小化交叉熵等价于最大化正确标签的对数似然。对于一个特定的样本$x$，其标签为$y$，对于$q(k)=δ_{k,y}$，最大化其对数概率，$δ_{k,y}$为狄拉克$δ$函数，当且仅当$k=y$时，$δ$函数值为1，否则为0。对于有限的$z_k$，不能取得最大值，但对于所有$k≠y$，如果$z_y≫z_k$——也就是说，如果对应实际标签的逻辑单元远大于其它的逻辑单元，那么对数概率会接近最大值。然而这可能会引起两个问题。首先，它可能导致过拟合：如果模型学习到对于每一个训练样本，分配所有概率到实际标签上，那么它不能保证泛化能力。第二，它鼓励最大的逻辑单元与所有其它逻辑单元之间的差距变大，与有界限的梯度$\frac{∂ℓ}{∂z_k}$相结合，这会降低模型的适应能力。直观上讲这会发生，因为模型变得对它的预测过于自信。</p>
+<p>对于每个训练样本$x$，我们的模型计算每个标签的概率$k∈{1…K}: p(k|x)=\frac{exp(zk)}{∑^K_{i=1}exp(z_i)}$。这里，$z_i$是对数单位或未归一化的对数概率。考虑这个训练样本在标签上的实际分布$q(k|x)$，因此归一化后$∑_kq(k|x)=1$。为了简洁，我们省略$p$和$q$对样本$x$的依赖。我们将样本损失定义为交叉熵：$ℓ=−∑^K_{k=1}log(p(k))q(k)$。最小化交叉熵等价于最大化标签对数似然期望，其中标签是根据它的实际分布$q(k)$选择的。交叉熵损失对于$z_k$是可微的，因此可以用来进行深度模型的梯度训练。其梯度有一个更简单的形式：$\frac{∂ℓ}{∂z_k}=p(k)−q(k)$，它的范围在$−1$到$1$之间。</p>
+<p>考虑单个真实标签$y$的例子，对于所有$k≠y$，有$q(y)=1$，$q(k)=0$。在这种情况下，最小化交叉熵等价于最大化正确标签的对数似然。对于一个特定的样本$x$，其标签为$y$，对于$q(k)=δ_{k,y}$，最大化其对数概率，$δ_{k,y}$为狄拉克$δ$函数，当且仅当$k=y$时，$δ$函数值为1，否则为0。对于有限的$z_k$，不能取得最大值，但对于所有$k≠y$，如果$z_y≫z_k$——也就是说，如果对应实际标签的逻辑单元远大于其它的逻辑单元，那么对数概率会接近最大值。然而这可能会引起两个问题。首先，它可能导致过拟合：如果模型学习到对于每一个训练样本，分配所有概率到实际标签上，那么它不能保证泛化能力。第二，它鼓励最大的逻辑单元与所有其它逻辑单元之间的差距变大，与有界限的梯度$\frac{∂ℓ}{∂z_k}$相结合，这会降低模型的适应能力。直观上讲这会发生，因为模型变得对它的预测过于自信。</p>
 <p>我们提出了一个鼓励模型不那么自信的机制。如果目标是最大化训练标签的对数似然，这可能不是想要的，但它确实使模型正规化并使其更具适应性。这个方法很简单。考虑标签$u(k)$的分布和平滑参数$ϵ$，<em>与训练样本$x$相互独立</em>。对于一个真实标签为$y$的训练样本，我们用</p>
 <p>$$
 q′(k|x)=(1−ϵ)δ_{k,y}+ϵu(k)
@@ -361,6 +372,7 @@ $$</p>
     </a><figcaption class="image-caption">表2</figcaption>
     </figure>
 <blockquote>
+<p>表2。</p>
 <p>当感受野尺寸变化时，识别性能的比较，但计算代价是不变的。</p>
 </blockquote>
 <p>但是，如果只是单纯地按照输入分辨率减少网络尺寸，那么网络的性能就会差得多。然而，这将是一个不公平的比较，因为我们将在比较困难的任务上比较一个便宜16倍的模型。</p>
@@ -379,6 +391,7 @@ $$</p>
     </a><figcaption class="image-caption">表3</figcaption>
     </figure>
 <blockquote>
+<p>表3。</p>
 <p>单张裁剪图像的实验结果，比较各种影响因素的累积影响。我们将我们的数据与Ioffe等人[7]发布的单张裁剪图像的最好推断结果进行了比较。在“Inception-v2”行，变化是累积的并且接下来的每一行都包含除了前面的变化之外的新变化。最后一行是所有的变化，我们称为“Inception-v3”。遗憾的是，He等人[6]仅报告了10个裁剪图像的评估结果，但没有单张裁剪图像的结果，报告在下面的表4中。</p>
 </blockquote>
 <figure><a class="lightgallery" href="https://github.com/705248010/notes_images/blob/master/GoogleNet/V3/Table_4.png?raw=true" title="https://github.com/705248010/notes_images/blob/master/GoogleNet/V3/Table_4.png?raw=true" data-thumbnail="https://github.com/705248010/notes_images/blob/master/GoogleNet/V3/Table_4.png?raw=true" data-sub-html="<h2>表4</h2>">
@@ -392,6 +405,7 @@ $$</p>
     </a><figcaption class="image-caption">表4</figcaption>
     </figure>
 <blockquote>
+<p>表4。</p>
 <p>单模型，多裁剪图像的实验结果，比较各种影响因素的累积影响。我们将我们的数据与ILSVRC 2012分类基准中发布的最佳单模型推断结果进行了比较。</p>
 </blockquote>
 <figure><a class="lightgallery" href="https://github.com/705248010/notes_images/blob/master/GoogleNet/V3/Table_5.png?raw=true" title="https://github.com/705248010/notes_images/blob/master/GoogleNet/V3/Table_5.png?raw=true" data-thumbnail="https://github.com/705248010/notes_images/blob/master/GoogleNet/V3/Table_5.png?raw=true" data-sub-html="<h2>表5</h2>">
@@ -405,6 +419,7 @@ $$</p>
     </a><figcaption class="image-caption">表5</figcaption>
     </figure>
 <blockquote>
+<p>表5。</p>
 <p>模型组合评估结果，比较多模型，多裁剪图像的报告结果。我们的数据与ILSVRC 2012分类基准数据集上发布的最好模型组合推断结果的比较。所有的结果，除了在验证集上的<code>top-5</code>模型组合结果。模型组合在验证集上取得了<code>3.46% top-5</code>错误率。</p>
 </blockquote>
 <h2 id="11-conclusions">11. Conclusions</h2>
@@ -495,6 +510,6 @@ International Conference on Machine Learning (ICML-13), volume 28, pages 1139–
               onmouseover="this.src='https://cdn.jsdelivr.net/gh/lewky/lewky.github.io@master/images/b2t/lamuB.png'" 
               onmouseout="this.src='https://cdn.jsdelivr.net/gh/lewky/lewky.github.io@master/images/b2t/lamuA.png'" title="回到底部">
             </div>
-          </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@2.1.3/dist/jquery.min.js"></script>
+          </div><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@2.1.3/dist/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-backstretch@2.1.18/jquery.backstretch.min.js"></script><script type="text/javascript" src="/js/custom.js"></script></body>
 </html>
