@@ -26,7 +26,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/705248010.github.io\/inceptionv3\/"
-        },"genre": "posts","keywords": "CNN, GoogleNet, 卷积神经网络, Image Classification","wordcount":  11682 ,
+        },"genre": "posts","keywords": "CNN, GoogleNet, 卷积神经网络, Image Classification","wordcount":  11993 ,
         "url": "https:\/\/705248010.github.io\/inceptionv3\/","datePublished": "2021-12-08T13:02:41+08:00","dateModified": "2021-12-08T13:02:41+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -112,7 +112,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">InceptionV3</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/705248010" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>Kurong123</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"><i class="far fa-folder fa-fw"></i>卷积神经网络</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar fa-fw"></i>&nbsp;<time datetime="2021-12-08">2021-12-08</time>&nbsp;<i class="far fa-calendar-plus fa-fw"></i>&nbsp;<time datetime="2021-12-08">2021-12-08</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 11682 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar fa-fw"></i>&nbsp;<time datetime="2021-12-08">2021-12-08</time>&nbsp;<i class="far fa-calendar-plus fa-fw"></i>&nbsp;<time datetime="2021-12-08">2021-12-08</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 11993 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 24 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -153,10 +153,10 @@
 <h2 id="2-general-design-principles">2. General Design Principles</h2>
 <p>这里我们将介绍一些具有卷积网络的、具有各种架构选择的、基于大规模实验的设计原则。在这一点上，以下原则的效用是推测性的，另外将来的实验证据将对于评估其准确性和有效领域是必要的。然而，严重偏移这些原则往往会导致网络质量的恶化，修正检测到的这些偏差状况通常会导致改进的架构。</p>
 <ol>
-<li>避免表征瓶颈，尤其是在网络的前面。前馈网络可以由从输入层到分类器或回归器的非循环图表示。这为信息流定义了一个明确的方向。对于分离输入输出的任何切口，可以访问通过切口的信息量。应该避免极端压缩的瓶颈。一般来说，在达到用于着手任务的最终表示之前，表示大小应该从输入到输出缓慢减小。理论上，信息内容不能仅通过表示的维度来评估，因为它丢弃了诸如相关结构的重要因素；维度仅提供信息内容的粗略估计。</li>
-<li>更高维度的表示在网络中更容易局部处理。在卷积网络中增加每个图块的激活允许更多解耦的特征。所产生的网络将训练更快。</li>
-<li>空间聚合可以在较低维度嵌入上完成，而不会在表示能力上造成许多或任何损失。例如，在执行更多展开（例如3×3）卷积之前，可以在空间聚合之前减小输入表示的维度，没有预期的严重不利影响。我们假设，如果在空间聚合上下文中使用输出，则相邻单元之间的强相关性会导致维度缩减期间的信息损失少得多。鉴于这些信号应该易于压缩，因此尺寸减小甚至会促进更快的学习。</li>
-<li>平衡网络的宽度和深度。通过平衡每个阶段的滤波器数量和网络的深度可以达到网络的最佳性能。增加网络的宽度和深度可以有助于更高质量的网络。然而，如果两者并行增加，则可以达到恒定计算量的最佳改进。因此，计算预算应该在网络的深度和宽度之间以平衡方式进行分配。</li>
+<li><strong>避免表征瓶颈，尤其是在网络的前面</strong>。前馈网络可以由从输入层到分类器或回归器的非循环图表示。这为信息流定义了一个明确的方向，对于分离输入输出的任何切口，可以访问通过切口的信息量。应该避免极端压缩的瓶颈。<strong>一般来说，在达到用于着手任务的最终表示之前，表示大小应该从输入到输出缓慢减小。理论上，信息内容不能仅通过表示的维度来评估，因为它丢弃了诸如相关结构的重要因素，而维度仅提供信息内容的粗略估计</strong>。</li>
+<li><strong>更高维度的表示在网络中更容易局部处理。在卷积网络中增加每个图块的激活允许更多解耦的特征，所产生的网络将训练更快</strong>。</li>
+<li><strong>空间聚合可以在较低维度嵌入上完成，而不会在表示能力上造成许多或任何损失</strong>。例如，在执行更多展开（例如3×3）卷积之前，可以在空间聚合之前减小输入表示的维度，没有预期的严重不利影响。我们假设，如果在空间聚合上下文中使用输出，则相邻单元之间的强相关性会导致维度缩减期间的信息损失少得多。鉴于这些信号应该易于压缩，因此尺寸减小甚至会促进更快的学习。</li>
+<li>平衡网络的宽度和深度。<strong>通过平衡每个阶段的滤波器数量和网络的深度可以达到网络的最佳性能，增加网络的宽度和深度可以有助于更高质量的网络。然而，如果两者并行增加，则可以达到恒定计算量的最佳改进</strong>。因此，计算预算应该在网络的深度和宽度之间以平衡方式进行分配。</li>
 </ol>
 <p>虽然这些原则可能是有意义的，但并不是开箱即用的直接使用它们来提高网络质量。我们的想法是仅在不明确的情况下才明智地使用它们。</p>
 <h2 id="3-factorizing-convolutions-with-large-filter-size">3. Factorizing Convolutions with Large Filter Size</h2>
@@ -178,7 +178,7 @@
 <p>在这里，我们将在各种设定中探索卷积分解的其它方法，特别是为了提高解决方案的计算效率。由于Inception网络是全卷积的，每个权重对应每个激活的一次乘法。因此，任何计算成本的降低会导致参数数量减少。这意味着，通过适当的分解，我们可以得到更多的解耦参数，从而加快训练。此外，我们可以使用计算和内存节省来增加我们网络的滤波器组的大小，同时保持我们在单个计算机上训练每个模型副本的能力。</p>
 <h3 id="31-factorization-into-smaller-convolutions">3.1. Factorization into smaller convolutions</h3>
 <p>具有较大空间滤波器（例如5×5或7×7）的卷积在计算方面往往不成比例地昂贵。例如，具有n个滤波器的5×5卷积在具有m个滤波器的网格上比具有相同数量的滤波器的3×3卷积的计算量高25/9=2.78倍。当然，5×5滤波器在更前面的层可以捕获更远的单元激活之间、信号之间的依赖关系，因此滤波器几何尺寸的减小带来了很大的表现力。然而，我们可以询问5×5卷积是否可以被具有相同输入尺寸和输出深度的参数较小的多层网络所取代。如果我们放大5×5卷积的计算图，我们看到每个输出看起来像一个小的完全连接的网络，在其输入上滑过5×5的块（见图1）。由于我们正在构建视觉网络，所以通过两层的卷积结构再次利用平移不变性来代替全连接的组件似乎是很自然的：第一层是3×3卷积，第二层是在第一层的3×3输出网格之上的一个全连接层（见图1）。通过在输入激活网格上滑动这个小网络，用两层3×3卷积来替换5×5卷积（比较图4和5）。</p>
-<p>该设定通过相邻块之间共享权重明显减少了参数数量。为了分析预期的计算成本节省，我们将对典型的情况进行一些简单的假设：我们可以假设$n=αm$，也就是我们想通过常数$α$因子来改变激活/单元的数量。由于5×5卷积是聚合的，$α$通常比1略大（在GoogLeNet中大约是1.5）。用两个层替换5×5层，似乎可以通过两个步骤来实现扩展：在两个步骤中通过$\sqrtα$增加滤波器数量。为了简化我们的估计，通过选择$α=1$（无扩展），如果我们单纯地滑动网络而不重新使用相邻网格图块之间的计算，我们将增加计算成本。滑动该网络可以由两个3×3的卷积层表示，其重用相邻图块之间的激活。这样，我们最终得到一个计算量减少到$\frac{9+9}{25}×$的网络，通过这种分解导致了28％的相对增益。每个参数在每个单元的激活计算中只使用一次，所以参数计数具有完全相同的节约。不过，这个设置提出了两个一般性的问题：这种替换是否会导致任何表征力的丧失？如果我们的主要目标是对计算的线性部分进行分解，是不是建议在第一层保持线性激活？我们已经进行了几个控制实验（例如参见图2），并且在分解的所有阶段中使用线性激活总是逊于使用修正线性单元。我们将这个收益归因于网络可以学习的增强的空间变化，特别是如果我们对输出激活进行批标准化[7]。当对维度减小组件使用线性激活时，可以看到类似的效果。</p>
+<p><strong>该设定通过相邻块之间共享权重明显减少了参数数量</strong>。为了分析预期的计算成本节省，我们将对典型的情况进行一些简单的假设：我们可以假设$n=αm$，也就是我们想通过常数$α$因子来改变激活/单元的数量。由于5×5卷积是聚合的，$α$通常比1略大（在GoogLeNet中大约是1.5）。用两个层替换5×5层，似乎可以通过两个步骤来实现扩展：在两个步骤中通过$\sqrtα$增加滤波器数量。为了简化我们的估计，通过选择$α=1$（无扩展），如果我们单纯地滑动网络而不重新使用相邻网格图块之间的计算，我们将增加计算成本。滑动该网络可以由两个3×3的卷积层表示，其重用相邻图块之间的激活。这样，我们最终得到一个计算量减少到$\frac{9+9}{25}×$的网络，通过这种分解导致了28％的相对增益。每个参数在每个单元的激活计算中只使用一次，所以参数计数具有完全相同的节约。不过，这个设置提出了两个一般性的问题：这种替换是否会导致任何表征力的丧失？如果我们的主要目标是对计算的线性部分进行分解，是不是建议在第一层保持线性激活？我们已经进行了几个控制实验（例如参见图2），并且在分解的所有阶段中使用线性激活总是逊于使用修正线性单元。我们将这个收益归因于网络可以学习的增强的空间变化，特别是如果我们对输出激活进行批标准化[7]。当对维度减小组件使用线性激活时，可以看到类似的效果。</p>
 <figure><a class="lightgallery" href="https://github.com/705248010/notes_images/blob/master/GoogleNet/V3/Figure_2.png?raw=true" title="https://github.com/705248010/notes_images/blob/master/GoogleNet/V3/Figure_2.png?raw=true" data-thumbnail="https://github.com/705248010/notes_images/blob/master/GoogleNet/V3/Figure_2.png?raw=true" data-sub-html="<h2>图2</h2>">
         <img
             class="lazyload"
@@ -194,7 +194,7 @@
 <p>两个Inception模型间几个控制实验中的一个，其中一个分解为线性层+ ReLU层，另一个使用两个ReLU层。在三亿八千六百万次运算后，在验证集上前者达到了<code>76.2% top-1</code>准确率，后者达到了<code>77.2% top-1</code>的准确率。</p>
 </blockquote>
 <h3 id="32-spatial-factorization-into-asymmetric-convolutions">3.2. Spatial Factorization into Asymmetric Convolutions</h3>
-<p>上述结果表明，大于3×3的卷积滤波器可能不是通常有用的，因为它们总是可以简化为3×3卷积层序列。我们仍然可以问这个问题，是否应该把它们分解成更小的，例如2×2的卷积。然而，通过使用非对称卷积，可以做出甚至比2×2更好的效果，即n×1。例如使用3×1卷积后接一个1×3卷积，相当于以与3×3卷积相同的感受野滑动两层网络（参见图3）。如果输入和输出滤波器的数量相等，那么对于相同数量的输出滤波器，两层解决方案便宜33％。相比之下，将3×3卷积分解为两个2×2卷积表示仅节省了11％的计算量。</p>
+<p>上述结果表明，大于3×3的卷积滤波器可能不是通常有用的，因为它们总是可以简化为3×3卷积层序列。我们仍然可以问这个问题，是否应该把它们分解成更小的，例如2×2的卷积。然而，<strong>通过使用非对称卷积，可以做出甚至比2×2更好的效果，即n×1。例如使用3×1卷积后接一个1×3卷积，相当于以与3×3卷积相同的感受野滑动两层网络</strong>（参见图3）。如果输入和输出滤波器的数量相等，那么对于相同数量的输出滤波器，两层解决方案便宜33％。相比之下，将3×3卷积分解为两个2×2卷积表示仅节省了11％的计算量。</p>
 <figure><a class="lightgallery" href="https://github.com/705248010/notes_images/blob/master/GoogleNet/V3/Figure_3.png?raw=true" title="https://github.com/705248010/notes_images/blob/master/GoogleNet/V3/Figure_3.png?raw=true" data-thumbnail="https://github.com/705248010/notes_images/blob/master/GoogleNet/V3/Figure_3.png?raw=true" data-sub-html="<h2>图3</h2>">
         <img
             class="lazyload"
@@ -238,9 +238,6 @@
 <p>图5。</p>
 <p>Inception模块中每个5×5卷积由两个3×3卷积替换，正如第2小节中原则3建议的那样。</p>
 </blockquote>
-<h2 id="4-utility-of-auxiliary-classifiers">4. Utility of Auxiliary Classifiers</h2>
-<p>[20]引入了辅助分类器的概念，以改善非常深的网络的收敛。最初的动机是将有用的梯度推向较低层，使其立即有用，并通过抵抗非常深的网络中的消失梯度问题来提高训练过程中的收敛。Lee等人[11]也认为辅助分类器促进了更稳定的学习和更好的收敛。有趣的是，我们发现辅助分类器在训练早期并没有导致改善收敛：在两个模型达到高精度之前，有无侧边网络的训练进度看起来几乎相同。接近训练结束，辅助分支网络开始超越没有任何分支的网络的准确性，达到了更高的稳定水平。</p>
-<p>另外，[20]在网络的不同阶段使用了两个侧分支。移除更下面的辅助分支对网络的最终质量没有任何不利影响。再加上前一段的观察结果，这意味着[20]最初的假设，这些分支有助于演变低级特征很可能是不适当的。相反，我们认为辅助分类器起着正则化项的作用。这是由于如果侧分支是批标准化的[7]或具有丢弃层，则网络的主分类器性能更好。这也为推测批标准化作为正则化项给出了一个弱支持证据。</p>
 <figure><a class="lightgallery" href="https://github.com/705248010/notes_images/blob/master/GoogleNet/V3/Figure_6.png?raw=true" title="https://github.com/705248010/notes_images/blob/master/GoogleNet/V3/Figure_6.png?raw=true" data-thumbnail="https://github.com/705248010/notes_images/blob/master/GoogleNet/V3/Figure_6.png?raw=true" data-sub-html="<h2>图6</h2>">
         <img
             class="lazyload"
@@ -255,9 +252,10 @@
 <p>图6。</p>
 <p>n×n卷积分解后的Inception模块。在我们提出的架构中，对17×17的网格我们选择n=7。（滤波器尺寸可以通过原则3选择）</p>
 </blockquote>
-<h2 id="5-efficient-grid-size-reduction">5. Efficient Grid Size Reduction</h2>
-<p>传统上，卷积网络使用一些池化操作来缩减特征图的网格大小。为了避免表示瓶颈，在应用最大池化或平均池化之前，需要扩展网络滤波器的激活维度。例如，开始有一个带有$k$个滤波器的$d×d$网格，如果我们想要达到一个带有$2k$个滤波器的$\frac{d}{2}×\frac{d}{2}$网格，我们首先需要用$2k$个滤波器计算步长为1的卷积，然后应用一个额外的池化步骤。这意味着总体计算成本由在较大的网格上使用$2d^2k^2$次运算的昂贵卷积支配。一种可能性是转换为带有卷积的池化，因此导致$2(\frac{d}{2})^2k^2$次运算，将计算成本降低为原来的四分之一。然而，由于表示的整体维度下降到$(\frac{d}{2})^2k$，会导致表示能力较弱的网络（参见图9），这会产生一个表示瓶颈。我们建议另一种变体，其甚至进一步降低了计算成本，同时消除了表示瓶颈（见图10），而不是这样做。我们可以使用两个平行的步长为2的块：$P$和$C$。$P$是一个池化层（平均池化或最大池化）的激活，两者都是步长为$2$，其滤波器组连接如图10所示。</p>
-<figure><a class="lightgallery" href="https://github.com/705248010/notes_images/blob/master/GoogleNet/V3/Figure_7.png?raw=true" title="https://github.com/705248010/notes_images/blob/master/GoogleNet/V3/Figure_7.png?raw=true" data-thumbnail="https://github.com/705248010/notes_images/blob/master/GoogleNet/V3/Figure_7.png?raw=true" data-sub-html="<h2>图7</h2>">
+<h2 id="4-utility-of-auxiliary-classifiers">4. Utility of Auxiliary Classifiers</h2>
+<p>（这一部分内容已过时，好像只在GAN中使用）</p>
+<p>[20]引入了辅助分类器的概念，以改善非常深的网络的收敛。最初的动机是将有用的梯度推向较低层，使其立即有用，并通过抵抗非常深的网络中的消失梯度问题来提高训练过程中的收敛。Lee等人[11]也认为辅助分类器促进了更稳定的学习和更好的收敛。有趣的是，我们发现辅助分类器在训练早期并没有导致改善收敛：在两个模型达到高精度之前，有无侧边网络的训练进度看起来几乎相同。接近训练结束，辅助分支网络开始超越没有任何分支的网络的准确性，达到了更高的稳定水平。</p>
+<p>另外，[20]在网络的不同阶段使用了两个侧分支。移除更下面的辅助分支对网络的最终质量没有任何不利影响。再加上前一段的观察结果，这意味着[20]最初的假设，这些分支有助于演变低级特征很可能是不适当的。相反，我们认为辅助分类器起着正则化项的作用。这是由于如果侧分支是批标准化的[7]或具有丢弃层，则网络的主分类器性能更好。这也为推测批标准化作为正则化项给出了一个弱支持证据。<figure><a class="lightgallery" href="https://github.com/705248010/notes_images/blob/master/GoogleNet/V3/Figure_7.png?raw=true" title="https://github.com/705248010/notes_images/blob/master/GoogleNet/V3/Figure_7.png?raw=true" data-thumbnail="https://github.com/705248010/notes_images/blob/master/GoogleNet/V3/Figure_7.png?raw=true" data-sub-html="<h2>图7</h2>">
         <img
             class="lazyload"
             src="/svg/loading.min.svg"
@@ -266,7 +264,7 @@
             data-sizes="auto"
             alt="https://github.com/705248010/notes_images/blob/master/GoogleNet/V3/Figure_7.png?raw=true" />
     </a><figcaption class="image-caption">图7</figcaption>
-    </figure>
+    </figure></p>
 <blockquote>
 <p>图7。</p>
 <p>具有扩展的滤波器组输出的Inception模块。这种架构被用于最粗糙的（8×8）网格，以提升高维表示，如第2节原则2所建议的那样。我们仅在最粗的网格上使用了此解决方案，因为这是产生高维度的地方，稀疏表示是最重要的，因为与空间聚合相比，局部处理（1×11×1 卷积）的比率增加。</p>
@@ -285,6 +283,8 @@
 <p>图8。</p>
 <p>最后17×17层之上的辅助分类器。 侧头中的层的批标准化[7]导致<code>top-1 0.4％</code>的绝对收益。下轴显示执行的迭代次数，每个批次大小为32。</p>
 </blockquote>
+<h2 id="5-efficient-grid-size-reduction">5. Efficient Grid Size Reduction</h2>
+<p>传统上，卷积网络使用一些池化操作来缩减特征图的网格大小。<strong>为了避免表示瓶颈，在应用最大池化或平均池化之前，需要扩展网络滤波器的激活维度</strong>。例如，开始有一个带有$k$个滤波器的$d×d$网格，如果我们想要达到一个带有$2k$个滤波器的$\frac{d}{2}×\frac{d}{2}$网格，我们首先需要用$2k$个滤波器计算步长为1的卷积，然后应用一个额外的池化步骤。这意味着总体计算成本由在较大的网格上使用$2d^2k^2$次运算的昂贵卷积支配。一种可能性是转换为带有卷积的池化，因此导致$2(\frac{d}{2})^2k^2$次运算，将计算成本降低为原来的四分之一。然而，由于表示的整体维度下降到$(\frac{d}{2})^2k$，会导致表示能力较弱的网络（参见图9），这会产生一个表示瓶颈。我们建议另一种变体，其甚至进一步降低了计算成本，同时消除了表示瓶颈（见图10）。我们可以使用两个平行的步长为2的块：$P$和$C$。$P$是一个池化层（平均池化或最大池化）的激活，两者都是步长为$2$，其滤波器组连接如图10所示。</p>
 <figure><a class="lightgallery" href="https://github.com/705248010/notes_images/blob/master/GoogleNet/V3/Figure_9.png?raw=true" title="https://github.com/705248010/notes_images/blob/master/GoogleNet/V3/Figure_9.png?raw=true" data-thumbnail="https://github.com/705248010/notes_images/blob/master/GoogleNet/V3/Figure_9.png?raw=true" data-sub-html="<h2>图9</h2>">
         <img
             class="lazyload"
@@ -349,6 +349,16 @@ H(q′,p)=−\sum_{k=1}^Klog \ p(k)q′(k)=(1−ϵ)H(q,p)+ϵH(u,p)
 $$</p>
 <p>因此，LSR等价于用一对这样的损失$H(q,p)$和$H(u,p)$来替换单个交叉熵损失$H(q,p)$。第二个损失惩罚预测的标签分布$p$与先验$u$之间的偏差，其中相对权重为$\frac{ϵ}{1−ϵ}$。注意，由于$H(u,p)=D_{KL}(u|p)+H(u)$和$H(u)$是固定的，因此这个偏差可以等价地被KL散度捕获。当$u$是均匀分布时，$H(u,p)$是度量预测分布p与均匀分布不同的程度，也可以通过负熵$−H(p)$来度量（但不等价）；我们还没有实验过这种方法。</p>
 <p>在我们的$K=1000$类的ImageNet实验中，我们使用了$u(k)=1/10000$和$ϵ=0.1$。对于ILSVRC 2012，我们发现对于<code>top-1</code>错误率和<code>top-5</code>错误率，持续提高了大约$0.2%$（参见表3）。</p>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw"></i>Label Smoothing<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>标签平滑（Label smoothing），像L1、L2和dropout一样，是机器学习领域的一种正则化方法，通常用于分类问题，目的是防止模型在训练时过于自信地预测标签，改善泛化能力差的问题。</p>
+<p>NIPS 2019上的这篇论文<a href="https://papers.nips.cc/paper/8717-when-does-label-smoothing-help.pdf" target="_blank" rel="noopener noreffer">When Does Label Smoothing Help?</a>用实验说明了为什么Label smoothing可以work，指出标签平滑可以让分类之间的cluster更加紧凑，增加类间距离，减少类内距离，提高泛化性，同时还能提高Model Calibration（模型对于预测值的confidences和accuracies之间aligned的程度）。但是在模型蒸馏中使用Label smoothing会导致性能下降。</p>
+</div>
+        </div>
+    </div>
 <h2 id="8-training-methodology">8. Training Methodology</h2>
 <p>我们在TensorFlow[1]分布式机器学习系统上使用随机梯度方法训练了我们的网络，使用了$50$个副本，每个副本在一个NVidia Kepler GPU上运行，批处理大小为$32$，$100$个epoch。我们之前的实验使用动量方法[19]，衰减值为$0.9$，而我们最好的模型是用RMSProp [21]实现的，衰减值为$0.9$，$ϵ=1.0$。我们使用$0.045$的学习率，每两个epoch以$0.94$的指数速率衰减。此外，阈值为$2.0$的梯度裁剪[14]被发现对于稳定训练是有用的。使用随时间计算的运行参数的平均值来执行模型评估。</p>
 <h2 id="9-performance-on-lower-resolution-input">9. Performance on Lower Resolution Input</h2>
