@@ -26,7 +26,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/705248010.github.io\/nin\/"
-        },"genre": "posts","keywords": "CNN, NIN, 卷积神经网络, Image Classification","wordcount":  8087 ,
+        },"genre": "posts","keywords": "CNN, NIN, 卷积神经网络, Image Classification","wordcount":  8240 ,
         "url": "https:\/\/705248010.github.io\/nin\/","datePublished": "2021-12-14T09:51:08+08:00","dateModified": "2021-12-14T09:51:08+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -112,7 +112,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">NIN</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="https://github.com/705248010" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>Kurong123</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"><i class="far fa-folder fa-fw"></i>卷积神经网络</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar fa-fw"></i>&nbsp;<time datetime="2021-12-14">2021-12-14</time>&nbsp;<i class="far fa-calendar-plus fa-fw"></i>&nbsp;<time datetime="2021-12-14">2021-12-14</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 8087 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar fa-fw"></i>&nbsp;<time datetime="2021-12-14">2021-12-14</time>&nbsp;<i class="far fa-calendar-plus fa-fw"></i>&nbsp;<time datetime="2021-12-14">2021-12-14</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 8240 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 17 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -139,7 +139,6 @@
         <li><a href="#44-street-view-house-numbers">4.4 Street View House Numbers</a></li>
         <li><a href="#45-mnist">4.5 MNIST</a></li>
         <li><a href="#46-global-average-pooling-as-a-regularizer">4.6 Global Average Pooling as a Regularizer</a></li>
-        <li><a href="#47-visualization-of-nin">4.7 Visualization of NIN</a></li>
       </ul>
     </li>
     <li><a href="#5-conclusions">5 Conclusions</a></li>
@@ -169,10 +168,12 @@
 <p>在CNN中，本文没有采用传统的全连接层进行分类，而是通过全局平均池化层直接输出最后一个mlpconv层的特征图的空间平均值作为类别的置信度，然后将所得向量送入softmax层。在传统的CNN中，由于全连接层作为中间的黑匣子，很难解释来自目标成本层的类别级信息是如何传递回前一个卷积层的。相比之下，全局平均集合更有意义，也更容易解释，因为它强化了特征图和类别之间的对应关系，而这是通过使用微网络进行更强的局部建模实现的。此外，全连接层容易出现过拟合，并严重依赖dropout正则化[4] [5]，而全局平均池化本身就是一个结构正则化器，它天生就能防止整体结构的过拟合。</p>
 <div class="details admonition tip open">
         <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw"></i>技巧<i class="details-icon fas fa-angle-right fa-fw"></i>
+            <i class="icon fas fa-lightbulb fa-fw"></i>本小节理解<i class="details-icon fas fa-angle-right fa-fw"></i>
         </div>
         <div class="details-content">
-            <div class="admonition-content">全局平均池化层需要细看下。</div>
+            <div class="admonition-content"><p>作者认为传统的GLM在特征提取的过程中根本不能区分这些中间过程里所形成的特征元素，除非这些特征元素是线性可分的。所以，在作者的眼里，传统CNN有效的一个假设就是这些特征元素能够线性可分。</p>
+<p>例如在一个用于识别汽车图片的卷积网络模型中，靠前的卷积层会被用于提取一些粗糙的原始的特征（如：线段、棱角等）；而靠后的卷积层则会以前面的为基础提取到更为高级一些的特征（如：轮胎、车门等）。同时，在每个阶段里所形的这些特征原始都被称之为 “latent concept”，因为事实上还有很多抽像的特征我们人类是无法辨认的（它可能是有用的特征，也可能不是），所以被称为“latent”。作者认为，传统的GLM在进行每一阶段的特征提取中，根本不足以区分这些特征元素——例如某个卷积层可能提取得到了很多“轮胎”这一类的same concept，但是GLM区分不了这些非线性的特征（到底是哪一类汽车的轮胎）——所以导致最终的任务精度不那么的尽如人意。</p>
+</div>
         </div>
     </div>
 <h2 id="2-convolutional-neural-networks">2 Convolutional Neural Networks</h2>
@@ -185,6 +186,14 @@ $$
 <p>在最近的maxout网络[8]中，通过对仿生特征图（仿生特征图是不应用激活函数的线性卷积的直接结果）的最大集合来减少特征图的数量。对线性函数的最大化使得一个分片线性逼近器能够逼近任何凸函数。与进行线性分离的传统卷积层相比，maxout网络更有效力，因为它可以分离位于凸集内的概念。这一改进使maxout网络在几个基准数据集上具有最佳性能。</p>
 <p>然而，maxout网络强加了一个先验，即潜在概念的实例位于输入空间的凸集内，这并不一定成立。当潜在概念的分布更加复杂时，有必要采用一个更通用的函数近似器。所以本文试图通过引入新颖的 &ldquo;网中网 &ldquo;结构来实现这一点，在每个卷积层中引入一个微型网络来计算局部斑块的更抽象的特征。</p>
 <p>在以前的一些工作中已经提出在输入上滑动微网络。例如，结构化多层感知器（SMLP）[9]在输入图像的不同斑块上应用共享多层感知器；在另一项工作中，基于神经网络的过滤器被训练用于人脸检测[10]。然而，它们都是为特定的问题而设计的，并且都只包含滑动网络结构中的一个层。NIN是从一个更普遍的角度提出的，微网络被整合到CNN结构中，以寻求对各级特征的更好的抽象。</p>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw"></i>本小节理解<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">可以先利用浅层的网络来对各个阶段里所形成的非线性特征元素进行特征表示，然后再通过卷积层来完成分类类别间线性不可分的抽象表示，以此来提高模型最后的任务精度。</div>
+        </div>
+    </div>
 <h2 id="3-network-in-network">3 Network In Network</h2>
 <p>本文首先强调了提出的 &ldquo;网中网 &ldquo;结构的关键部分：MLP卷积层和全局平均池层，分别在第3.1和第3.2节。然后，在第3.3节中详细介绍整个NIN。</p>
 <h3 id="31-mlp-convolution-layers">3.1 MLP Convolution Layers</h3>
@@ -199,7 +208,7 @@ $$
             alt="https://github.com/705248010/notes_images/blob/master/NIN/formula_1.png?raw=true" />
     </a><figcaption class="image-caption">公式</figcaption>
     </figure>
-<p>这里$n$是多层感知器中的层数。多层感知器中使用ReLU作为激活函数。</p>
+<p>这里$n$是MLP中的层数。MLP中使用ReLU作为激活函数。</p>
 <p>从跨通道（跨特征图）池化的角度来看，式2相当于在正常卷积层上的级联跨通道参数池化。每个池化层对输入的特征图进行加权线性重组，然后经过一个ReLU。跨通道池化后的特征图在下一层中再次进行跨通道池化。这种级联式跨渠道参数池结构允许跨渠道信息的复杂和可学习的相互作用。</p>
 <p>跨信道参数池层也相当于一个具有1x1卷积核的卷积层，这种解释可以直接理解NIN的结构。</p>
 <figure><a class="lightgallery" href="https://github.com/705248010/notes_images/blob/master/NIN/Figure_2.png?raw=true" title="https://github.com/705248010/notes_images/blob/master/NIN/Figure_2.png?raw=true" data-thumbnail="https://github.com/705248010/notes_images/blob/master/NIN/Figure_2.png?raw=true" data-sub-html="<h2>图2</h2>">
@@ -225,6 +234,14 @@ $$
 <p>它将卷积层视为特征提取器，并以传统的方式对产生的特征进行分类。然而，全连接层容易出现过拟合，从而阻碍了整个网络的泛化能力。Hinton等人[5]提出的Dropout是一个正则器，它在训练过程中随机地将全连接层的一半激活值设置为零。它提高了泛化能力，并在很大程度上防止了过拟合[4]。</p>
 <p>本文提出了另一种叫做全局平均池的策略，以取代CNN中传统的全连接层。其思路是在最后一个mlpconv层中为分类任务的每个对应类别生成一个特征图。本文不在特征图上添加全连接层，而是取每个特征图的平均值，然后将得到的向量直接送入softmax层。全局平均池比全连接层更好的一个特点是，它通过强制执行特征图和类别之间的对应关系，更符合卷积结构。因此，特征图可以很容易地被解释为类别置信图。另一个优点是，在全局平均集合中没有参数需要优化，因此在这一层可以避免过度拟合。此外，全局平均集合法还总结出了空间信息，因此它对输入的空间平移更为稳健。</p>
 <p>可以把全局平均集合看作是一个结构性的正则器，它明确地将特征图强制为概念（类别）的置信图。这是由mlpconv层实现的，因为它们比GLMs更好地接近置信图。</p>
+<div class="details admonition tip open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-lightbulb fa-fw"></i>本小节理解<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">在这篇文章中，作者提出了通过以全局平均池化的方式来代替这部分全连接网络。全局平均池化的具体做法是取最后卷积输出的特征图中每一个特征图的均值来作为其中一个类别的logit值。然后再将其输入到softmax分类层进行分类。因此，这也就意味着如果你需要完成的是一个$k$分类的任务，那么模型最后的卷积输出一定得含有$k$个通道数。</div>
+        </div>
+    </div>
 <h3 id="33-network-in-network-structure">3.3 Network In Network Structure</h3>
 <p>NIN的整体结构是一个mlpconv层的堆叠，在其之上是全局平均池和目标成本层。像CNN和maxout网络一样，在mlpconv层之间可以添加子采样层。图2显示了一个有三个mlpconv层的NIN。在每个mlpconv层中，都有一个三层感知器。NIN和微网络的层数都很灵活，可以针对具体任务进行调整。</p>
 <h2 id="4-experiments">4 Experiments</h2>
@@ -326,20 +343,6 @@ $$
 <p>如表5所示，没有dropout正则化的全连接层的性能最差（11.59%）。这是预料之中的，因为如果不应用正则化，全连接层就会过度适应训练数据。在全连接层之前添加dropout可以减少测试误差（10.88%）。全局平均池在三者中取得了最低的测试误差（10.41%）。</p>
 <p>然后探讨全局平均池对传统CNN是否有同样的正则化效果。 本文实例化了Hinton等人[5]所描述的传统CNN，它由三个卷积层和一个局部连接层组成。局部连接层产生16个特征图，这些特征图被馈送到一个有dropout的全连接层。为了使比较公平，本文将局部连接层的特征图数量从16个减少到10个，因为在全局平均池化方案中，每个类别只允许有一个特征图。然后，通过用全局平均池化方案替换掉dropout+全连接层来创建一个全局平均池化的等效网络。在CIFAR-10数据集上测试了这些性能。</p>
 <p>这个全连接层的CNN模型只能达到17.56%的错误率。当加入dropout时，本文取得了与Hinton等人[5]报告的类似的性能（15.99%）。在这个模型中，通过用全局平均池代替全连接层，得到了16.46%的错误率，与没有dropout的CNN相比，有1%的提高。这再次验证了全局平均池化层作为正则器的有效性。虽然它比dropout正则器的结果略差，但本文呢认为全局平均池化对线性卷积层的要求可能太高，因为它需要带有整流激活的线性滤波器来模拟类别的置信图。</p>
-<h3 id="47-visualization-of-nin">4.7 Visualization of NIN</h3>
-<p>本文明确地将NIN最后一个mlpconv层的特征图通过全局平均集合的方式强制为类别的置信图，这只有在更强的局部感受野建模中才有可能，例如NIN中的mlpconv。为了了解这一目的的完成程度，本文从CIFAR-10的训练模型的最后一个mlpconv层中提取并直接可视化了特征图。</p>
-<figure><a class="lightgallery" href="https://github.com/705248010/notes_images/blob/master/NIN/Figure_4.png?raw=true" title="https://github.com/705248010/notes_images/blob/master/NIN/Figure_4.png?raw=true" data-thumbnail="https://github.com/705248010/notes_images/blob/master/NIN/Figure_4.png?raw=true" data-sub-html="<h2>图3</h2>">
-        <img
-            class="lazyload"
-            src="/svg/loading.min.svg"
-            data-src="https://github.com/705248010/notes_images/blob/master/NIN/Figure_4.png?raw=true"
-            data-srcset="https://github.com/705248010/notes_images/blob/master/NIN/Figure_4.png?raw=true, https://github.com/705248010/notes_images/blob/master/NIN/Figure_4.png?raw=true 1.5x, https://github.com/705248010/notes_images/blob/master/NIN/Figure_4.png?raw=true 2x"
-            data-sizes="auto"
-            alt="https://github.com/705248010/notes_images/blob/master/NIN/Figure_4.png?raw=true" />
-    </a><figcaption class="image-caption">图3</figcaption>
-    </figure>
-<p>图4显示了从CIFAR-10测试集中选出的10个类别中的一些示例图像及其相应的特征图。预计最大的激活是在与输入图像的地面真相类别相对应的特征图中观察到的，这是由全局平均池明确执行的。在基础事实类别的特征图中，可以看到最强的激活大致出现在原始图像中物体的同一区域。这对于结构化的物体尤其如此，比如图4第二行的汽车。请注意，类别的特征图是仅用类别信息训练的。如果使用物体的边界框作为细粒度的标签，预计会有更好的结果。</p>
-<p>该可视化图再次证明了NIN的有效性。它是通过使用mlpconv层进行更强的局部感受野建模来实现的。然后，全局平均池强化了类别水平特征图的学习。进一步的探索可以在一般物体检测方面进行。检测结果可以在类别级特征图的基础上实现，与Farabet等人[20]的场景标签工作中的味道相同。</p>
 <h2 id="5-conclusions">5 Conclusions</h2>
 <p>本文为分类任务提出了一种新的深度网络，称为 &ldquo;网络中的网络&rdquo;（NIN）。这种新的结构由mlpconv层和全局平均池层组成，前者使用MLP对输入进行卷积，后者替代了传统CNN中的全连接层。mlpconv层对局部斑块进行了更好的建模，而全局平均池则作为一种结构上的正则器，防止全局的过度拟合。利用NIN的这两个组成部分，本文在CIFAR-10、CIFAR-100和SVHN数据集上展示了最先进的性能。通过对特征图的可视化，证明了来自NIN的最后一个mlpconv层的特征图是类别的信心图。</p>
 <h2 id="references">References</h2>
