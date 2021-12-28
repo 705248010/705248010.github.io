@@ -4,7 +4,14 @@
         <link>https://705248010.github.io/tags/%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/</link>
         <description>卷积神经网络 - 标签 - Kurong123&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>705248010@qq.com (Kurong123)</managingEditor>
-            <webMaster>705248010@qq.com (Kurong123)</webMaster><lastBuildDate>Tue, 14 Dec 2021 09:51:08 &#43;0800</lastBuildDate><atom:link href="https://705248010.github.io/tags/%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>705248010@qq.com (Kurong123)</webMaster><lastBuildDate>Tue, 28 Dec 2021 17:22:58 &#43;0800</lastBuildDate><atom:link href="https://705248010.github.io/tags/%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" rel="self" type="application/rss+xml" /><item>
+    <title>ResNet</title>
+    <link>https://705248010.github.io/resnet/</link>
+    <pubDate>Tue, 28 Dec 2021 17:22:58 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://705248010.github.io/resnet/</guid>
+    <description><![CDATA[ResNet Abstract 更深的神经网络更难训练。我们提出了一种残差学习框架来减轻网络训练，这些网络比以前使用的网络更深。我们明确地将层变为学习关于层输入的残差函]]></description>
+</item><item>
     <title>NIN</title>
     <link>https://705248010.github.io/nin/</link>
     <pubDate>Tue, 14 Dec 2021 09:51:08 &#43;0800</pubDate>
