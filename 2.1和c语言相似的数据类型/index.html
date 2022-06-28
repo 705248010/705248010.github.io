@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>2.1和C语言相似的数据类型 - Kurong123&#39;s Blog</title><meta name="Description" content="Personal Blog"><meta property="og:title" content="2.1和C语言相似的数据类型" />
+<meta property="og:description" content="2.1 和C语言相似的数据类型 本章内容重点讲解LPC语言的数据类型，相对C语言，LPC语言的数据类型有较大的调整，在LPC语言中有10种数据类型（" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://705248010.github.io/2.1%E5%92%8Cc%E8%AF%AD%E8%A8%80%E7%9B%B8%E4%BC%BC%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-06-28T23:54:34+08:00" />
+<meta property="article:modified_time" content="2022-06-28T23:54:34+08:00" />
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="2.1和C语言相似的数据类型"/>
+<meta name="twitter:description" content="2.1 和C语言相似的数据类型 本章内容重点讲解LPC语言的数据类型，相对C语言，LPC语言的数据类型有较大的调整，在LPC语言中有10种数据类型（"/>
+<meta name="application-name" content="LoveIt">
+<meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="canonical" href="https://705248010.github.io/2.1%E5%92%8Cc%E8%AF%AD%E8%A8%80%E7%9B%B8%E4%BC%BC%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" /><link rel="prev" href="https://705248010.github.io/1.5lpc%E7%9A%84%E5%85%B3%E9%94%AE%E5%AD%97%E5%8F%8A%E6%9C%AF%E8%AF%AD%E8%AF%B4%E6%98%8E/" /><link rel="next" href="https://705248010.github.io/2.2%E4%B8%8D%E5%90%8C%E4%BA%8Ec%E8%AF%AD%E8%A8%80%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "2.1和C语言相似的数据类型",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/705248010.github.io\/2.1%E5%92%8Cc%E8%AF%AD%E8%A8%80%E7%9B%B8%E4%BC%BC%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B\/"
+        },"genre": "posts","keywords": "LPC, MUD, “LPMUD”","wordcount":  5503 ,
+        "url": "https:\/\/705248010.github.io\/2.1%E5%92%8Cc%E8%AF%AD%E8%A8%80%E7%9B%B8%E4%BC%BC%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B\/","datePublished": "2022-06-28T23:54:34+08:00","dateModified": "2022-06-28T23:54:34+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Kurong123"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <a href="https://github.com/705248010" class="github-corner" target="_blank" title="Follow me on GitHub" aria-label="Follow me on GitHub"><svg width="3.5rem" height="3.5rem" viewBox="0 0 250 250" style="fill:#70B7FD; color:#fff; position: absolute; top: 0; border: 0; left: 0; transform: scale(-1, 1);" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+        <div class="header-title">
+            <a href="/" title="Kurong123&#39;s Blog">Kurong123&#39;s Blog</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner">
+		<div class="dropdown">
+			<a href="/posts/" class="menu-item menu-more dropbtn" title="" ><i class='fas fa-fw fa-archive'></i> 归档 
+			</a>
+			<div class="menu-more-content dropdown-content"><a href="/categories/" title="" ><i class='fas fa-fw fa-th'></i> 分类 </a><a href="/tags/" title="" target="_blank" rel="noopener"><i class='fas fa-fw fa-tag'></i> 标签 </a></div>
+		</div>
+	<a class="menu-item" href="/friends/"><i class='fas fa-fw fa-fan fa-link'></i> 友链 
+		</a><a class="menu-item" href="/about/"><i class='fas fa-fw fa-fan fa-book'></i> 关于 
+		</a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Kurong123&#39;s Blog">Kurong123&#39;s Blog</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title=""><i class='fas fa-fw fa-archive'></i>归档</a><a class="menu-item" href="/friends/" title=""><i class='fas fa-fw fa-fan fa-link'></i>友链</a><a class="menu-item" href="/about/" title=""><i class='fas fa-fw fa-fan fa-book'></i>关于</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">2.1和C语言相似的数据类型</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/705248010" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>Kurong123</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/lpmud/"><i class="far fa-folder fa-fw"></i>LPMUD</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar fa-fw"></i>&nbsp;<time datetime="2022-06-28">2022-06-28</time>&nbsp;<i class="far fa-calendar-plus fa-fw"></i>&nbsp;<time datetime="2022-06-28">2022-06-28</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 5503 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 11 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#21-有符号整型int">2.1 有符号整型(int)</a></li>
+    <li><a href="#22-单精度浮点型float">2.2 单精度浮点型(float)</a></li>
+    <li><a href="#23-字符串类型string">2.3 字符串类型(string)</a></li>
+    <li><a href="#24-数组类型array">2.4 数组类型(array)</a></li>
+    <li><a href="#25-结构体类型struct">2.5 结构体类型(struct)</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="21-和c语言相似的数据类型">2.1 和C语言相似的数据类型</h1>
+<p>本章内容重点讲解LPC语言的数据类型，相对C语言，LPC语言的数据类型有较大的调整，在LPC语言中有10种数据类型（以fluffos为标准），是哪10种呢？本章一一介绍。</p>
+<p>请注意，从本章开始，学习到的知识需要C语言基础，和C语言完全一样的知识，本书不会单独讲解，如果教程中没有明确提出 <code>没有</code> 或 <code>不同</code>，那就默认为有，且和C语言用法相同。对C语言基础欠缺的同学，推荐看看C语言入门书籍<a href="http://c.biancheng.net/cpp/u/jiaocheng/" target="_blank" rel="noopener noreffer">《C语言小白变怪兽》</a></p>
+<p>LPC语言的数据类型基本和C语言类似，但是和C语言相同和相似的数据类型只有：整型(int)、浮点型(float)、字符串(string)、数组(array)、结构体(struct)。C语言中的其它数据类型在LPC语言中没有。</p>
+<h2 id="21-有符号整型int">2.1 有符号整型(int)</h2>
+<p>在C语言中的整数分 short、int、long，还有无符号数 unsigned，但<strong>在LPC语言中，只有 int 类型</strong>。</p>
+<p>在 fluffos 驱动中，int 的长度是8个字节，长度和C语言64 位 Linux 及 Mac OS 下的长整型一样，取值范围是-263 ~ 263-1，即-9223372036854775808~9223372036854775807。</p>
+<p>在C语言中，如果数值超出取值范围会超成数据溢出，如下C语言代码，在64位 Linux 系统下，因为溢出，输出结果变成：-9223372036854775808</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span><span class="cp"></span><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="kt">long</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">9223372036854775808</span><span class="p">;</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;%ld</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>但是在LPC中，对数据溢出的处理方式不太一样，如果变量赋值超出最大值，取最大值，如果赋值小于最小值，取最小值(但最小值有BUG，实际值为-9223372036854775807，这是因为MUDOS对待负值的处理方式是-1 * 正值，而 9223372036854775808 会溢出，取值改为最大值 9223372036854775807，这样最小值实际为：-1 * 9223372036854775807)，但是对赋值后的变量做运算，会和C语言一样的溢出。</p>
+<p>我们复制 <code>test.c</code> 文件为 <code>2.1.1.c</code> 并修改代码如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="c1">// 示例：2.1.1
+</span><span class="c1"></span><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="n">object</span> <span class="n">me</span><span class="p">,</span> <span class="n">string</span> <span class="n">arg</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">// MAX_INT、MIN_INT 为 fluffos 定义宏
+</span><span class="c1"></span>    <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="n">MAX_INT</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">MIN_INT</span><span class="p">;</span>
+    <span class="c1">// 赋值时做运算
+</span><span class="c1"></span>    <span class="kt">int</span> <span class="n">c</span> <span class="o">=</span> <span class="n">MAX_INT</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="n">MIN_INT</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">e</span> <span class="o">=</span> <span class="n">d</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="c1">// 赋值超出取值范围（10倍）
+</span><span class="c1"></span>    <span class="kt">int</span> <span class="n">f</span> <span class="o">=</span> <span class="mi">92233720368547758070</span><span class="p">,</span> <span class="n">g</span> <span class="o">=</span> <span class="o">-</span><span class="mi">92233720368547758080</span><span class="p">;</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;a = %d</span><span class="se">\n</span><span class="s">b = %d</span><span class="se">\n</span><span class="s">c = %d</span><span class="se">\n</span><span class="s">d = %d</span><span class="se">\n</span><span class="s">e = %d</span><span class="se">\n</span><span class="s">f = %d</span><span class="se">\n</span><span class="s">g = %d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>然后输入指令 <code>2.1.1</code> ，输出结果如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">a =  9223372036854775807
+b = -9223372036854775807
+c = -9223372036854775808
+d = -9223372036854775808
+e =  9223372036854775807
+f =  9223372036854775807
+g = -9223372036854775807
+</code></pre></td></tr></table>
+</div>
+</div><p>代码中的 <code>MAX_INT</code> 和 <code>MIN_INT</code> 是 fluffos 宏定义的整形最大值和最小值，变量 a、f都取最大值，变量 b、g都取最小值，但从结果看，最小值输出比实际大了1。变量 c 运算后溢出，变量 d 理论上应该溢出，但因为fluffos原因，造成实际取了真实的最小值，变量 e 在真实的最小值上运算后溢出。</p>
+<p>注意，如果在运行时修改了代码，需要重新编译文件（指令：<code>update</code>）或者重启系统（指令：<code>shutdown</code>）才能生效。</p>
+<p>示例代码中的 <code>printf()</code> 函数是LPC语言的 efun，可以理解为类似C语言的库函数（Library Function），因为LPC是从C语言衍生的，语法结构和C语言基本一样，但是C语言的库函数在LPC中不存在，千万不要直接把C语言中的函数在LPMUD开发中直接用，LPC语言中有很多和C语言同名且功能相同或相似的函数，如 <code>printf()</code>，但也有很多和C语言同名但功能不太一样的函数，如 <code>sizeof()</code>，还有更多C语言中没有的函数，如 <code>this_player()</code>，这些独有的函数让LPC开发网络游戏变的更为便捷，关于函数，后续章节会重点介绍。</p>
+<p>为方便学习，这里先补充一下格式化输出函数 <code>printf()</code>的用法，在LPC语言中的用法和C语言中的同名函数基本一样，只是格式控制修饰符和数据类型有一些差异。printf() 格式控制符的完整形式如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">%[flag][width][.precision]type
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>[ ] 表示此处的内容可有可无，是可以省略的。</p>
+</blockquote>
+<p>和C语言相比，标志控制符（flag）增加了“|”（列居中对齐）、“=”（字符串纵列模式）、“&lsquo;X&rsquo;”（使用指定字符填充空位，X代表任意字符）和 “@”（指明参数为数组）；修改了“#”的作用为字符串输出为表格模式。</p>
+<p>输出类型（type）只有 &ldquo;c&rdquo;、&ldquo;s&rdquo;、&ldquo;d/i&rdquo;、&ldquo;f&rdquo;、&ldquo;o&rdquo;、&ldquo;x/X&rdquo;，作用和C语言一致，同时新增了&quot;O&quot;表示LPC语言数据类型（可输出LPC语言的任何类型），关于 printf 函数的说明文档可看这里：<a href="https://wiki.mud.ren/index.php?title=Printf" target="_blank" rel="noopener noreffer">printf/sprintf</a>。</p>
+<p>这里需要特别说明的是，<strong>LPC语言中没有字符型变量<code>char</code>，只有字符型常量<code>'x'</code>（x为任意字符）</strong>，而且和C语言一样，在输出中可以把整型输出为字符（如：printf(&quot;%c&quot;,123)），也可以直接把字符赋值给整型变量（如：int i = &lsquo;a&rsquo;）。</p>
+<p>另外，C语言中的整数除了可以使用十进制，还可以使用八进制和十六进制，在LPC语言中，整数只能用十进制和十六进制赋值，可以用八进制输出，但<strong>不能用八进制赋值</strong>，而且和C语言一样既不能用二进制赋值也无法用二进制输出。</p>
+<p>复制 <code>test.c</code> 文件为 <code>2.1.2</code>，并修改代码如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="c1">// 示例：2.1.2
+</span><span class="c1"></span><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="n">object</span> <span class="n">me</span><span class="p">,</span> <span class="n">string</span> <span class="n">arg</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">16</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="sc">&#39;a&#39;</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="mh">0xF</span><span class="p">;</span>
+
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;a 十进制为%d，八进制为%o，十六进制为%x</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">a</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;b 十进制为%d，ASCII字符为%c</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;c 十进制为%d，十六进制为%x或%X</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">c</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>输出结果为：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">a 十进制为16，八进制为20，十六进制为10
+b 十进制为97，ASCII字符为a
+c 十进制为15，十六进制为f或F
+</code></pre></td></tr></table>
+</div>
+</div><p>如果修改代码使用八进制赋值会发现其实还是十进制(如：0123赋值结果为十进制123)，而用二进制赋值的话，代码编译报错。</p>
+<h2 id="22-单精度浮点型float">2.2 单精度浮点型(float)</h2>
+<p>在LPC语言中，小数只有 float 类型，但是实际和C语言中的 double 类型一样，取值范围为 ±1.7E-308 和 ±1.7E308 之间。</p>
+<p>和C语言不同的是，LPC语言中的浮点数只能用十进制形式表示，不可以使用指数形式，如果使用指数形式赋值会报错。另外，因为LPC语言中只有一种小数类型，所以，也就没有C语言中的数字加后缀L或F指明类型了。</p>
+<p>在 fluffos 中，也定义了二个宏表示特定的浮点数，<code>MAX_FLOAT</code> 表示浮点数的最大值，但是 <code>MIN_FLOAT</code> 却是表示 0.000000，这个主要是做浮点数比较运算用。</p>
+<p>使用以下代码试试看，会输出一个大到你数不出来的数字（整数部分309位）。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="c1">// 示例：2.1.3
+</span><span class="c1"></span><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="n">object</span> <span class="n">me</span><span class="p">,</span> <span class="n">string</span> <span class="n">arg</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">float</span> <span class="n">fa</span> <span class="o">=</span> <span class="n">MAX_FLOAT</span><span class="p">;</span>
+    <span class="c1">// 最小值
+</span><span class="c1"></span>    <span class="kt">float</span> <span class="n">fi</span> <span class="o">=</span> <span class="n">MIN_FLOAT</span><span class="p">;</span>
+
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;fa = %f</span><span class="se">\n</span><span class="s">fi = %f</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">fa</span><span class="p">,</span> <span class="n">fi</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>输出结果不同系统下精度不太一样哦。</p>
+<h2 id="23-字符串类型string">2.3 字符串类型(string)</h2>
+<p>和C语言差别比较大的一种数据类型，我们知道，C语言严格上说没有字符串数据类型，字符串类型实际上是字符数组，可以使用以下几种方式赋值：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span><span class="cp"></span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="k">const</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+    <span class="kt">char</span> <span class="n">str1</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#34;mud.ren&#34;</span><span class="p">};</span>
+    <span class="kt">char</span> <span class="n">str2</span><span class="p">[]</span> <span class="o">=</span> <span class="s">&#34;mud.wiki&#34;</span><span class="p">;</span>
+    <span class="kt">char</span> <span class="o">*</span><span class="n">str</span> <span class="o">=</span> <span class="s">&#34;www.mud.ren&#34;</span><span class="p">;</span>
+
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;str1 = %s</span><span class="se">\n</span><span class="s">str2 = %s</span><span class="se">\n</span><span class="s">str = %s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">str1</span><span class="p">,</span> <span class="n">str2</span><span class="p">,</span> <span class="n">str</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>在LPC语言中，没有字符类型，无法使用这种方式赋值字符串，但是单独增加了字符串类型（string），可以直接赋值并使用。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="c1">// 示例：2.1.4
+</span><span class="c1"></span><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="n">object</span> <span class="n">me</span><span class="p">,</span> <span class="n">string</span> <span class="n">arg</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">string</span> <span class="n">s</span> <span class="o">=</span> <span class="s">&#34;www.mud.ren&#34;</span><span class="p">;</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;s = %s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span><span class="n">s</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>在Ｃ语言中只有字符串常量，没有字符串变量，变量类型只有字符型char，而LPC语言中相反，只有字符型常量，没有字符型变量，变量类型有字符串string。</p>
+</blockquote>
+<p>在C语言中&quot;&ldquo;包围起来的字符串中间不能换行，但是，在LPC语言中，<strong>&ldquo;&ldquo;中的内容可以换行</strong>，看看以下的例子：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="c1">// 示例：2.1.5
+</span><span class="c1"></span><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="n">object</span> <span class="n">me</span><span class="p">,</span> <span class="n">string</span> <span class="n">arg</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">string</span> <span class="n">qr</span><span class="o">=</span><span class="s">&#34;</span>
+<span class="err">█████████████████████████████████████</span>
+<span class="err">█████████████████████████████████████</span>
+<span class="err">████</span> <span class="err">▄▄▄▄▄</span> <span class="err">█▀▀</span> <span class="err">██</span>  <span class="err">▀██</span> <span class="err">█▀█</span> <span class="err">▄▄▄▄▄</span> <span class="err">████</span>
+<span class="err">████</span> <span class="err">█</span>   <span class="err">█</span> <span class="err">█▄▀██▀█▀</span> <span class="err">█▄</span> <span class="err">▀▄█</span> <span class="err">█</span>   <span class="err">█</span> <span class="err">████</span>
+<span class="err">████</span> <span class="err">█▄▄▄█</span> <span class="err">█</span> <span class="err">▄</span> <span class="err">█</span> <span class="err">█▄▀▄█</span>  <span class="err">██</span> <span class="err">█▄▄▄█</span> <span class="err">████</span>
+<span class="err">████▄▄▄▄▄▄▄█</span> <span class="err">█</span> <span class="err">▀▄█▄█▄▀▄▀</span> <span class="err">█▄▄▄▄▄▄▄████</span>
+<span class="err">████▄▄▀▄▀█▄</span> <span class="err">█▀█</span>  <span class="err">▀</span> <span class="err">▀</span> <span class="err">▀▀▄█▀</span> <span class="err">▄▄▀▄▄▀████</span>
+<span class="err">████▀</span>  <span class="err">▄▄▀▄█▀▀▀</span>  <span class="err">▀█▀</span> <span class="err">▄█</span> <span class="err">██▀</span> <span class="err">▄▄</span>  <span class="err">█████</span>
+<span class="err">█████</span> <span class="err">▀██</span> <span class="err">▄▄▀█▄</span> <span class="err">█</span> <span class="err">█▀███</span>   <span class="err">▄██▄█▄▄████</span>
+<span class="err">████▀</span> <span class="err">█▄▄▀▄▄▀</span>   <span class="err">█▀▄▀█</span> <span class="err">██</span> <span class="err">▀███</span> <span class="err">▄</span> <span class="err">▄████</span>
+<span class="err">█████▄▄▄▀▀▄</span> <span class="err">▄▄▄█</span>  <span class="err">▀▄</span> <span class="err">▄▀█▄</span> <span class="err">▀</span> <span class="err">█▀█▄▀████</span>
+<span class="err">████▄█▀</span> <span class="err">█▄▄█</span>  <span class="err">▄▄</span> <span class="err">█▀▀▄</span> <span class="err">▄▀██</span> <span class="err">█▀██</span>  <span class="err">████</span>
+<span class="err">████▄█▄██▄▄▄</span> <span class="err">▀▀▀▄</span> <span class="err">▀█▀▄▀▀</span> <span class="err">▄▄▄</span> <span class="err">█</span> <span class="err">▀▀████</span>
+<span class="err">████</span> <span class="err">▄▄▄▄▄</span> <span class="err">█▄▀▀▀▄▀██▀▄▀█</span> <span class="err">█▄█</span> <span class="err">▀▀▄█████</span>
+<span class="err">████</span> <span class="err">█</span>   <span class="err">█</span> <span class="err">█▀▀</span>  <span class="err">▄▄███</span> <span class="err">▀█</span> <span class="err">▄</span>   <span class="err">▀▀</span> <span class="err">█████</span>
+<span class="err">████</span> <span class="err">█▄▄▄█</span> <span class="err">█▀</span> <span class="err">▄</span> <span class="err">█▀▄█▄</span>    <span class="err">▄█▄▄▄▄▀▄████</span>
+<span class="err">████▄▄▄▄▄▄▄█▄██▄▄▄██▄▄█▄▄██▄▄██▄█████</span>
+<span class="err">█████████████████████████████████████</span>
+<span class="err">█████████████████████████████████████</span>
+
+        <span class="err">扫码加雪风微信</span> <span class="o">^</span><span class="n">_</span><span class="o">^</span>
+<span class="s">&#34;;</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;%s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">qr</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>*<strong>注意：网页显示错位，但游戏中会正确的显示二维码并可以扫描，效果如下*</strong><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://oiuv.oss-cn-beijing.aliyuncs.com/images/lpc_book/2.1.5.png"
+        data-srcset="https://oiuv.oss-cn-beijing.aliyuncs.com/images/lpc_book/2.1.5.png, https://oiuv.oss-cn-beijing.aliyuncs.com/images/lpc_book/2.1.5.png 1.5x, https://oiuv.oss-cn-beijing.aliyuncs.com/images/lpc_book/2.1.5.png 2x"
+        data-sizes="auto"
+        alt="https://oiuv.oss-cn-beijing.aliyuncs.com/images/lpc_book/2.1.5.png"
+        title="img" /></p>
+<p>在LPC语言中，对字符串取子字符串的操作很别致而灵活，使用子字符串操作符，形式是：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">str[n1..n2];
+</code></pre></td></tr></table>
+</div>
+</div><p>类似数组索引，n1最小值为0，n2最大值为n-1。但和数组不同的是越界不报错，如果 n1 小于0，视为0，如果 n2 超过字符串的长度或省略，视为到字符串的结尾<code>n-1</code>。如果二个数值相等（str[n..n]），则传回字符串的第 n 个字符。如果 n1 &gt; n2 或者 n1 数值超过字符串的长度，会传回空字符串“”。除了从左开始，还可以从右开始索引如果要从右开始使用<code>&lt;n</code>，如 <code>arr[0..&lt;1]</code>，从左开始第一个数值为0，如果从右开始第一个数值为1, <strong>str[&lt;n] 可以理解为 str[strlen(str)-n]，而 str[x..] 等价于 str[x..&lt;1]</strong>。</p>
+<p>除了<code>str[n1..n2]</code>取子字符串，还有<code>str[n]</code>取单个字符(C语言的字符char类型)。<code>str[n]</code>和<code>str[n..n]</code>不是，一个是字符类型<code>'x'</code>一个是字符串类型<code>&quot;x&quot;</code>。</p>
+<p>测试如下代码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="c1">// 示例：2.1.6
+</span><span class="c1"></span><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="n">object</span> <span class="n">me</span><span class="p">,</span> <span class="n">string</span> <span class="n">arg</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">string</span> <span class="n">s</span> <span class="o">=</span> <span class="s">&#34;www.mud.ren&#34;</span><span class="p">;</span>
+
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;s = %s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">s</span><span class="p">);</span>
+
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;s[4..4] = %s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">s</span><span class="p">[</span><span class="mf">4..4</span><span class="p">]);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;s[4] = %c</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span><span class="n">s</span><span class="p">[</span><span class="mi">4</span><span class="p">]);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;s[4] = %d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span><span class="n">s</span><span class="p">[</span><span class="mi">4</span><span class="p">]);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;s[4..6] = %s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">s</span><span class="p">[</span><span class="mf">4..6</span><span class="p">]);</span>
+
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;s[0..20] = %s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">s</span><span class="p">[</span><span class="mf">0..20</span><span class="p">]);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;s[7..] = %s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">s</span><span class="p">[</span><span class="mf">7.</span><span class="p">.]);</span>
+
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;s[4..&lt;1] = %s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">s</span><span class="p">[</span><span class="mf">4.</span><span class="p">.</span><span class="o">&lt;</span><span class="mi">1</span><span class="p">]);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;s[&lt;7..&lt;5] = %s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">s</span><span class="p">[</span><span class="o">&lt;</span><span class="mf">7.</span><span class="p">.</span><span class="o">&lt;</span><span class="mi">5</span><span class="p">]);</span>
+
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;s[1..0] = %s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">s</span><span class="p">[</span><span class="mf">1..0</span><span class="p">]);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;s[20..30] = %s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">s</span><span class="p">[</span><span class="mf">20..30</span><span class="p">]);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;s[&lt;5..&lt;7] = %s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">s</span><span class="p">[</span><span class="o">&lt;</span><span class="mf">5.</span><span class="p">.</span><span class="o">&lt;</span><span class="mi">7</span><span class="p">]);</span>
+
+    <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>输出结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">s = www.mud.ren
+s[4..4] = m
+s[4] = m
+s[4] = 109
+s[4..6] = mud
+s[0..20] = www.mud.ren
+s[7..] = .ren
+s[4..&lt;1] = mud.ren
+s[&lt;7..&lt;5] = mud
+s[1..0] =
+s[20..30] =
+s[&lt;5..&lt;7] =
+</code></pre></td></tr></table>
+</div>
+</div><p>和C语言不同，LPC语言中的字符串当数组操作时输出为ASCII值。</p>
+<h2 id="24-数组类型array">2.4 数组类型(array)</h2>
+<p>数组类型，LPC语言和C语言的差别还是比较大的，在C语言中数组定义方式为：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">dataType  arrayName[length];
+</code></pre></td></tr></table>
+</div>
+</div><p>并且可以使用指针操作数组。例如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span><span class="cp"></span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="k">const</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">arr</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">};</span>
+    <span class="kt">int</span> <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="n">arr</span><span class="p">;</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;arr[0] = %d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="o">*</span><span class="n">p</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>而在LPC语言中，数组用 ({}) 表示，并且使用类似指针的方式赋值，另外还有使用 外部函数 <code>allocate()</code> 初始化的方式。具体定义数组的方式如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">dataType *arrayName = ({value1, value2,...});
+dataType *arrayName = allocate(size, value);
+</code></pre></td></tr></table>
+</div>
+</div><p><code>allocate()</code> 函数说明文档请看：<a href="https://wiki.mud.ren/index.php?title=Allocate" target="_blank" rel="noopener noreffer">array/allocate</a>。</p>
+<p>我们继续测试如下代码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="c1">// 示例：2.1.7
+</span><span class="c1"></span><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="n">object</span> <span class="n">me</span><span class="p">,</span> <span class="n">string</span> <span class="n">arg</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">string</span> <span class="o">*</span><span class="n">str</span> <span class="o">=</span> <span class="p">({</span><span class="s">&#34;www&#34;</span><span class="p">,</span> <span class="s">&#34;mud&#34;</span><span class="p">,</span> <span class="s">&#34;ren&#34;</span><span class="p">});</span>
+    <span class="kt">int</span> <span class="o">*</span><span class="n">arr</span> <span class="o">=</span> <span class="n">allocate</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">random</span><span class="p">(</span><span class="mi">9</span><span class="p">),</span> <span class="p">(</span><span class="o">:</span> <span class="err">$</span><span class="mi">1</span> <span class="o">:</span><span class="p">));</span>
+
+    <span class="c1">// @代表参数是数组，使用除@以外的格式循环输出数组的每个元素
+</span><span class="c1"></span>    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;str = %@-4s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">str</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;str[0] = %s, str[1] = %s, str[2] = %s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">str</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">str</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">str</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;arr = %@&#39;,&#39;-2d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">arr</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>输出结果如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">str = www mud ren
+str[0] = www, str[1] = mud, str[2] = ren
+arr = 0,1,2,3
+</code></pre></td></tr></table>
+</div>
+</div><p>以上代码中第二种定义中使用了 <code>random()</code> 外部函数，所以 arr 每次输出结果是随机的。</p>
+<p>另外，和字符串类似，数组可以使用arr[x..y]的方式取子数组，也可以使用 arr[&lt;n]的方式，其意义等价于 arr[sizeof(arr) - n]。</p>
+<p>数组严格上说不是一种数据类型，只是一种数据集合，关于数组的使用，后续章节会详细讲解，这里先了解LPC语言中数组定义的方式。</p>
+<h2 id="25-结构体类型struct">2.5 结构体类型(struct)</h2>
+<p>结构体本质上也不是一种数据类型，而是一种数据集合，在C语言中数组是一组具有相同类型的数据的集合，而结构体用来存放一组不同类型的数据，但是在LPC语言中完全可以使用混合类型数组来实现存放不同类型的数据，或用使用更灵活的映射类型，所以结构体基本没什么大用，这里只做简单的介绍。</p>
+<p>在C语言中的结构体类型关键字是 struct，LPC语言中结构体变量的定义方法和C语言有一点不一样的地方是<strong>C语言中结构体定义时 <code>}</code> 后面必须有 分号<code>;</code>，而LPC语言中不需要，另外LPC语言中结构体赋值取值只能使用 <code>-&gt;</code></strong>。</p>
+<p>在LPC语言中结构体有点像C++语言的类(class)，也增加了关键字 <code>class</code> 可用，而且是使用 <code>new</code> 关键字实例化，看起来好像升级成类了。但是，又和C语言的 <code>struct</code> 一样只能包含成员变量，不能包含成员函数，本质上不能算类。</p>
+<p>这里给一个具体的示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="c1">// 示例：2.1.8
+</span><span class="c1"></span><span class="n">class</span> <span class="n">example</span> <span class="p">{</span>
+    <span class="n">string</span> <span class="n">name</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">age</span><span class="p">;</span>
+    <span class="n">string</span> <span class="o">*</span><span class="n">lover</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">class</span> <span class="n">example</span> <span class="n">test</span><span class="p">(</span><span class="n">string</span> <span class="n">name</span><span class="p">,</span> <span class="kt">int</span> <span class="n">age</span><span class="p">,</span> <span class="n">string</span> <span class="o">*</span><span class="n">lover</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">class</span> <span class="n">example</span> <span class="n">test</span> <span class="o">=</span> <span class="n">new</span> <span class="p">(</span><span class="n">class</span> <span class="n">example</span><span class="p">);</span>
+    <span class="c1">// 赋值
+</span><span class="c1"></span>    <span class="n">test</span><span class="o">-&gt;</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span><span class="p">;</span>
+    <span class="n">test</span><span class="o">-&gt;</span><span class="n">age</span> <span class="o">=</span> <span class="n">age</span><span class="p">;</span>
+    <span class="n">test</span><span class="o">-&gt;</span><span class="n">lover</span> <span class="o">=</span> <span class="n">lover</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">test</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="n">main</span><span class="p">(</span><span class="n">object</span> <span class="n">me</span><span class="p">,</span> <span class="n">string</span> <span class="n">arg</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">// 变量
+</span><span class="c1"></span>    <span class="n">class</span> <span class="n">example</span> <span class="n">instance</span><span class="p">;</span>
+
+    <span class="n">instance</span> <span class="o">=</span> <span class="n">test</span><span class="p">(</span><span class="s">&#34;mudren&#34;</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="p">({</span><span class="s">&#34;a&#34;</span><span class="p">,</span> <span class="s">&#34;b&#34;</span><span class="p">,</span> <span class="s">&#34;c&#34;</span><span class="p">,</span> <span class="s">&#34;d&#34;</span><span class="p">,</span> <span class="s">&#34;e&#34;</span><span class="p">}));</span>
+    <span class="c1">// 取值
+</span><span class="c1"></span>    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;name : %s，age : %d, lover : %@-7s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">instance</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">,</span> <span class="n">instance</span><span class="o">-&gt;</span><span class="n">age</span><span class="p">,</span> <span class="n">instance</span><span class="o">-&gt;</span><span class="n">lover</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>输出结果如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">name : mudren，age : 24, lover : a      b      c      d      e
+</code></pre></td></tr></table>
+</div>
+</div><p>因为结构体类型在LPC语言中的定义和声明的方法和 struct 不完全一样，所以推荐使用 <code>class</code> 关键字。当然，以上代码中 <code>class</code> 改成 <code>struct</code> 也可以，甚至混用也没错。</p>
+<p>另外，结构体在实例化时也可以传参数，如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="n">class</span> <span class="n">foo</span> <span class="p">{</span> <span class="kt">int</span> <span class="n">x</span><span class="p">;</span> <span class="n">string</span> <span class="n">y</span><span class="p">;</span> <span class="p">}</span>
+<span class="n">class</span> <span class="n">foo</span> <span class="n">f1</span> <span class="o">=</span> <span class="n">new</span><span class="p">(</span><span class="n">class</span> <span class="n">foo</span><span class="p">,</span> <span class="nl">x</span> <span class="p">:</span> <span class="mi">5</span><span class="p">);</span>
+<span class="n">class</span> <span class="n">foo</span> <span class="n">f2</span> <span class="o">=</span> <span class="n">new</span><span class="p">(</span><span class="n">class</span> <span class="n">foo</span><span class="p">,</span> <span class="nl">y</span> <span class="p">:</span> <span class="s">&#34;foo&#34;</span><span class="p">,</span> <span class="nl">x</span> <span class="p">:</span> <span class="mi">1</span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>这有点类似PHP8中新增的<code>命名参数</code>的用法，高级~~~</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2022-06-28</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/2.1%E5%92%8Cc%E8%AF%AD%E8%A8%80%E7%9B%B8%E4%BC%BC%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://705248010.github.io/2.1%E5%92%8Cc%E8%AF%AD%E8%A8%80%E7%9B%B8%E4%BC%BC%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" data-title="2.1和C语言相似的数据类型" data-via="xxxx" data-hashtags="LPC,MUD,“LPMUD”"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://705248010.github.io/2.1%E5%92%8Cc%E8%AF%AD%E8%A8%80%E7%9B%B8%E4%BC%BC%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" data-hashtag="LPC"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://705248010.github.io/2.1%E5%92%8Cc%E8%AF%AD%E8%A8%80%E7%9B%B8%E4%BC%BC%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" data-title="2.1和C语言相似的数据类型"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://705248010.github.io/2.1%E5%92%8Cc%E8%AF%AD%E8%A8%80%E7%9B%B8%E4%BC%BC%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" data-title="2.1和C语言相似的数据类型" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></i></a><a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://705248010.github.io/2.1%E5%92%8Cc%E8%AF%AD%E8%A8%80%E7%9B%B8%E4%BC%BC%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" data-title="2.1和C语言相似的数据类型" data-description=""><i class="fab fa-blogger fa-fw"></i></a><a href="javascript:void(0);" title="分享到 百度" data-sharer="baidu" data-url="https://705248010.github.io/2.1%E5%92%8Cc%E8%AF%AD%E8%A8%80%E7%9B%B8%E4%BC%BC%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" data-title="2.1和C语言相似的数据类型"><i data-svg-src="/lib/simple-icons/icons/baidu.min.svg"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/lpc/">LPC</a>,&nbsp;<a href="/tags/mud/">MUD</a>,&nbsp;<a href="/tags/lpmud/">“LPMUD”</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/1.5lpc%E7%9A%84%E5%85%B3%E9%94%AE%E5%AD%97%E5%8F%8A%E6%9C%AF%E8%AF%AD%E8%AF%B4%E6%98%8E/" class="prev" rel="prev" title="1.5LPC的关键字及术语说明"><i class="fas fa-angle-left fa-fw"></i>1.5LPC的关键字及术语说明</a>
+            <a href="/2.2%E4%B8%8D%E5%90%8C%E4%BA%8Ec%E8%AF%AD%E8%A8%80%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" class="next" rel="next" title="2.2不同于C语言的数据类型">2.2不同于C语言的数据类型<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line"><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/705248010" target="_blank">Kurong123</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+        
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div>
+
+        <div class="sidebar_wo">
+            <div id="leimu">
+              <img src="https://cdn.jsdelivr.net/gh/lewky/lewky.github.io@master/images/b2t/leimuA.png" alt="雷姆" 
+              onmouseover="this.src='https://cdn.jsdelivr.net/gh/lewky/lewky.github.io@master/images/b2t/leimuB.png'" 
+              onmouseout="this.src='https://cdn.jsdelivr.net/gh/lewky/lewky.github.io@master/images/b2t/leimuA.png'" title="回到顶部">
+            </div>
+            <div class="sidebar_wo" id="lamu">
+              <img src="https://cdn.jsdelivr.net/gh/lewky/lewky.github.io@master/images/b2t/lamuA.png" alt="雷姆" 
+              onmouseover="this.src='https://cdn.jsdelivr.net/gh/lewky/lewky.github.io@master/images/b2t/lamuB.png'" 
+              onmouseout="this.src='https://cdn.jsdelivr.net/gh/lewky/lewky.github.io@master/images/b2t/lamuA.png'" title="回到底部">
+            </div>
+          </div><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@2.1.3/dist/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-backstretch@2.1.18/jquery.backstretch.min.js"></script><script type="text/javascript" src="/js/custom.js"></script></body>
+</html>

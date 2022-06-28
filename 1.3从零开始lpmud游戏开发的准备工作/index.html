@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>1.3从零开始LPMUD游戏开发的准备工作 - Kurong123&#39;s Blog</title><meta name="Description" content="Personal Blog"><meta property="og:title" content="1.3从零开始LPMUD游戏开发的准备工作" />
+<meta property="og:description" content="1.3 从零开始 LPMUD 游戏开发的准备工作 我们学C语言时已经熟悉C语言程序的编译运行流程，如下面的代码： 1 2 3 4 5 6 #include &lt;stdio.h&gt;int main() { puts(&#34;www.mud.ren&#34;); return 0; } 我们需要先编译生成可" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://705248010.github.io/1.3%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8Blpmud%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E7%9A%84%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-06-28T23:50:23+08:00" />
+<meta property="article:modified_time" content="2022-06-28T23:50:23+08:00" />
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="1.3从零开始LPMUD游戏开发的准备工作"/>
+<meta name="twitter:description" content="1.3 从零开始 LPMUD 游戏开发的准备工作 我们学C语言时已经熟悉C语言程序的编译运行流程，如下面的代码： 1 2 3 4 5 6 #include &lt;stdio.h&gt;int main() { puts(&#34;www.mud.ren&#34;); return 0; } 我们需要先编译生成可"/>
+<meta name="application-name" content="LoveIt">
+<meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="canonical" href="https://705248010.github.io/1.3%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8Blpmud%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E7%9A%84%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C/" /><link rel="prev" href="https://705248010.github.io/1.2lpmud%E6%B8%B8%E6%88%8F%E9%A9%B1%E5%8A%A8%E8%AF%B4%E6%98%8E/" /><link rel="next" href="https://705248010.github.io/1.4lpc%E8%AF%AD%E8%A8%80%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "1.3从零开始LPMUD游戏开发的准备工作",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/705248010.github.io\/1.3%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8Blpmud%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E7%9A%84%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C\/"
+        },"genre": "posts","keywords": "LPC, MUD, “LPMUD”","wordcount":  2492 ,
+        "url": "https:\/\/705248010.github.io\/1.3%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8Blpmud%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E7%9A%84%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C\/","datePublished": "2022-06-28T23:50:23+08:00","dateModified": "2022-06-28T23:50:23+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Kurong123"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <a href="https://github.com/705248010" class="github-corner" target="_blank" title="Follow me on GitHub" aria-label="Follow me on GitHub"><svg width="3.5rem" height="3.5rem" viewBox="0 0 250 250" style="fill:#70B7FD; color:#fff; position: absolute; top: 0; border: 0; left: 0; transform: scale(-1, 1);" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+        <div class="header-title">
+            <a href="/" title="Kurong123&#39;s Blog">Kurong123&#39;s Blog</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner">
+		<div class="dropdown">
+			<a href="/posts/" class="menu-item menu-more dropbtn" title="" ><i class='fas fa-fw fa-archive'></i> 归档 
+			</a>
+			<div class="menu-more-content dropdown-content"><a href="/categories/" title="" ><i class='fas fa-fw fa-th'></i> 分类 </a><a href="/tags/" title="" target="_blank" rel="noopener"><i class='fas fa-fw fa-tag'></i> 标签 </a></div>
+		</div>
+	<a class="menu-item" href="/friends/"><i class='fas fa-fw fa-fan fa-link'></i> 友链 
+		</a><a class="menu-item" href="/about/"><i class='fas fa-fw fa-fan fa-book'></i> 关于 
+		</a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Kurong123&#39;s Blog">Kurong123&#39;s Blog</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title=""><i class='fas fa-fw fa-archive'></i>归档</a><a class="menu-item" href="/friends/" title=""><i class='fas fa-fw fa-fan fa-link'></i>友链</a><a class="menu-item" href="/about/" title=""><i class='fas fa-fw fa-fan fa-book'></i>关于</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">1.3从零开始LPMUD游戏开发的准备工作</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/705248010" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>Kurong123</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/lpmud/"><i class="far fa-folder fa-fw"></i>LPMUD</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar fa-fw"></i>&nbsp;<time datetime="2022-06-28">2022-06-28</time>&nbsp;<i class="far fa-calendar-plus fa-fw"></i>&nbsp;<time datetime="2022-06-28">2022-06-28</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2492 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 5 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#131-服务端配置">1.3.1 服务端配置</a></li>
+    <li><a href="#132-客户端连接">1.3.2 客户端连接</a></li>
+    <li><a href="#133-开发工具的准备">1.3.3 开发工具的准备</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="13-从零开始-lpmud-游戏开发的准备工作">1.3 从零开始 LPMUD 游戏开发的准备工作</h1>
+<p>我们学C语言时已经熟悉C语言程序的编译运行流程，如下面的代码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span><span class="cp"></span><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">puts</span><span class="p">(</span><span class="s">&#34;www.mud.ren&#34;</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>我们需要先编译生成可执行程序，然后运行这个程序，程序自动从int main(void)函数开始执行。</p>
+<p>前面也介绍了LPMUD通过MUD游戏引擎驱动，但我们写的代码怎么运行呢？因为是入门教程，这里不做过多分析，只是先简单的描述游戏启动顺序：游戏引擎运行后，首先载入运行时配置文件中指定的 <code>simul_efun</code> 文件，然后载入运行时配置文件中指定的 <code>master</code> 文件完成启动并等待玩家连线。如果有玩家连线，驱动自动调用 <code>master</code> 文件中的 <code>object connect(int port)</code> 方法处理连接，此方法会返回连线对象，并自动调用对象中的 <code>object logon(void)</code> 方法处理登录。注意，在 lpmud 中所有对象都会自动包含一个头文件 <code>globals.h</code> （运行时配置文件中指定位置和文件名)。和C语言不同的是，lpc 程序没有结束，只要启动后不销毁会一直在内存中保持运行，而且也没有 int main() 入口函数，不过有一个类似的 <code>void create(void)</code> 方法，在游戏文件加载时自动调用此方法。</p>
+<p>在LPC语言中，没有编译并生成可执行程序的过程，所有 .c 源程序都可以随时加载并生效。</p>
+<h2 id="131-服务端配置">1.3.1 服务端配置</h2>
+<p>关于启动流程的问题，这里不理解也没有关系，我们先从基础语法开始学习，因为LPC代码不能单独运行，只能在项目中执行，为了方便学习LPC语言，这里提供一个基础的 mudlib，可以正常的使用游戏引擎驱动。</p>
+<p>下载地址：https://github.com/mudren/lpc-test/archive/master.zip</p>
+<p>从下一章开始，我们就在此 mudlib 中学习LPC语言。这个项目目录的文件并不多，主要结构如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">.
+├── area                    游戏环境区域所在目录
+│   ├── tower.c             勇者之塔
+│   └── virtual.c           虚拟环境控制文件
+├── cmds                    游戏指令（包括教程演示代码）所在目录
+│   ├── demo                教程示例代码所在目录
+│   │   └── ...
+│   ├── test                个人学习代码存放目录
+│   │   ├── test.c
+│   │   └── ...
+│   ├── update.c
+│   └── ...
+├── config.ini              *运行时配置文件*
+├── data                    存档文件保存目录
+│   └── ...
+├── include                 头文件所在目录
+│   ├── ansi.h              *颜色控制头文件*
+│   └── globals.h           *全局默认包含头文件*
+├── inherit                 继承功能文件目录
+│   ├── clean_up.c          内存清理接口
+│   └── dbase.c             数据存取接口
+├── log                     日志记录目录
+│   ├── author_stats        author 统计
+│   ├── debug.log           驱动日志
+│   ├── domain_stats        domain 统计
+│   ├── error_handler       编译错误日志
+│   └── log_error           代码错误及警告日志
+├── README                  说明文件
+├── system                  系统文件目录
+│   ├── kernel              核心文件目录
+│   │   ├── master.c        *主控对象*
+│   │   └── simul_efun.c    *模拟外部函数*
+│   └── object              核对对象目录
+│       ├── login.c         *连线对象*
+│       ├── user.c          *玩家对象*
+│       └── void.c          *默认环境对象*
+└── tree.txt                当前文档结构说明文件
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>提示：因为项目持续更新，目录结构可能稍有不同，具体可以看项目README.md。</p>
+</blockquote>
+<p>先把下载的 mudlib 解压到D盘根目录（其它盘也可以），把目录改名为 <code>lpc-test</code>,同时把游戏驱动也解压到D盘根目录，把驱动目录改名为 <code>lpmud-driver</code>，在 <code>lpc-test</code> 目录中新建 <code>driver.cmd</code> 文件，使用记事本打开，输入以下内容并保存：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">:start
+D:\lpmud-driver\driver.exe config.ini
+goto start
+</code></pre></td></tr></table>
+</div>
+</div><p>双击 <code>driver.cmd</code>，MUD服务器启动，如图1所示：</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://oiuv.oss-cn-beijing.aliyuncs.com/images/lpc_book/1.3.1.jpg"
+        data-srcset="https://oiuv.oss-cn-beijing.aliyuncs.com/images/lpc_book/1.3.1.jpg, https://oiuv.oss-cn-beijing.aliyuncs.com/images/lpc_book/1.3.1.jpg 1.5x, https://oiuv.oss-cn-beijing.aliyuncs.com/images/lpc_book/1.3.1.jpg 2x"
+        data-sizes="auto"
+        alt="https://oiuv.oss-cn-beijing.aliyuncs.com/images/lpc_book/1.3.1.jpg"
+        title="driver启动界面" /></p>
+<blockquote>
+<p>如果启动失败，请确认你的驱动目录是否正确，没有驱动的在此下载<a href="https://bbs.mud.ren/threads/4" target="_blank" rel="noopener noreffer">fluffos v2019 正式版</a>。</p>
+</blockquote>
+<p>请注意：早期开发的 MUDLIB 都是使用 GBK 编码，但FluffOS v2019开始只支持 utf-8 编码，本教程代码统一为 utf-8 编码。</p>
+<h2 id="132-客户端连接">1.3.2 客户端连接</h2>
+<p>服务启动后，使用MUD游戏客户端连接 127.0.0.1:4000 或网页访问 http://127.0.0.1:4001/ 可以成功连接游戏。测试 mud 支持 help、update 等指令，对应的文件在 <code>lpc-test</code> 的 <code>cmds</code> 目录中，输入<code>help</code>可以查看帮助。</p>
+<p>在 <code>cmds</code> 目录下我们还有 <code>demo</code> 和 <code>test</code> 二个目录，其中 <code>demo</code> 目录是后续教程中对应的代码示例，可以直接在游戏中输入 <code>示例名</code> 测试对应的示例，如输入<code>2.1.1</code>；而 <code>test</code> 目录是给大家学习用的目录，在这个目录中新建的文件都可以直接输入文件名运行，其中有一个默认的测试文件 <code>test.c</code>，我们打开 <code>test.c</code>,可以看到以下代码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="n">object</span> <span class="n">me</span><span class="p">,</span> <span class="n">string</span> <span class="n">arg</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">// 请在此实现你的代码
+</span><span class="c1"></span>
+    <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>从下章开始，我们一直保持游戏驱动运行，并使用客户端连接。学习过程中我们以 <code>test.c</code> 文件为模板测试我们的代码，把自己的学习代码文件存放在 <code>cmds/test/</code> 目录中，然后在客户端直接输入文件名可执行。</p>
+<p>注意这里的 <code>int main(object me, string arg)</code> 是我们自定义的函数，作为指令执行的入口，和C语言中的 <code>int main(void)</code> 函数没有任何关系，返回值是 1 ，而不是C语言中的 0，这里先不解释，通过后续章节的学习你会理解为什么是这样。</p>
+<blockquote>
+<p>提示：除了把代码写在<code>/cmds/test/</code>目录中外，还可以使用<code>eval</code>指令执行代码片段，方便简易测试，如：<code>eval return this_player();</code>，不过<code>eval</code>指令需要先输入指令<code>wizard</code>进入wizard角色才能使用。</p>
+</blockquote>
+<p>在开发测试中，我们推荐直接网页访问 http://127.0.0.1:4001/ 打开游戏，如果要客户端，推荐使用 <a href="https://tintin.sourceforge.io/" target="_blank" rel="noopener noreffer">tintin++</a> 客户端，小巧方便,下载地址：https://tintin.sourceforge.io/download.php</p>
+<blockquote>
+<p>在线测试地址：https://test.mud.ren/</p>
+</blockquote>
+<h2 id="133-开发工具的准备">1.3.3 开发工具的准备</h2>
+<p>在开发工具上，只推荐一个：Visual Studio Code，简称VS code，官方网站：https://code.visualstudio.com/ 。</p>
+<p>为了方便 LPC 开发，需要在项目配置文件 <code>.vscode\c_cpp_properties.json</code> 中指定 include 位置并自动包含 globals.h。具体配置如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
+    <span class="nt">&#34;configurations&#34;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="nt">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;LPC&#34;</span><span class="p">,</span>
+            <span class="nt">&#34;includePath&#34;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="s2">&#34;${workspaceFolder}/include/&#34;</span>
+            <span class="p">],</span>
+            <span class="nt">&#34;forcedInclude&#34;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="s2">&#34;${workspaceFolder}/include/globals.h&#34;</span>
+            <span class="p">],</span>
+            <span class="nt">&#34;defines&#34;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="s2">&#34;FLUFFOS&#34;</span><span class="p">,</span>
+                <span class="s2">&#34;MUDOS&#34;</span>
+            <span class="p">],</span>
+            <span class="nt">&#34;cStandard&#34;</span><span class="p">:</span> <span class="s2">&#34;c89&#34;</span><span class="p">,</span>
+            <span class="nt">&#34;cppStandard&#34;</span><span class="p">:</span> <span class="s2">&#34;c++11&#34;</span><span class="p">,</span>
+            <span class="nt">&#34;intelliSenseMode&#34;</span><span class="p">:</span> <span class="s2">&#34;${default}&#34;</span>
+        <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="nt">&#34;version&#34;</span><span class="p">:</span> <span class="mi">4</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>另外，因为LPC代码使用的 .c 扩展名，但并不完全是C语言的语法，所以会提示各种错误，我们需要<strong>禁用错误下划线</strong>,需要在项目配置文件 <code>.vscode\settings.json</code> 中做类似以下配置：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
+    <span class="nt">&#34;C_Cpp.errorSquiggles&#34;</span><span class="p">:</span> <span class="s2">&#34;Disabled&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;editor.formatOnType&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nt">&#34;files.autoGuessEncoding&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nt">&#34;files.insertFinalNewline&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nt">&#34;files.trimFinalNewlines&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nt">&#34;files.trimTrailingWhitespace&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nt">&#34;editor.renderWhitespace&#34;</span><span class="p">:</span> <span class="s2">&#34;all&#34;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>具体操作：</p>
+<ol>
+<li>请用 VS CODE 打开你的MUDLIB后，打开命令面板（在 windows 系统下，按 <code>ctrl+shift+p</code>）</li>
+<li>选择 <code>C/C++:编辑配置(JSON)</code> 打开 <code>c_cpp_properties.json</code> 编辑</li>
+<li>选择 <code>C/C++:禁用错误下划线</code> 关闭错误提示。</li>
+</ol>
+<p>配置后基本能实现LPC开发的友好提示和格式化，只是对函数指针、格式定界符（<a href="https://bbs.mud.ren/XXX" target="_blank" rel="noopener noreffer">@XXX</a> &hellip;XXX）的支持不够，需要手动微调。</p>
+<p>在本教程提供的最新代码中已做好配置，大家无需再做任何设置即可直接生效。</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2022-06-28</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/1.3%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8Blpmud%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E7%9A%84%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://705248010.github.io/1.3%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8Blpmud%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E7%9A%84%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C/" data-title="1.3从零开始LPMUD游戏开发的准备工作" data-via="xxxx" data-hashtags="LPC,MUD,“LPMUD”"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://705248010.github.io/1.3%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8Blpmud%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E7%9A%84%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C/" data-hashtag="LPC"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://705248010.github.io/1.3%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8Blpmud%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E7%9A%84%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C/" data-title="1.3从零开始LPMUD游戏开发的准备工作"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://705248010.github.io/1.3%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8Blpmud%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E7%9A%84%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C/" data-title="1.3从零开始LPMUD游戏开发的准备工作" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></i></a><a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://705248010.github.io/1.3%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8Blpmud%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E7%9A%84%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C/" data-title="1.3从零开始LPMUD游戏开发的准备工作" data-description=""><i class="fab fa-blogger fa-fw"></i></a><a href="javascript:void(0);" title="分享到 百度" data-sharer="baidu" data-url="https://705248010.github.io/1.3%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8Blpmud%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E7%9A%84%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C/" data-title="1.3从零开始LPMUD游戏开发的准备工作"><i data-svg-src="/lib/simple-icons/icons/baidu.min.svg"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/lpc/">LPC</a>,&nbsp;<a href="/tags/mud/">MUD</a>,&nbsp;<a href="/tags/lpmud/">“LPMUD”</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/1.2lpmud%E6%B8%B8%E6%88%8F%E9%A9%B1%E5%8A%A8%E8%AF%B4%E6%98%8E/" class="prev" rel="prev" title="1.2LPMUD游戏驱动说明"><i class="fas fa-angle-left fa-fw"></i>1.2LPMUD游戏驱动说明</a>
+            <a href="/1.4lpc%E8%AF%AD%E8%A8%80%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/" class="next" rel="next" title="1.4LPC语言的基本语法">1.4LPC语言的基本语法<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line"><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/705248010" target="_blank">Kurong123</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+        
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div>
+
+        <div class="sidebar_wo">
+            <div id="leimu">
+              <img src="https://cdn.jsdelivr.net/gh/lewky/lewky.github.io@master/images/b2t/leimuA.png" alt="雷姆" 
+              onmouseover="this.src='https://cdn.jsdelivr.net/gh/lewky/lewky.github.io@master/images/b2t/leimuB.png'" 
+              onmouseout="this.src='https://cdn.jsdelivr.net/gh/lewky/lewky.github.io@master/images/b2t/leimuA.png'" title="回到顶部">
+            </div>
+            <div class="sidebar_wo" id="lamu">
+              <img src="https://cdn.jsdelivr.net/gh/lewky/lewky.github.io@master/images/b2t/lamuA.png" alt="雷姆" 
+              onmouseover="this.src='https://cdn.jsdelivr.net/gh/lewky/lewky.github.io@master/images/b2t/lamuB.png'" 
+              onmouseout="this.src='https://cdn.jsdelivr.net/gh/lewky/lewky.github.io@master/images/b2t/lamuA.png'" title="回到底部">
+            </div>
+          </div><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@2.1.3/dist/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-backstretch@2.1.18/jquery.backstretch.min.js"></script><script type="text/javascript" src="/js/custom.js"></script></body>
+</html>
