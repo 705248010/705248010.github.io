@@ -4,75 +4,75 @@
         <link>https://705248010.github.io/posts/</link>
         <description>所有文章 | Kurong123&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>705248010@qq.com (Kurong123)</managingEditor>
-            <webMaster>705248010@qq.com (Kurong123)</webMaster><lastBuildDate>Wed, 29 Jun 2022 12:54:35 &#43;0800</lastBuildDate><atom:link href="https://705248010.github.io/posts/" rel="self" type="application/rss+xml" /><item>
-    <title>5.6LPC语言中的面向对象编程</title>
-    <link>https://705248010.github.io/5.6lpc%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/</link>
-    <pubDate>Wed, 29 Jun 2022 12:54:35 &#43;0800</pubDate>
+            <webMaster>705248010@qq.com (Kurong123)</webMaster><lastBuildDate>Wed, 29 Jun 2022 13:17:38 &#43;0800</lastBuildDate><atom:link href="https://705248010.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>7.6@和@@</title>
+    <link>https://705248010.github.io/7.6%E5%92%8C/</link>
+    <pubDate>Wed, 29 Jun 2022 13:17:38 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://705248010.github.io/5.6lpc%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/</guid>
-    <description><![CDATA[5.6 LPC语言中的面向对象编程 除了语法的差别，支持面向对象是LPC语言和C语言最大的差别，因为C语言是面向过程的，如果看本教程的同学没有学过面]]></description>
+    <guid>https://705248010.github.io/7.6%E5%92%8C/</guid>
+    <description><![CDATA[7.6 @和@@ 关于@和@@的用法，在字符串和数组中有讲解，这里不再重复，如果还不熟悉请复习第六章字符串和数组的内容。只是说明一点：这二个用法本质]]></description>
 </item><item>
-    <title>5.5LPC语言中的对象及相关常用Efun</title>
-    <link>https://705248010.github.io/5.5lpc%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E5%AF%B9%E8%B1%A1%E5%8F%8A%E7%9B%B8%E5%85%B3%E5%B8%B8%E7%94%A8efun/</link>
-    <pubDate>Wed, 29 Jun 2022 12:54:25 &#43;0800</pubDate>
+    <title>7.5#pragma</title>
+    <link>https://705248010.github.io/7.5#pragma/</link>
+    <pubDate>Wed, 29 Jun 2022 13:17:28 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://705248010.github.io/5.5lpc%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E5%AF%B9%E8%B1%A1%E5%8F%8A%E7%9B%B8%E5%85%B3%E5%B8%B8%E7%94%A8efun/</guid>
-    <description><![CDATA[5.5 LPC语言中的对象及相关常用Efun 我们已经知道在LPC中所有载入驱动程序的 .c 文件都是对象，所有对象中都可以存在以下 apply 方法：clean_u]]></description>
+    <guid>https://705248010.github.io/7.5#pragma/</guid>
+    <description><![CDATA[7.5 #pragma #pragma是C语言中也存在的预处理指令，在所有的预处理指令中，#pragma 指令可能是最复杂的了，它的作用是设定编译器的状态或者是指]]></description>
 </item><item>
-    <title>5.4游戏最常用的外部函数</title>
-    <link>https://705248010.github.io/5.4%E6%B8%B8%E6%88%8F%E6%9C%80%E5%B8%B8%E7%94%A8%E7%9A%84%E5%A4%96%E9%83%A8%E5%87%BD%E6%95%B0/</link>
-    <pubDate>Wed, 29 Jun 2022 12:54:15 &#43;0800</pubDate>
+    <title>7.4#echo</title>
+    <link>https://705248010.github.io/7.4#echo/</link>
+    <pubDate>Wed, 29 Jun 2022 13:17:18 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://705248010.github.io/5.4%E6%B8%B8%E6%88%8F%E6%9C%80%E5%B8%B8%E7%94%A8%E7%9A%84%E5%A4%96%E9%83%A8%E5%87%BD%E6%95%B0/</guid>
-    <description><![CDATA[5.4 游戏最常用的外部函数 在本章第一节 《LPC语言的函数和方法》 中说明有一类函数叫模拟外部函数（simulated external function），但我们一]]></description>
+    <guid>https://705248010.github.io/7.4#echo/</guid>
+    <description><![CDATA[7.4 #echo 在LPC语言的预处理器中前面介绍的文件包含、宏定义、条件编译是最最常用的，而且用法和C语言一至，不过LPC语言中还有几个独有的预处理，其]]></description>
 </item><item>
-    <title>5.3基本输入输出函数</title>
-    <link>https://705248010.github.io/5.3%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E5%87%BD%E6%95%B0/</link>
-    <pubDate>Wed, 29 Jun 2022 12:54:04 &#43;0800</pubDate>
+    <title>7.3条件编译</title>
+    <link>https://705248010.github.io/7.3%E6%9D%A1%E4%BB%B6%E7%BC%96%E8%AF%91/</link>
+    <pubDate>Wed, 29 Jun 2022 13:17:10 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://705248010.github.io/5.3%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E5%87%BD%E6%95%B0/</guid>
-    <description><![CDATA[5.3 基本输入输出函数 和C语言比，LPC语言中提供了更多的输入输出函数。输出函数上，除了前面章节已经讲解并使用的 printf()/sprintf() 外部函数，还有以下主要函数： 5.3.1]]></description>
+    <guid>https://705248010.github.io/7.3%E6%9D%A1%E4%BB%B6%E7%BC%96%E8%AF%91/</guid>
+    <description><![CDATA[7.3 条件编译 LPC条件编译的使用和C语言完全相同,主要包括如下： 7.3.1 if&hellip;#endif #if 命令的完整格式为： 1 2 3 4 5 6 7 8 9 #if 整型常量表达式1 程序段1 #elif 整型常量]]></description>
 </item><item>
-    <title>5.2LPC语言的环境和内容物</title>
-    <link>https://705248010.github.io/5.2lpc%E8%AF%AD%E8%A8%80%E7%9A%84%E7%8E%AF%E5%A2%83%E5%92%8C%E5%86%85%E5%AE%B9%E7%89%A9/</link>
-    <pubDate>Wed, 29 Jun 2022 12:53:53 &#43;0800</pubDate>
+    <title>7.2宏定义</title>
+    <link>https://705248010.github.io/7.2%E5%AE%8F%E5%AE%9A%E4%B9%89/</link>
+    <pubDate>Wed, 29 Jun 2022 13:16:55 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://705248010.github.io/5.2lpc%E8%AF%AD%E8%A8%80%E7%9A%84%E7%8E%AF%E5%A2%83%E5%92%8C%E5%86%85%E5%AE%B9%E7%89%A9/</guid>
-    <description><![CDATA[5.2 LPC语言的环境和内容物 为了后续章节内容的讲解，这里补充一下环境的概念，什么是环境（environment）？什么是内容物（invento]]></description>
+    <guid>https://705248010.github.io/7.2%E5%AE%8F%E5%AE%9A%E4%B9%89/</guid>
+    <description><![CDATA[7.2 宏定义 7.2.1 宏定义(#define) LPC语言中的宏定义用法和C语言一样。宏定义的一般形式为： 1 #define 宏名 字符串 对宏定义的几点说明： \1) 宏定义是用宏]]></description>
 </item><item>
-    <title>5.1LPC语言的函数和方法</title>
-    <link>https://705248010.github.io/5.1lpc%E8%AF%AD%E8%A8%80%E7%9A%84%E5%87%BD%E6%95%B0%E5%92%8C%E6%96%B9%E6%B3%95/</link>
-    <pubDate>Wed, 29 Jun 2022 12:53:44 &#43;0800</pubDate>
+    <title>7.1文件包含（头文件）</title>
+    <link>https://705248010.github.io/7.1%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E5%A4%B4%E6%96%87%E4%BB%B6/</link>
+    <pubDate>Wed, 29 Jun 2022 13:16:45 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://705248010.github.io/5.1lpc%E8%AF%AD%E8%A8%80%E7%9A%84%E5%87%BD%E6%95%B0%E5%92%8C%E6%96%B9%E6%B3%95/</guid>
-    <description><![CDATA[5.1 LPC语言的函数和方法 5.1.1 简介 函数是一段可以重复执行的代码。它可以接受不同的参数，完成对应的操作。下面的例子就是一个函数。 1 2 3 int plus_one(int n) { return n]]></description>
+    <guid>https://705248010.github.io/7.1%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E5%A4%B4%E6%96%87%E4%BB%B6/</guid>
+    <description><![CDATA[7.1 文件包含（头文件） 7.1.1 简介 和 C 语言一样，LPC驱动(编译器)在编译程序之前，会先使用预处理器（preprocessor）处理代码。 预处理器首]]></description>
 </item><item>
-    <title>4.2LPC语言的循环结构</title>
-    <link>https://705248010.github.io/4.2lpc%E8%AF%AD%E8%A8%80%E7%9A%84%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84/</link>
-    <pubDate>Wed, 29 Jun 2022 12:53:35 &#43;0800</pubDate>
+    <title>6.7LPC语言中的数字0</title>
+    <link>https://705248010.github.io/6.7lpc%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E6%95%B0%E5%AD%970/</link>
+    <pubDate>Wed, 29 Jun 2022 13:16:31 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://705248010.github.io/4.2lpc%E8%AF%AD%E8%A8%80%E7%9A%84%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84/</guid>
-    <description><![CDATA[4.2 LPC语言的循环结构 循环结构在C语言中有 while、do..while、for 和 if..goto 四种，在LPC语言中没有 goto 关键字，所以基本循环只有三种，]]></description>
+    <guid>https://705248010.github.io/6.7lpc%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E6%95%B0%E5%AD%970/</guid>
+    <description><![CDATA[6.7 LPC语言中的数字0 在LPC语言中数字0是一个特殊的存在，它主要有以下用途： 6.7.1 整型常量0 最直接的用途就是表示一个整型数字0，可赋值给整型变]]></description>
 </item><item>
-    <title>4.1LPC语言的选择结构</title>
-    <link>https://705248010.github.io/4.1lpc%E8%AF%AD%E8%A8%80%E7%9A%84%E9%80%89%E6%8B%A9%E7%BB%93%E6%9E%84/</link>
-    <pubDate>Wed, 29 Jun 2022 12:53:24 &#43;0800</pubDate>
+    <title>6.6LPC语言中的buffer类型</title>
+    <link>https://705248010.github.io/6.6lpc%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84buffer%E7%B1%BB%E5%9E%8B/</link>
+    <pubDate>Wed, 29 Jun 2022 13:16:21 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://705248010.github.io/4.1lpc%E8%AF%AD%E8%A8%80%E7%9A%84%E9%80%89%E6%8B%A9%E7%BB%93%E6%9E%84/</guid>
-    <description><![CDATA[4.1 LPC语言的选择结构 C语言中常用的编程结构有三种（其它编程语言也是如此），它们分别是： 顺序结构：代码从前往后依次执行，没有任何“拐弯抹角”]]></description>
+    <guid>https://705248010.github.io/6.6lpc%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84buffer%E7%B1%BB%E5%9E%8B/</guid>
+    <description><![CDATA[6.6 LPC语言中的buffer类型 在教程第二章第二节中有介绍buffer数据类型，缓冲(buffer)类型是LPC语言中介于数组和字符串类型之]]></description>
 </item><item>
-    <title>3.3表达式、语句和数据类型转换</title>
-    <link>https://705248010.github.io/3.3%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%AF%AD%E5%8F%A5%E5%92%8C%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/</link>
-    <pubDate>Wed, 29 Jun 2022 12:53:14 &#43;0800</pubDate>
+    <title>6.5LPC结构体使用详解</title>
+    <link>https://705248010.github.io/6.5lpc%E7%BB%93%E6%9E%84%E4%BD%93%E4%BD%BF%E7%94%A8%E8%AF%A6%E8%A7%A3/</link>
+    <pubDate>Wed, 29 Jun 2022 13:16:10 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://705248010.github.io/3.3%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%AF%AD%E5%8F%A5%E5%92%8C%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/</guid>
-    <description><![CDATA[3.3 表达式、语句和数据类型转换 3.3.1 表达式和语句 在C语言中我们学过表达式和语句的概念，LPC语言中的运算表达式和C语言相同，在第一章LPC语言的基]]></description>
+    <guid>https://705248010.github.io/6.5lpc%E7%BB%93%E6%9E%84%E4%BD%93%E4%BD%BF%E7%94%A8%E8%AF%A6%E8%A7%A3/</guid>
+    <description><![CDATA[6.5 LPC结构体使用详解 在第二章数据类型中我们简单的介绍了LPC语言的结构体，这种数据类型可以像C++一样使用class关键字代替struct]]></description>
 </item><item>
-    <title>3.2LPC语言中的特殊运算符</title>
-    <link>https://705248010.github.io/3.2lpc%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E7%89%B9%E6%AE%8A%E8%BF%90%E7%AE%97%E7%AC%A6/</link>
-    <pubDate>Wed, 29 Jun 2022 12:53:03 &#43;0800</pubDate>
+    <title>6.4字符串常用外部函数</title>
+    <link>https://705248010.github.io/6.4%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%B8%B8%E7%94%A8%E5%A4%96%E9%83%A8%E5%87%BD%E6%95%B0/</link>
+    <pubDate>Wed, 29 Jun 2022 13:16:02 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://705248010.github.io/3.2lpc%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E7%89%B9%E6%AE%8A%E8%BF%90%E7%AE%97%E7%AC%A6/</guid>
-    <description><![CDATA[3.2 LPC语言中的特殊运算符 上一节中我们说了LPC语言的运算符和C语言基本相同，除了少了三个C语言中的运算符外，还有其它不同点吗？ 答案是有，运]]></description>
+    <guid>https://705248010.github.io/6.4%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%B8%B8%E7%94%A8%E5%A4%96%E9%83%A8%E5%87%BD%E6%95%B0/</guid>
+    <description><![CDATA[6.4 字符串常用外部函数 LPC 语言中的字符串在第二章数据类型中已经做了讲解，这里做个回顾，并补充相关外部函数的使用。 6.4.1 字符串赋值 字符串赋值直接使用以]]></description>
 </item></channel>
 </rss>
