@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>5.1LPC语言的函数和方法 - Kurong123&#39;s Blog</title><meta name="Description" content="Personal Blog"><meta property="og:title" content="5.1LPC语言的函数和方法" />
+<meta property="og:description" content="5.1 LPC语言的函数和方法 5.1.1 简介 函数是一段可以重复执行的代码。它可以接受不同的参数，完成对应的操作。下面的例子就是一个函数。 1 2 3 int plus_one(int n) { return n" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://705248010.github.io/5.1lpc%E8%AF%AD%E8%A8%80%E7%9A%84%E5%87%BD%E6%95%B0%E5%92%8C%E6%96%B9%E6%B3%95/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-06-29T12:53:44+08:00" />
+<meta property="article:modified_time" content="2022-06-29T12:53:44+08:00" />
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="5.1LPC语言的函数和方法"/>
+<meta name="twitter:description" content="5.1 LPC语言的函数和方法 5.1.1 简介 函数是一段可以重复执行的代码。它可以接受不同的参数，完成对应的操作。下面的例子就是一个函数。 1 2 3 int plus_one(int n) { return n"/>
+<meta name="application-name" content="LoveIt">
+<meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="canonical" href="https://705248010.github.io/5.1lpc%E8%AF%AD%E8%A8%80%E7%9A%84%E5%87%BD%E6%95%B0%E5%92%8C%E6%96%B9%E6%B3%95/" /><link rel="prev" href="https://705248010.github.io/4.2lpc%E8%AF%AD%E8%A8%80%E7%9A%84%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84/" /><link rel="next" href="https://705248010.github.io/5.2lpc%E8%AF%AD%E8%A8%80%E7%9A%84%E7%8E%AF%E5%A2%83%E5%92%8C%E5%86%85%E5%AE%B9%E7%89%A9/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "5.1LPC语言的函数和方法",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/705248010.github.io\/5.1lpc%E8%AF%AD%E8%A8%80%E7%9A%84%E5%87%BD%E6%95%B0%E5%92%8C%E6%96%B9%E6%B3%95\/"
+        },"genre": "posts","keywords": "LPC, MUD, “LPMUD”","wordcount":  3887 ,
+        "url": "https:\/\/705248010.github.io\/5.1lpc%E8%AF%AD%E8%A8%80%E7%9A%84%E5%87%BD%E6%95%B0%E5%92%8C%E6%96%B9%E6%B3%95\/","datePublished": "2022-06-29T12:53:44+08:00","dateModified": "2022-06-29T12:53:44+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Kurong123"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <a href="https://github.com/705248010" class="github-corner" target="_blank" title="Follow me on GitHub" aria-label="Follow me on GitHub"><svg width="3.5rem" height="3.5rem" viewBox="0 0 250 250" style="fill:#70B7FD; color:#fff; position: absolute; top: 0; border: 0; left: 0; transform: scale(-1, 1);" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+        <div class="header-title">
+            <a href="/" title="Kurong123&#39;s Blog">Kurong123&#39;s Blog</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner">
+		<div class="dropdown">
+			<a href="/posts/" class="menu-item menu-more dropbtn" title="" ><i class='fas fa-fw fa-archive'></i> 归档 
+			</a>
+			<div class="menu-more-content dropdown-content"><a href="/categories/" title="" ><i class='fas fa-fw fa-th'></i> 分类 </a><a href="/tags/" title="" target="_blank" rel="noopener"><i class='fas fa-fw fa-tag'></i> 标签 </a></div>
+		</div>
+	<a class="menu-item" href="/friends/"><i class='fas fa-fw fa-fan fa-link'></i> 友链 
+		</a><a class="menu-item" href="/about/"><i class='fas fa-fw fa-fan fa-book'></i> 关于 
+		</a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Kurong123&#39;s Blog">Kurong123&#39;s Blog</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title=""><i class='fas fa-fw fa-archive'></i>归档</a><a class="menu-item" href="/friends/" title=""><i class='fas fa-fw fa-fan fa-link'></i>友链</a><a class="menu-item" href="/about/" title=""><i class='fas fa-fw fa-fan fa-book'></i>关于</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">5.1LPC语言的函数和方法</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/705248010" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>Kurong123</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/lpmud/"><i class="far fa-folder fa-fw"></i>LPMUD</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar fa-fw"></i>&nbsp;<time datetime="2022-06-29">2022-06-29</time>&nbsp;<i class="far fa-calendar-plus fa-fw"></i>&nbsp;<time datetime="2022-06-29">2022-06-29</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 3887 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 8 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#511-简介">5.1.1 简介</a></li>
+    <li><a href="#512-参数的传值引用">5.1.2 参数的传值引用</a></li>
+    <li><a href="#513-函数指针">5.1.3 函数指针</a></li>
+    <li><a href="#514-函数原型">5.1.4 函数原型</a></li>
+    <li><a href="#515-函数修饰符">5.1.5 函数修饰符</a></li>
+    <li><a href="#516-可变参数">5.1.6 可变参数</a></li>
+    <li><a href="#517-efun--lpc语言的库函数">5.1.7 efun : LPC语言的库函数</a></li>
+    <li><a href="#518-sefun--lpc语言中的模拟库函数">5.1.8 sefun : LPC语言中的模拟库函数</a></li>
+    <li><a href="#519-lfun--lpc语言中的自定义函数方法">5.1.9 lfun : LPC语言中的自定义函数(方法)</a></li>
+    <li><a href="#5110-apply--lpc语言中的系统方法">5.1.10 apply : LPC语言中的系统方法</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="51-lpc语言的函数和方法">5.1 LPC语言的函数和方法</h1>
+<h2 id="511-简介">5.1.1 简介</h2>
+<p>函数是一段可以重复执行的代码。它可以接受不同的参数，完成对应的操作。下面的例子就是一个函数。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="kt">int</span> <span class="nf">plus_one</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>上面的代码声明了一个函数<code>plus_one()</code>。</p>
+<p>函数声明的语法有以下几点，需要注意：</p>
+<p>（1）返回值类型。函数声明时，首先需要给出返回值的类型，上例是<code>int</code>，表示函数<code>plus_one()</code>返回一个整数。</p>
+<p>（2）参数。函数名后面的圆括号里面，需要声明参数的类型和参数名，<code>plus_one(int n)</code>表示这个函数有一个整数参数<code>n</code>。</p>
+<p>（3）函数体。函数体要写在大括号里面，后面（即大括号外面）不需要加分号。大括号的起始位置，可以跟函数名在同一行，也可以另起一行，本书采用同一行的写法。</p>
+<p>（4）<code>return</code>语句。<code>return</code>语句给出函数的返回值，程序运行到这一行，就会跳出函数体，结束函数的调用。如果函数没有返回值，可以省略<code>return</code>语句，或者写成<code>return;</code>。</p>
+<blockquote>
+<p>提示：函数不能返回多个值，但可以通过返回一个数组来得到类似的效果。</p>
+</blockquote>
+<p>调用函数时，只要在函数名后面加上圆括号就可以了，实际的参数放在圆括号里面，就像下面这样。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="n">plus_one</span><span class="p">(</span><span class="mi">13</span><span class="p">);</span>
+<span class="c1">// a 等于 14
+</span></code></pre></td></tr></table>
+</div>
+</div><p>函数调用时，参数个数必须与定义里面的参数个数一致，参数过多或过少都会报错。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="kt">int</span> <span class="nf">plus_one</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">plus_one</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span> <span class="c1">// 报错
+</span><span class="c1"></span><span class="n">plus_one</span><span class="p">();</span>  <span class="c1">// 报错
+</span></code></pre></td></tr></table>
+</div>
+</div><p>上面示例中，函数<code>plus_one()</code>只能接受一个参数，传入两个参数或不传参数，都会报错。</p>
+<p>函数必须声明后使用，否则会报错。也就是说，一定要在使用<code>plus_one()</code>之前，声明这个函数。如果像下面这样写，编译时会报错。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="n">plus_one</span><span class="p">(</span><span class="mi">13</span><span class="p">);</span>
+
+<span class="kt">int</span> <span class="nf">plus_one</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>上面示例中，在调用<code>plus_one()</code>之后，才声明这个函数，编译就会报错。</p>
+<p>C 语言标准规定，函数只能声明在源码文件的顶层，不能声明在其他函数内部。</p>
+<p>不返回值的函数，使用<code>void</code>关键字表示返回值的类型。没有参数的函数，声明时要用<code>void</code>关键字表示参数类型。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="kt">void</span> <span class="nf">myFunc</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// ...
+</span><span class="c1"></span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>上面的<code>myFunc()</code>函数，既没有返回值，调用时也不需要参数。</p>
+<p>函数可以调用自身，这就叫做递归（recursion）。下面是斐波那契数列的例子。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="kt">unsigned</span> <span class="kt">long</span> <span class="nf">Fibonacci</span><span class="p">(</span><span class="kt">unsigned</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">Fibonacci</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">Fibonacci</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">);</span>
+  <span class="k">else</span>
+    <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>上面示例中，函数<code>Fibonacci()</code>调用了自身，大大简化了算法。</p>
+<h2 id="512-参数的传值引用">5.1.2 参数的传值引用</h2>
+<p>如果函数的参数是一个变量，那么调用时，传入的是这个变量的值的拷贝，而不是变量本身。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="kt">void</span> <span class="nf">increment</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">a</span><span class="o">++</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="n">increment</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+
+<span class="n">printf</span><span class="p">(</span><span class="s">&#34;%d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span> <span class="c1">// 10
+</span></code></pre></td></tr></table>
+</div>
+</div><p>上面示例中，调用<code>increment(i)</code>以后，变量<code>i</code>本身不会发生变化，还是等于<code>10</code>。因为传入函数的是<code>i</code>的拷贝，而不是<code>i</code>本身，拷贝的变化，影响不到原始变量。这就叫做“传值引用”。</p>
+<p>所以，如果参数变量发生变化，最好把它作为返回值传出来。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="kt">int</span> <span class="nf">increment</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">a</span><span class="o">++</span><span class="p">;</span>
+  <span class="k">return</span> <span class="n">a</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="n">i</span> <span class="o">=</span> <span class="n">increment</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+
+<span class="n">printf</span><span class="p">(</span><span class="s">&#34;%d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span> <span class="c1">// 11
+</span></code></pre></td></tr></table>
+</div>
+</div><h2 id="513-函数指针">5.1.3 函数指针</h2>
+<p>在C语言中有指针相关操作，但在LPC语言中没有明确的指针运算符和取地址运算符。但在LPC语言中函数也是指针，只是和C语言中不太一样，具体内容会在后续教程中讲解。</p>
+<h2 id="514-函数原型">5.1.4 函数原型</h2>
+<p>前面说过，函数必须先声明，后使用。但是，对于函数较多的程序，保证每个函数的顺序正确，会变得很麻烦。</p>
+<p>解决方法是，只要在程序开头处给出函数原型，函数就可以先使用、后声明。所谓函数原型，就是提前告诉编译器，每个函数的返回类型和参数类型。其他信息都不需要，也不用包括函数体，具体的函数实现可以后面再补上。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="kt">int</span> <span class="nf">twice</span><span class="p">(</span><span class="kt">int</span><span class="p">);</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">num</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="n">twice</span><span class="p">(</span><span class="n">num</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">twice</span><span class="p">(</span><span class="kt">int</span> <span class="n">num</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">num</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>上面示例中，函数<code>twice()</code>的实现是放在<code>main()</code>后面，但是代码头部先给出了函数原型，所以可以正确编译。只要提前给出函数原型，函数具体的实现放在哪里，就不重要了。</p>
+<p>函数原型包括参数名也可以，虽然这样对于编译器是多余的，但是阅读代码的时候，可能有助于理解函数的意图。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="kt">int</span> <span class="nf">twice</span><span class="p">(</span><span class="kt">int</span><span class="p">);</span>
+
+<span class="c1">// 等同于
+</span><span class="c1"></span><span class="kt">int</span> <span class="nf">twice</span><span class="p">(</span><span class="kt">int</span> <span class="n">num</span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>上面示例中，<code>twice</code>函数的参数名<code>num</code>，无论是否出现在原型里面，都是可以的。</p>
+<p>注意，函数原型必须以分号结尾。</p>
+<p>一般来说，每个源码文件的头部，都会给出当前脚本使用的所有函数的原型。</p>
+<h2 id="515-函数修饰符">5.1.5 函数修饰符</h2>
+<p>C 语言提供了一些函数修饰符，让函数用法更加明确，包括<code>public</code>、<code>protected</code>、<code>private</code>、<code>nomask</code>和<code>varargs</code>，相关内容会在后续面向对象编程模块详细讲解。</p>
+<h2 id="516-可变参数">5.1.6 可变参数</h2>
+<p>有些函数的参数数量是不确定的，声明函数的时候，可以使用省略号<code>...</code>表示可变数量的参数。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="kt">void</span> <span class="nf">test</span><span class="p">(</span><span class="n">mixed</span> <span class="o">*</span><span class="n">x</span><span class="p">...)</span>
+<span class="p">{</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;x = %O</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">x</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>你传的所有参数都成为数组 x 的元素，而且没有限制参数数量。如：test()、test(1,2,3)、test(&ldquo;hello&rdquo;,1,2,({3,4,5}))、test(1,3,5,([&ldquo;name&rdquo;:&ldquo;abc&rdquo;,&ldquo;age&rdquo;:12]),3.14)。</p>
+<p>这个用法和使用 varargs 相比还有一个很大的不同点，不传参数时函数参数在 varargs 定义的函数中是未定义状态（undefinedp/nullp），不管任何类型默认初始化为整型值为0，但在这里是初始化为空数组。</p>
+<hr>
+<p>在C语言函数分库函数和自字义函数，在LPC语言中类似，也有自己的库函数，这里需要强调的是C语言的库函数在LPC语言中都是不存在的，不可以直接用，前面章节中使用的 <code>printf</code> 函数只是LPC语言中同名的库函数。</p>
+<h2 id="517-efun--lpc语言的库函数">5.1.7 efun : LPC语言的库函数</h2>
+<p>在LPC语言中有各种可以直接使用的库函数，专业术语为 <code>外部函数(external function)</code>，通常简称为 <code>efun</code>，在 fluffos 中一共有近300个 efun，这些函数都可以直接使用，而且不需要和C语言一样要引入头文件，如：<code>printf</code>、<code>allocate</code>、<code>this_object</code>。在后续章节我们会逐步介绍常用的 efun，你也可以从这里查看所有 <a href="https://wiki.mud.ren/index.php?title=Lpc:Efun" target="_blank" rel="noopener noreffer">efun 文档</a>：https://wiki.mud.ren/index.php?title=Lpc:Efun</p>
+<h2 id="518-sefun--lpc语言中的模拟库函数">5.1.8 sefun : LPC语言中的模拟库函数</h2>
+<p>LPC语言的 efun 已经很多了，但游戏开发有各种需求，有时我们会开发一些自己的库函数，想在整个游戏中可以随意使用，这在LPC语言中专业术语是 <code>模拟外部函数(simulated external function)</code>，简称 <code>sefun</code>。在第一章中我们简单的介绍了驱动运行流程，也大概了解运行时配置文件中有一个参数 <code>simulated efun file</code> 指定 sefun 的位置，我们的 <code>sefun</code> 写在运行时配置中指定的文件中后，就可以和 efun 一样随意使用了。</p>
+<p>efun 的运行速度是最快的， sefun 其次。</p>
+<h2 id="519-lfun--lpc语言中的自定义函数方法">5.1.9 lfun : LPC语言中的自定义函数(方法)</h2>
+<p>除了 efun 和 sefun，我们正常开发中会大量的自定义函数，这些函数被称为 <code>局部函数(local function)</code>，简称 <code>lfun</code>。因为LPC是面向对象编程，所有 lfun 都是写在蓝图对象中，而且和对象直接相关，不像 efun 和 sefun 可以随意调用。在现在面向对象编程中，对这些函数的称呼是 <code>方法</code>，我个人也习惯这种称呼，在本教程中对自定义函数全部统一称呼为 <code>方法</code>，代表和对象相关的自定义函数。</p>
+<h2 id="5110-apply--lpc语言中的系统方法">5.1.10 apply : LPC语言中的系统方法</h2>
+<p>在C语言中有一个很特殊的函数，就是主函数 <code>main</code>，这个函数没有实现任何具体功能，仅仅是程序的入口，而功能需要我们自己实现。而在 LPC 语言中也有大量这类函数，其特点是在游戏运行的特定状态下自动执行，具体执行后干什么由游戏开发者决定。这类函数有一个专业术语 <code>apply</code>，因为这些 apply 全部是和对象相关，需要通过特定对象调用，所以我们称呼为 <code>apply 方法</code>。</p>
+<p><code>apply 方法</code>根据相关对象一共分为三类，分别是和主控对象(master)相关、和玩家对象(interactive)相关、和所有对象(object)相关，在特定条件下，游戏驱动会自动调用这些方法，具体调用后做什么，则是开发者做的事了。</p>
+<p>比如：<code>connect</code> 这个 apply 方法在主控对象中，当有玩家连接时会被主控对象自动调用，开发者在这个方法里实现连接和登录功能；<code>net_dead</code> 这个 apply 方法在玩家对象中，当玩家断线时会自动调用，开发者可以在这个方法里处理断线后怎么办；而所有对象都有 <code>create</code> apply 方法，当对象被初始化时会自动调用，开发者可以在这个方法里初始化这个对象的基本参数和行为。</p>
+<p>请注意：有的 apply 方法必须实现，否则游戏不能正常运行，而有的 apply 对象可以不实现，这样相关的行为就不会被处理。</p>
+<p>目前 fluffos 支持的 <a href="https://wiki.mud.ren/index.php?title=Lpc:Apply" target="_blank" rel="noopener noreffer">apply 方法</a>请点击链接查看：https://wiki.mud.ren/index.php?title=Lpc:Apply</p>
+<p>我们看一个简单的示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="c1">// 示例：5.1.1
+</span><span class="c1">// apply 方法，对象加载时自动执行
+</span><span class="c1"></span><span class="kt">void</span> <span class="nf">create</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="c1">// 发送信息给当前玩家
+</span><span class="c1"></span>    <span class="n">write</span><span class="p">(</span><span class="s">&#34;create 5.1.1!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// apply 方法，设置心跳后自动执行
+</span><span class="c1"></span><span class="kt">void</span> <span class="nf">heart_beat</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="c1">// 记录日志，请在driver界面或 debug.log 文件中查看
+</span><span class="c1"></span>    <span class="n">debug_message</span><span class="p">(</span><span class="n">file_name</span><span class="p">(</span><span class="n">this_object</span><span class="p">())</span> <span class="o">+</span> <span class="s">&#34;: &#34;</span> <span class="o">+</span> <span class="n">time</span><span class="p">());</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="n">object</span> <span class="n">me</span><span class="p">,</span> <span class="n">string</span> <span class="n">arg</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">query_heart_beat</span><span class="p">())</span>
+    <span class="p">{</span>
+        <span class="n">write</span><span class="p">(</span><span class="s">&#34;停止心跳！</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+        <span class="n">set_heart_beat</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">else</span>
+    <span class="p">{</span>
+        <span class="n">write</span><span class="p">(</span><span class="s">&#34;开始心跳！</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+        <span class="n">set_heart_beat</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>在本示例中，包括 efun、lfun 和 apply，其中 <code>debug_message</code>、<code>file_name</code>、<code>this_object</code>、<code>time</code>、<code>query_heart_beat</code>、<code>set_heart_beat</code>、<code>write</code>是 efun，<code>create</code>、<code>heart_beat</code>是 apply，<code>main</code>是 lfun。</p>
+<p>另外，在LPC语言中多了C语言默认不支持的匿名函数，可以结合函数指针使用，语法格式：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">function( &lt;argument list&gt; ) { &lt;code&gt; }
+</code></pre></td></tr></table>
+</div>
+</div><p>以下是示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">int main(object me, string arg)
+{
+    function f = function(int x) {
+        int y;
+
+        switch(x)
+        {
+        case 1:
+            y = 3;
+            break;
+        case 2:
+            y = 5;
+        }
+        return y - 2;
+    };
+
+    printf(&#34;%i %i %i\n&#34;, (*f)(1), (*f)(2), (*f)(3));
+    return 1;
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>会输出:</p>
+<blockquote>
+<p>1 3 -2</p>
+</blockquote>
+<p>注意, <strong>(*f)(&hellip;) 等于 evaluate(f, &hellip;)</strong>，保留这种语法是为了与旧版相容。任何普通函数合法 (legal) 的写法，都可以用于匿名函数。</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2022-06-29</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/5.1lpc%E8%AF%AD%E8%A8%80%E7%9A%84%E5%87%BD%E6%95%B0%E5%92%8C%E6%96%B9%E6%B3%95/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://705248010.github.io/5.1lpc%E8%AF%AD%E8%A8%80%E7%9A%84%E5%87%BD%E6%95%B0%E5%92%8C%E6%96%B9%E6%B3%95/" data-title="5.1LPC语言的函数和方法" data-via="xxxx" data-hashtags="LPC,MUD,“LPMUD”"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://705248010.github.io/5.1lpc%E8%AF%AD%E8%A8%80%E7%9A%84%E5%87%BD%E6%95%B0%E5%92%8C%E6%96%B9%E6%B3%95/" data-hashtag="LPC"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://705248010.github.io/5.1lpc%E8%AF%AD%E8%A8%80%E7%9A%84%E5%87%BD%E6%95%B0%E5%92%8C%E6%96%B9%E6%B3%95/" data-title="5.1LPC语言的函数和方法"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://705248010.github.io/5.1lpc%E8%AF%AD%E8%A8%80%E7%9A%84%E5%87%BD%E6%95%B0%E5%92%8C%E6%96%B9%E6%B3%95/" data-title="5.1LPC语言的函数和方法" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></i></a><a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://705248010.github.io/5.1lpc%E8%AF%AD%E8%A8%80%E7%9A%84%E5%87%BD%E6%95%B0%E5%92%8C%E6%96%B9%E6%B3%95/" data-title="5.1LPC语言的函数和方法" data-description=""><i class="fab fa-blogger fa-fw"></i></a><a href="javascript:void(0);" title="分享到 百度" data-sharer="baidu" data-url="https://705248010.github.io/5.1lpc%E8%AF%AD%E8%A8%80%E7%9A%84%E5%87%BD%E6%95%B0%E5%92%8C%E6%96%B9%E6%B3%95/" data-title="5.1LPC语言的函数和方法"><i data-svg-src="/lib/simple-icons/icons/baidu.min.svg"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/lpc/">LPC</a>,&nbsp;<a href="/tags/mud/">MUD</a>,&nbsp;<a href="/tags/lpmud/">“LPMUD”</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/4.2lpc%E8%AF%AD%E8%A8%80%E7%9A%84%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84/" class="prev" rel="prev" title="4.2LPC语言的循环结构"><i class="fas fa-angle-left fa-fw"></i>4.2LPC语言的循环结构</a>
+            <a href="/5.2lpc%E8%AF%AD%E8%A8%80%E7%9A%84%E7%8E%AF%E5%A2%83%E5%92%8C%E5%86%85%E5%AE%B9%E7%89%A9/" class="next" rel="next" title="5.2LPC语言的环境和内容物">5.2LPC语言的环境和内容物<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line"><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/705248010" target="_blank">Kurong123</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+        
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div>
+
+        <div class="sidebar_wo">
+            <div id="leimu">
+              <img src="https://cdn.jsdelivr.net/gh/lewky/lewky.github.io@master/images/b2t/leimuA.png" alt="雷姆" 
+              onmouseover="this.src='https://cdn.jsdelivr.net/gh/lewky/lewky.github.io@master/images/b2t/leimuB.png'" 
+              onmouseout="this.src='https://cdn.jsdelivr.net/gh/lewky/lewky.github.io@master/images/b2t/leimuA.png'" title="回到顶部">
+            </div>
+            <div class="sidebar_wo" id="lamu">
+              <img src="https://cdn.jsdelivr.net/gh/lewky/lewky.github.io@master/images/b2t/lamuA.png" alt="雷姆" 
+              onmouseover="this.src='https://cdn.jsdelivr.net/gh/lewky/lewky.github.io@master/images/b2t/lamuB.png'" 
+              onmouseout="this.src='https://cdn.jsdelivr.net/gh/lewky/lewky.github.io@master/images/b2t/lamuA.png'" title="回到底部">
+            </div>
+          </div><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@2.1.3/dist/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-backstretch@2.1.18/jquery.backstretch.min.js"></script><script type="text/javascript" src="/js/custom.js"></script></body>
+</html>

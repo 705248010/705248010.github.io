@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>5.6LPC语言中的面向对象编程 - Kurong123&#39;s Blog</title><meta name="Description" content="Personal Blog"><meta property="og:title" content="5.6LPC语言中的面向对象编程" />
+<meta property="og:description" content="5.6 LPC语言中的面向对象编程 除了语法的差别，支持面向对象是LPC语言和C语言最大的差别，因为C语言是面向过程的，如果看本教程的同学没有学过面" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://705248010.github.io/5.6lpc%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-06-29T12:54:35+08:00" />
+<meta property="article:modified_time" content="2022-06-29T12:54:35+08:00" />
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="5.6LPC语言中的面向对象编程"/>
+<meta name="twitter:description" content="5.6 LPC语言中的面向对象编程 除了语法的差别，支持面向对象是LPC语言和C语言最大的差别，因为C语言是面向过程的，如果看本教程的同学没有学过面"/>
+<meta name="application-name" content="LoveIt">
+<meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="canonical" href="https://705248010.github.io/5.6lpc%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/" /><link rel="prev" href="https://705248010.github.io/5.5lpc%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E5%AF%B9%E8%B1%A1%E5%8F%8A%E7%9B%B8%E5%85%B3%E5%B8%B8%E7%94%A8efun/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "5.6LPC语言中的面向对象编程",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/705248010.github.io\/5.6lpc%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B\/"
+        },"genre": "posts","keywords": "LPC, MUD, “LPMUD”","wordcount":  6271 ,
+        "url": "https:\/\/705248010.github.io\/5.6lpc%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B\/","datePublished": "2022-06-29T12:54:35+08:00","dateModified": "2022-06-29T12:54:35+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Kurong123"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <a href="https://github.com/705248010" class="github-corner" target="_blank" title="Follow me on GitHub" aria-label="Follow me on GitHub"><svg width="3.5rem" height="3.5rem" viewBox="0 0 250 250" style="fill:#70B7FD; color:#fff; position: absolute; top: 0; border: 0; left: 0; transform: scale(-1, 1);" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+        <div class="header-title">
+            <a href="/" title="Kurong123&#39;s Blog">Kurong123&#39;s Blog</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner">
+		<div class="dropdown">
+			<a href="/posts/" class="menu-item menu-more dropbtn" title="" ><i class='fas fa-fw fa-archive'></i> 归档 
+			</a>
+			<div class="menu-more-content dropdown-content"><a href="/categories/" title="" ><i class='fas fa-fw fa-th'></i> 分类 </a><a href="/tags/" title="" target="_blank" rel="noopener"><i class='fas fa-fw fa-tag'></i> 标签 </a></div>
+		</div>
+	<a class="menu-item" href="/friends/"><i class='fas fa-fw fa-fan fa-link'></i> 友链 
+		</a><a class="menu-item" href="/about/"><i class='fas fa-fw fa-fan fa-book'></i> 关于 
+		</a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Kurong123&#39;s Blog">Kurong123&#39;s Blog</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title=""><i class='fas fa-fw fa-archive'></i>归档</a><a class="menu-item" href="/friends/" title=""><i class='fas fa-fw fa-fan fa-link'></i>友链</a><a class="menu-item" href="/about/" title=""><i class='fas fa-fw fa-fan fa-book'></i>关于</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">5.6LPC语言中的面向对象编程</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/705248010" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>Kurong123</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/lpmud/"><i class="far fa-folder fa-fw"></i>LPMUD</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar fa-fw"></i>&nbsp;<time datetime="2022-06-29">2022-06-29</time>&nbsp;<i class="far fa-calendar-plus fa-fw"></i>&nbsp;<time datetime="2022-06-29">2022-06-29</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 6271 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 13 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#561-面向对象编程">5.6.1 面向对象编程</a>
+      <ul>
+        <li><a href="#继承">继承</a></li>
+        <li><a href="#封装">封装</a></li>
+        <li><a href="#多态">多态</a>
+          <ul>
+            <li><a href="#varargs">varargs</a></li>
+          </ul>
+        </li>
+        <li><a href="#nomask">nomask</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="56-lpc语言中的面向对象编程">5.6 LPC语言中的面向对象编程</h1>
+<p>除了语法的差别，支持面向对象是LPC语言和C语言最大的差别，因为C语言是面向过程的，如果看本教程的同学没有学过面向对象编程，只以C语言的基础可能需要更多的学习来理解。</p>
+<h2 id="561-面向对象编程">5.6.1 面向对象编程</h2>
+<p>在JAVA、C++等主流的面向对象编程中，都有类(class)和对象(object)。与结构体类似，类可以看做是一种数据类型，它类似于普通的数据类型，但是又有别于普通的数据类型，类这种数据类型是一个包含成员变量和成员函数的集合。类是创建对象的模板，一个类可以创建多个对象，每个对象都是类类型的一个变量；创建对象的过程也叫类的实例化。每个对象都是类的一个具体实例（Instance），拥有类的成员变量和成员函数。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://api.mud.ren/storage/uploads/2022/06/20/fe60505253ed70fd3f70e5e05b248b08.png"
+        data-srcset="https://api.mud.ren/storage/uploads/2022/06/20/fe60505253ed70fd3f70e5e05b248b08.png, https://api.mud.ren/storage/uploads/2022/06/20/fe60505253ed70fd3f70e5e05b248b08.png 1.5x, https://api.mud.ren/storage/uploads/2022/06/20/fe60505253ed70fd3f70e5e05b248b08.png 2x"
+        data-sizes="auto"
+        alt="https://api.mud.ren/storage/uploads/2022/06/20/fe60505253ed70fd3f70e5e05b248b08.png"
+        title="file" /></p>
+<p>我们在第一章第一节已经提到，LPC语言中关键词<code>class</code>不像其它面向对象编程中用来定义类，而是结构体的别名，在LPC中虽然可以用<code>class</code>声明结构体，而且这个结构体的使用语法有点像类，但本质上也只是结构体，而不像在C++中把结构体升级为真正的类了。</p>
+<p>LPC语言中对类的声明比较特别，不需要用语法声明，<strong>MUDLIB中所有 .c 文件都是一个类，类名就是文件名</strong>（这和JAVA语言有点类似，JAVA中一个文件中可以定义多个类，但只能有一个public类，而且文件名必须和这个类名一至）。载入游戏后的对象则是类的实例，在LPMUD开发中，我们开发的每个功能都是面向对象的，我们每建一个<code>.c</code>源文件就是一个类，哪怕没有任何代码，它也是一个空类，可以正常的实例化。</p>
+<p>在LPC语言中创建对象的方式有二种：</p>
+<ol>
+<li>load_object</li>
+<li>clone_object</li>
+</ol>
+<p>使用<code>load_object</code>只能创建蓝图对象，不能传参数，具体语法为：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c">   <span class="n">object</span> <span class="nf">load_object</span><span class="p">(</span><span class="n">string</span> <span class="n">file</span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>使用<code>clone_object</code>创建对象可以传参数实例化不同属性的对象，也可以使用别名<code>new</code>，具体语法为：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c">    <span class="n">object</span> <span class="nf">clone_object</span><span class="p">(</span><span class="n">string</span> <span class="n">file</span><span class="p">,</span> <span class="n">mixed</span> <span class="n">extra</span><span class="p">,</span> <span class="p">...);</span>
+    <span class="n">object</span> <span class="nf">new</span><span class="p">(</span><span class="n">string</span> <span class="n">file</span><span class="p">,</span> <span class="n">mixed</span> <span class="n">extra</span><span class="p">,</span> <span class="p">...);</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>我们新建测试文件 <code>5.7.1.c</code>，代码如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="c1">// 示例：5.7.1
+</span><span class="c1"></span><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="n">object</span> <span class="n">me</span><span class="p">,</span> <span class="n">string</span> <span class="n">arg</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">// 取得游戏中所有已加载对象
+</span><span class="c1"></span>    <span class="n">object</span> <span class="o">*</span><span class="n">obs</span> <span class="o">=</span> <span class="n">objects</span><span class="p">();</span>
+
+    <span class="c1">// 输出对象列表
+</span><span class="c1"></span>    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;%O</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">obs</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>以上代码中 <code>objects()</code> 是LPC提供的efun，可以返回游戏中所有载入对象的数组。输入指令后，显示结果可能如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">({ /* sizeof() == 10 */
+  /cmds/demo/5.7.1 (&#34;/cmds/demo/5.7.1&#34;),
+  /cmds/test/x (&#34;/cmds/test/x&#34;),
+  /cmds/update (&#34;/cmds/update&#34;),
+  /system/object/user#1 (&#34;iuv&#34;),
+  /system/object/login#0 (&#34;/system/object/login#0&#34;),
+  /system/object/void (&#34;/system/object/void&#34;),
+  /system/object/user (&#34;/system/object/user&#34;),
+  /system/object/login (&#34;/system/object/login&#34;),
+  /system/kernel/master (&#34;ROOT&#34;),
+  /system/kernel/simul_efun (&#34;NONAME&#34;)
+})
+</code></pre></td></tr></table>
+</div>
+</div><p>对象后面的括号中的内容是主控对象中的 apply 方法 <code>object_name()</code> 返回的值。从列表可见，所有对象都是对应着.c类文件的实例，其中 <code>user#1</code> 是复制对象，代表不同的玩家对象，可以多连接几个客户端后再看看显示的结果。</p>
+<p>再次新增 <code>5.7.2.c</code> 测试以下代码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="c1">// 示例：5.7.2
+</span><span class="c1"></span><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="n">object</span> <span class="n">me</span><span class="p">,</span> <span class="n">string</span> <span class="n">arg</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">// 复制 test 对象
+</span><span class="c1"></span>    <span class="n">object</span> <span class="n">new_ob</span> <span class="o">=</span> <span class="n">new</span><span class="p">(</span><span class="s">&#34;/cmds/test/test&#34;</span><span class="p">);</span>
+
+    <span class="c1">// 取得游戏中所有已加载的复制对象
+</span><span class="c1"></span>    <span class="n">object</span> <span class="o">*</span><span class="n">obs</span> <span class="o">=</span> <span class="n">objects</span><span class="p">((</span><span class="o">:</span><span class="nl">clonep</span><span class="p">:));</span>
+
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;%O</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">obs</span><span class="p">);</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;new_ob = %O</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">new_ob</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>更新后运行试试，显示对象中新出现了有 #id 后缀的 test 复制对象了，而且多执行几次 <code>5.7.2</code> 指令，会发现系统中会多很多有 #id 的 test 复制对象。因为LPC的代码中没有结束，如果不主动销毁，这些对象都会一直在内存中，我们可以使用 <code>destruct()</code> 外部函数销毁对象，而且摧毁原始蓝图对象不会影响复制对象。在游戏开发中可以使用 apply 方法 <code>cleanup()</code> 来定期清理，这里先了解即可。</p>
+<p>在游戏中，复制对象的 id 是整个游戏中唯一，每个复制对象都有序递增，比如先 new 一个对象A的id是6，那再 new 一个对象B，id就是7。</p>
+<p>面向对象编程有三个基本特征：<code>封装</code>、<code>继承</code>、<code>多态</code>。在LPC面向对象编程中，也有这些特征。</p>
+<h3 id="继承">继承</h3>
+<p>先说继承的作用，继承（Inheritance）可以理解为一个类从另一个类获取成员变量和成员函数的过程。例如类 B 继承于类 A，那么 B 就拥有 A 的成员变量和成员函数。被继承的类称为父类或基类，继承的类称为子类或派生类。LPC中每个.c文件都是蓝图对象，也可以理解为类，一样可以子类继承父类，继承可以在无需重写代码的情况下让子类拥有父类的所有功能。</p>
+<p>在LPC语言中继承使用 <code>inherit</code> 关键字来实现，语法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">inherit &#34;path/to/file&#34;;
+</code></pre></td></tr></table>
+</div>
+</div><p>注意：继承的文件是相对根目录的，不是相对当前目录，所以路径要完整。</p>
+<p>我们直接上代码来演示，先在 <code>/cmds/test/</code> 目录下新建文件 <code>5.7.3.c</code> ,文件中代码如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="c1">// 示例：5.7.3
+</span><span class="c1"></span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="n">object</span> <span class="n">me</span><span class="p">,</span> <span class="n">string</span> <span class="n">arg</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">debug</span><span class="p">(</span><span class="s">&#34;我是示例 5.7.3!&#34;</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>我们输入指令 <code>5.7.3</code> ,应该会显示 <code>我是示例 5.7.3!</code>。再在 <code>/cmds/test/</code> 目录下新建文件 <code>5.7.3.1.c</code> ，文件代码如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="c1">// 示例：5.7.3.1
+</span><span class="c1"></span><span class="n">inherit</span> <span class="s">&#34;/cmds/test/5.7.3&#34;</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>我们输入指令 <code>5.7.3.1</code> ，还会显示 <code>我是示例 5.7.3!</code>，这是因为类 5.7.3.1 继承(inherit)了类 5.7.3，运行时自动调用了 5.7.3 的 main()方法。</p>
+<p>继承是可以多重继承的，我们再在目录下建一个文件 <code>5.7.3.2.c</code>，文件代码如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="c1">// 示例：5.7.3.2
+</span><span class="c1"></span><span class="n">inherit</span> <span class="s">&#34;/cmds/test/5.7.3.1&#34;</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>输入指令 <code>5.7.3.2</code> ，看看结果，还会显示 <code>我是示例 5.7.3!</code>。</p>
+<p>不只是可以多重继承，还可以同时继承多个对象，另外，继承对象中还可以直接使用父对象中的全局变量。我们再在目录下一个文件 <code>5.7.4.1.c</code>，代码如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="c1">// 示例：5.7.4.1
+</span><span class="c1"></span>
+<span class="n">string</span> <span class="n">s1</span> <span class="o">=</span> <span class="s">&#34;我在示例 5.7.4.1 中!&#34;</span><span class="p">;</span>
+
+<span class="kt">void</span> <span class="nf">test1</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">debug</span><span class="p">(</span><span class="n">s1</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>再新建一个测试文件 <code>5.7.4.2.c</code>，代码如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="c1">// 示例：5.7.4.2
+</span><span class="c1"></span><span class="n">string</span> <span class="n">s2</span> <span class="o">=</span> <span class="s">&#34;我在示例 5.7.4.2 中!&#34;</span><span class="p">;</span>
+
+<span class="kt">void</span> <span class="nf">test2</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">debug</span><span class="p">(</span><span class="n">s2</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>请注意，在以上二个示例中没有 <code>main()</code> 方法，输入指令调用会返回默认的指令执行失败提示<code>什么？</code>。</p>
+<p>再新建文件 <code>5.7.4.c</code> 继承以上二个文件。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="c1">// 示例：5.7.4
+</span><span class="c1"></span><span class="n">inherit</span> <span class="s">&#34;/cmds/demo/5.7.4.1&#34;</span><span class="p">;</span>
+<span class="n">inherit</span> <span class="s">&#34;/cmds/demo/5.7.4.2&#34;</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="n">object</span> <span class="n">me</span><span class="p">,</span> <span class="n">string</span> <span class="n">arg</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">// 直接调用继承对象中的方法
+</span><span class="c1"></span>    <span class="n">test1</span><span class="p">();</span>
+    <span class="n">test2</span><span class="p">();</span>
+    <span class="c1">// 直接使用继承对象的全局变量
+</span><span class="c1"></span>    <span class="n">debug</span><span class="p">(</span><span class="n">s1</span><span class="p">);</span>
+    <span class="n">debug</span><span class="p">(</span><span class="n">s2</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>以上的示例代码中继承了二个对象的方法，运行后输出如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">我在示例 5.7.4.1 中!
+我在示例 5.7.4.2 中!
+我在示例 5.7.4.1 中!
+我在示例 5.7.4.2 中!
+</code></pre></td></tr></table>
+</div>
+</div><p>在游戏开发中，我们会大量的使用继承，子对象除了拥有父对象的功能，还可以定义自己的新成员，以增强功能。</p>
+<p>以下是两种典型的使用继承的场景：</p>
+<ul>
+<li>当你创建的新类与现有的类相似，只是多出若干成员变量或成员函数时，可以使用继承，这样不但会减少代码量，而且新类会拥有父类的所有功能。比如，在游戏中有铁剑、铜剑、木剑等很多剑类武器，基本属性一样，只是描述、价值和伤害不同，我们可以先定义一个基本的剑类对象，然后所有的剑继承这个对象，然后只用修改描述和伤害等值即可。而且如果将来要限制剑只能某个职业可装备，只用在被继承的剑类对象中增加限制就行了。</li>
+<li>当你需要创建多个类，它们拥有很多相似的成员变量或成员函数时，也可以使用继承。可以将这些类的共同成员提取出来，定义一个基类，然后从这个基类中继承，既可以节省代码，也方便后续修改成员。比如，在游戏中除了剑以外，还有棍、杖、刀等类型的武器，那么，我们把所有兵器共同的成员变量和方法提取出来，定义一个兵器蓝图对象，所有种类武器的蓝图对象都继承兵器蓝图对象。</li>
+</ul>
+<p>继承时注意对全局变量要避免重复定义的问题。</p>
+<h3 id="封装">封装</h3>
+<p>封装，直白的就就是把细节包装起来，限制操作权限，在面向对象编程中都是使用“访问控制符”来控制哪些细节需要封装，哪些细节需要暴露的。在LPC语言中增加了三个访问控制符：<code>public</code> 、 <code>protected</code> 和 <code>private</code>。如果学过C++语言会发现这个和C++完全一样，但和C++不同的是在LPC语言中如果没有指定访问控制符，默认是 <code>public</code> 而不是 <code>private</code>。</p>
+<p>在对象的内部，无论成员（函数和变量）被声明为 public、protected 还是 private，都是可以互相访问的，没有访问权限的限制。而在对象的外部（定义对象的代码之外），只能在对象上通过 <code>-&gt;</code> 访问对象的成员函数，并且只能访问 public 属性的成员，不能访问 private、protected 属性的成员。但是当存在继承关系时，父对象中的 protected 成员可以在子对象中使用，而父对象中的 private 成员不能在子对象中使用。</p>
+<p>我们来演示一下，新建三个文件 <code>5.7.5.c</code>、<code>5.7.5.1.c</code>、<code>5.7.5.2.c</code>，代码如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="c1">// 示例：5.7.5
+</span><span class="c1"></span><span class="n">private</span> <span class="n">string</span> <span class="n">s1</span><span class="p">;</span>
+<span class="n">protected</span> <span class="n">string</span> <span class="n">s2</span><span class="p">;</span>
+<span class="n">public</span> <span class="n">string</span> <span class="n">s3</span><span class="p">;</span>
+
+<span class="kt">void</span> <span class="nf">create</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">s1</span> <span class="o">=</span> <span class="s">&#34;我是示例5.7.5 的 private 类型变量&#34;</span><span class="p">;</span>
+    <span class="n">s2</span> <span class="o">=</span> <span class="s">&#34;我是示例5.7.5 的 protected 类型变量&#34;</span><span class="p">;</span>
+    <span class="n">s3</span> <span class="o">=</span> <span class="s">&#34;我是示例5.7.5 的 public 类型变量&#34;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">private</span> <span class="kt">void</span> <span class="nf">test1</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">debug</span><span class="p">(</span><span class="s">&#34;调用 test1 方法&#34;</span><span class="p">);</span>
+    <span class="n">debug</span><span class="p">(</span><span class="s">&#34;我是示例5.7.5 的 private 类型函数&#34;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">protected</span> <span class="kt">void</span> <span class="nf">test2</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">debug</span><span class="p">(</span><span class="s">&#34;调用 test2 方法&#34;</span><span class="p">);</span>
+    <span class="n">debug</span><span class="p">(</span><span class="s">&#34;我是示例5.7.5 的 protected 类型函数&#34;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">public</span> <span class="kt">void</span> <span class="nf">test3</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">debug</span><span class="p">(</span><span class="s">&#34;调用 test3 方法&#34;</span><span class="p">);</span>
+    <span class="n">debug</span><span class="p">(</span><span class="s">&#34;我是示例5.7.5 的 public 类型函数&#34;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">test</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">debug</span><span class="p">(</span><span class="s">&#34;调用 test 方法&#34;</span><span class="p">);</span>
+    <span class="n">debug</span><span class="p">(</span><span class="n">s1</span><span class="p">);</span>
+    <span class="n">debug</span><span class="p">(</span><span class="n">s2</span><span class="p">);</span>
+    <span class="n">debug</span><span class="p">(</span><span class="n">s3</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="n">object</span> <span class="n">me</span><span class="p">,</span> <span class="n">string</span> <span class="n">arg</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">debug</span><span class="p">(</span><span class="s">&#34;调用 main 方法&#34;</span><span class="p">);</span>
+    <span class="n">test</span><span class="p">();</span>
+    <span class="n">test1</span><span class="p">();</span>
+    <span class="n">test2</span><span class="p">();</span>
+    <span class="n">test3</span><span class="p">();</span>
+
+    <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">set_s1</span><span class="p">(</span><span class="n">string</span> <span class="n">s</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">s1</span> <span class="o">=</span> <span class="n">s</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">string</span> <span class="nf">get_s1</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="n">s1</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>运行结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">调用 main 方法
+调用 test 方法
+我是示例5.7.5 的 private 类型变量
+我是示例5.7.5 的 protected 类型变量
+我是示例5.7.5 的 public 类型变量
+调用 test1 方法
+我是示例5.7.5 的 private 类型函数
+调用 test2 方法
+我是示例5.7.5 的 protected 类型函数
+调用 test3 方法
+我是示例5.7.5 的 public 类型函数
+// 示例：5.7.5.1
+
+int main(object me, string arg)
+{
+    object ob = load_object(&#34;/cmds/test/5.7.5&#34;);
+
+    ob-&gt;test1(); // 无效
+    ob-&gt;test2(); // 无效(MUDOS中有效)
+    ob-&gt;test3();
+    ob-&gt;test();
+    // 使用封装的方法修改值
+    ob-&gt;set_s1(&#34;5.7.5.1 重新设置 private 变量的值&#34;);
+    // 通地封装的方法获取值
+    debug(ob-&gt;get_s1());
+    return ob-&gt;main();
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>运行结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">调用 test3 方法
+我是示例5.7.5 的 public 类型函数
+调用 test 方法
+我是示例5.7.5 的 private 类型变量
+我是示例5.7.5 的 protected 类型变量
+我是示例5.7.5 的 public 类型变量
+5.7.5.1 重新设置 private 变量的值
+调用 main 方法
+调用 test 方法
+5.7.5.1 重新设置 private 变量的值
+我是示例5.7.5 的 protected 类型变量
+我是示例5.7.5 的 public 类型变量
+调用 test1 方法
+我是示例5.7.5 的 private 类型函数
+调用 test2 方法
+我是示例5.7.5 的 protected 类型函数
+调用 test3 方法
+我是示例5.7.5 的 public 类型函数
+// 示例：5.7.5.2
+inherit &#34;/cmds/demo/5.7.5&#34;;
+
+int main(object me, string arg)
+{
+    debug(&#34;直接继承变量!&#34;);
+    debug(s2);
+    debug(s3);
+    debug(&#34;直接继承方法!&#34;);
+    test2();
+    test3();
+    // 可以修改变量的值
+    set_s1(&#34;我是 5.7.5.2 通过方法修改的 s1&#34;);
+    s2 = &#34;我是 5.7.5.2 直接修改 s2&#34;;
+    s3 = &#34;我是 5.7.5.2 直接修改 s3&#34;;
+    test();
+
+    return 1;
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>运行结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">直接继承变量!
+我是示例5.7.5 的 protected 类型变量
+我是示例5.7.5 的 public 类型变量
+直接继承方法!
+调用 test2 方法
+我是示例5.7.5 的 protected 类型函数
+调用 test3 方法
+我是示例5.7.5 的 public 类型函数
+调用 test 方法
+我是 5.7.5.2 通过方法修改的 s1
+我是 5.7.5.2 直接修改 s2
+我是 5.7.5.2 直接修改 s3
+</code></pre></td></tr></table>
+</div>
+</div><p>需要注意的是，使用 <code>-&gt;</code> 访问无权访问的方法时，不会编译错误，就像访问一个不存在的方法一样，返回值为 0 。</p>
+<p>private 关键字的作用在于更好地隐藏类的内部实现，该向外暴露的接口（能通过对象访问的成员）都声明为 public，不希望外部知道、或者只在类内部使用的、或者对外部没有影响的成员，都建议声明为 private。</p>
+<p>根据C++软件设计规范，实际项目开发中的成员变量以及只在类内部使用的成员函数（只被成员函数调用的成员函数）都建议声明为 private，而只将允许通过对象调用的成员函数声明为 public。</p>
+<p>将成员变量都声明为 private，如何给它们赋值呢，又如何读取它们的值呢？我们可以额外添加两个 public 属性的成员函数，一个用来设置成员变量的值，一个用来修改成员变量的值。给成员变量赋值的函数通常称为 set 函数，它们的名字通常以set开头，后跟成员变量的名字；读取成员变量的值的函数通常称为 get 函数，它们的名字通常以get开头，后跟成员变量的名字。</p>
+<p>除了 set 函数和 get 函数，在创建对象时还可以调用 <code>create()</code> apply 方法来初始化默认成员变量，不过只能给成员变量赋值一次，以后再修改还得借助 set 函数。</p>
+<p>这种将成员变量声明为 private、将部分成员函数声明为 public 的做法体现了类的封装性。所谓封装，是指尽量隐藏类的内部实现，只向用户提供有用的成员函数。</p>
+<p>有读者可能会说，额外添加 set 函数和 get 函数多麻烦，直接将成员变量设置为 public 多省事！确实，这样做 99.9% 的情况下都不是一种错误，但是，将成员变量设置为 private 是一种软件设计规范，而且让你的代码更安全，尤其是在大中型项目中，还是请大家尽量遵守这一原则。</p>
+<h3 id="多态">多态</h3>
+<p>多态有二种方式：覆盖和重载。覆盖是子对象重新定义继承对象中的方法；重载是指允许存在多个同名方法，而这些方法的参数表不同（或许参数个数不同，或许参数类型不同，或许两者都不同）。但是，<strong>LPC语言中只支持覆盖，不支持重载</strong>，如果在同一个对象中定义多个同名方法是会报错的，而在子对象定义和父对象同名不同参数的对象会警告函数参数和以前定义的不一样。</p>
+<h4 id="varargs">varargs</h4>
+<p>虽然LPC语言中不支持重载，但是有一个和重载类似的功能，使用 <code>varargs</code> 声明可变参数的方法，这个也可以理解为LPC语言中的重载，只是实现时不用写成多个方法，而是在一个不定参数的方法中。</p>
+<p>如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="n">varargs</span> <span class="kt">void</span> <span class="nf">test</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="n">string</span> <span class="n">y</span><span class="p">,</span> <span class="n">mapping</span> <span class="n">z</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">//...
+</span><span class="c1"></span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>在调用中我们可以使用<code>test()</code>、<code>test(1)</code>、<code>test(1,&quot;test&quot;)</code>、<code>test(1,&quot;test&quot;,([&quot;a&quot;:1]))</code>，请注意，参没有传参的形式参数，会被初始化为 int 型 0 值，可以使用<code>nullp()</code>或<code>undefinedp()</code>判断是否传参数。</p>
+<p>另外，除了varargs的方式，还有一种可变参数的用法，请看以下示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="kt">void</span> <span class="nf">test</span><span class="p">(</span><span class="n">mixed</span> <span class="o">*</span><span class="n">arg</span><span class="p">...)</span>
+<span class="p">{</span>
+    <span class="c1">//...
+</span><span class="c1"></span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>对这种方式，我们可以传的任何参数都被处理成 arg 数组的元素，如：<code>test(1,2,3,4,5,6)</code> 后， <code>arg = ({1,2,3,4,5,6})</code>。</p>
+<p>对覆盖的方法，调用父类方法使用操作符 <code>::</code>。</p>
+<p>如下示例 <code>5.7.5.3.c</code>，<code>main()</code> 方法覆盖了父对象的同名方法，但是可以使用 <code>::main(me, arg)</code> 直接调用继承对象的方法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="c1">// 示例：5.7.5.3
+</span><span class="c1"></span><span class="n">inherit</span> <span class="s">&#34;/cmds/test/5.7.5&#34;</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="n">object</span> <span class="n">me</span><span class="p">,</span> <span class="n">string</span> <span class="n">arg</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">debug</span><span class="p">(</span><span class="s">&#34;示例5.7.5.3&#34;</span><span class="p">);</span>
+
+    <span class="n">s2</span> <span class="o">=</span> <span class="s">&#34;我是示例5.7.5.3 的 protected 类型变量&#34;</span><span class="p">;</span>
+    <span class="n">s3</span> <span class="o">=</span> <span class="s">&#34;我是示例5.7.5.3 的 public 类型变量&#34;</span><span class="p">;</span>
+
+    <span class="o">::</span><span class="n">main</span><span class="p">(</span><span class="n">me</span><span class="p">,</span> <span class="n">arg</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>执行结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">示例5.7.5.3
+调用 main 方法
+调用 test 方法
+我是示例5.7.5 的 private 类型变量
+我是示例5.7.5.3 的 protected 类型变量
+我是示例5.7.5.3 的 public 类型变量
+调用 test1 方法
+我是示例5.7.5 的 private 类型函数
+调用 test2 方法
+我是示例5.7.5 的 protected 类型函数
+调用 test3 方法
+我是示例5.7.5 的 public 类型函数
+</code></pre></td></tr></table>
+</div>
+</div><p>继承时一定要注意一个问题：避免<code>钻石继承</code>，所谓钻石继承，就是B和C都继承了A，D又继承了B和C，A、B、C、D的继承关系就成了钻石继承。</p>
+<p>钻石继承很容易造成方法和变量重复定义的问题，我们建一个示例 <code>5.7.5.4.c</code>，内容如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="c1">// 示例：5.7.5.4
+</span><span class="c1"></span><span class="n">inherit</span> <span class="s">&#34;/cmds/demo/5.7.5.2&#34;</span><span class="p">;</span>
+<span class="n">inherit</span> <span class="s">&#34;/cmds/demo/5.7.5.3&#34;</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>运行后，好像没毛病，看看日志文件 <code>log_error</code>，全是重复定义和重复继承的警告，这些都是可能造成BUG的因素。</p>
+<blockquote>
+<p>如果继承了多个实现同名方法的对象，通过<code>::</code>操作符调用父类方法是会以找到的第一个方法的为准，如果继承了多个实现同名方法的对象，作为继承直接调用，会以最后继承的为准。</p>
+<p>使用<code>::</code>和不使用调用父类的方法还有一个不同点，如果直接调用方法，非不定参数的方法参数不一致会报错，而通过<code>::</code>调用不会报错。</p>
+</blockquote>
+<p>如果要指定继承对象的方法，可以使用 <code>对象文件名::方法</code> 的方式调用，需要注意的是文件名不能有特殊符号，只能是字母和数字，所以文件命名时要注意。</p>
+<h3 id="nomask">nomask</h3>
+<p>对象中定义的方法可以被覆盖，但有的方法，我们不允许被覆盖，这时可以使用 <code>nomask</code> 修饰符限制方法的覆盖。如以下 test() 方法如果被覆盖的话编译会报错。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="n">protected</span> <span class="n">nomask</span> <span class="kt">void</span> <span class="nf">test</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="c1">// ...
+</span><span class="c1"></span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2022-06-29</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/5.6lpc%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://705248010.github.io/5.6lpc%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/" data-title="5.6LPC语言中的面向对象编程" data-via="xxxx" data-hashtags="LPC,MUD,“LPMUD”"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://705248010.github.io/5.6lpc%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/" data-hashtag="LPC"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://705248010.github.io/5.6lpc%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/" data-title="5.6LPC语言中的面向对象编程"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://705248010.github.io/5.6lpc%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/" data-title="5.6LPC语言中的面向对象编程" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></i></a><a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://705248010.github.io/5.6lpc%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/" data-title="5.6LPC语言中的面向对象编程" data-description=""><i class="fab fa-blogger fa-fw"></i></a><a href="javascript:void(0);" title="分享到 百度" data-sharer="baidu" data-url="https://705248010.github.io/5.6lpc%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/" data-title="5.6LPC语言中的面向对象编程"><i data-svg-src="/lib/simple-icons/icons/baidu.min.svg"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/lpc/">LPC</a>,&nbsp;<a href="/tags/mud/">MUD</a>,&nbsp;<a href="/tags/lpmud/">“LPMUD”</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/5.5lpc%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E5%AF%B9%E8%B1%A1%E5%8F%8A%E7%9B%B8%E5%85%B3%E5%B8%B8%E7%94%A8efun/" class="prev" rel="prev" title="5.5LPC语言中的对象及相关常用Efun"><i class="fas fa-angle-left fa-fw"></i>5.5LPC语言中的对象及相关常用Efun</a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line"><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/705248010" target="_blank">Kurong123</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+        
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div>
+
+        <div class="sidebar_wo">
+            <div id="leimu">
+              <img src="https://cdn.jsdelivr.net/gh/lewky/lewky.github.io@master/images/b2t/leimuA.png" alt="雷姆" 
+              onmouseover="this.src='https://cdn.jsdelivr.net/gh/lewky/lewky.github.io@master/images/b2t/leimuB.png'" 
+              onmouseout="this.src='https://cdn.jsdelivr.net/gh/lewky/lewky.github.io@master/images/b2t/leimuA.png'" title="回到顶部">
+            </div>
+            <div class="sidebar_wo" id="lamu">
+              <img src="https://cdn.jsdelivr.net/gh/lewky/lewky.github.io@master/images/b2t/lamuA.png" alt="雷姆" 
+              onmouseover="this.src='https://cdn.jsdelivr.net/gh/lewky/lewky.github.io@master/images/b2t/lamuB.png'" 
+              onmouseout="this.src='https://cdn.jsdelivr.net/gh/lewky/lewky.github.io@master/images/b2t/lamuA.png'" title="回到底部">
+            </div>
+          </div><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@2.1.3/dist/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-backstretch@2.1.18/jquery.backstretch.min.js"></script><script type="text/javascript" src="/js/custom.js"></script></body>
+</html>

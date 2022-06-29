@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>5.5LPC语言中的对象及相关常用Efun - Kurong123&#39;s Blog</title><meta name="Description" content="Personal Blog"><meta property="og:title" content="5.5LPC语言中的对象及相关常用Efun" />
+<meta property="og:description" content="5.5 LPC语言中的对象及相关常用Efun 我们已经知道在LPC中所有载入驱动程序的 .c 文件都是对象，所有对象中都可以存在以下 apply 方法：clean_u" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://705248010.github.io/5.5lpc%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E5%AF%B9%E8%B1%A1%E5%8F%8A%E7%9B%B8%E5%85%B3%E5%B8%B8%E7%94%A8efun/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-06-29T12:54:25+08:00" />
+<meta property="article:modified_time" content="2022-06-29T12:54:25+08:00" />
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="5.5LPC语言中的对象及相关常用Efun"/>
+<meta name="twitter:description" content="5.5 LPC语言中的对象及相关常用Efun 我们已经知道在LPC中所有载入驱动程序的 .c 文件都是对象，所有对象中都可以存在以下 apply 方法：clean_u"/>
+<meta name="application-name" content="LoveIt">
+<meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="canonical" href="https://705248010.github.io/5.5lpc%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E5%AF%B9%E8%B1%A1%E5%8F%8A%E7%9B%B8%E5%85%B3%E5%B8%B8%E7%94%A8efun/" /><link rel="prev" href="https://705248010.github.io/5.4%E6%B8%B8%E6%88%8F%E6%9C%80%E5%B8%B8%E7%94%A8%E7%9A%84%E5%A4%96%E9%83%A8%E5%87%BD%E6%95%B0/" /><link rel="next" href="https://705248010.github.io/5.6lpc%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "5.5LPC语言中的对象及相关常用Efun",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/705248010.github.io\/5.5lpc%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E5%AF%B9%E8%B1%A1%E5%8F%8A%E7%9B%B8%E5%85%B3%E5%B8%B8%E7%94%A8efun\/"
+        },"genre": "posts","keywords": "LPC, MUD, “LPMUD”","wordcount":  4976 ,
+        "url": "https:\/\/705248010.github.io\/5.5lpc%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E5%AF%B9%E8%B1%A1%E5%8F%8A%E7%9B%B8%E5%85%B3%E5%B8%B8%E7%94%A8efun\/","datePublished": "2022-06-29T12:54:25+08:00","dateModified": "2022-06-29T12:54:25+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Kurong123"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <a href="https://github.com/705248010" class="github-corner" target="_blank" title="Follow me on GitHub" aria-label="Follow me on GitHub"><svg width="3.5rem" height="3.5rem" viewBox="0 0 250 250" style="fill:#70B7FD; color:#fff; position: absolute; top: 0; border: 0; left: 0; transform: scale(-1, 1);" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+        <div class="header-title">
+            <a href="/" title="Kurong123&#39;s Blog">Kurong123&#39;s Blog</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner">
+		<div class="dropdown">
+			<a href="/posts/" class="menu-item menu-more dropbtn" title="" ><i class='fas fa-fw fa-archive'></i> 归档 
+			</a>
+			<div class="menu-more-content dropdown-content"><a href="/categories/" title="" ><i class='fas fa-fw fa-th'></i> 分类 </a><a href="/tags/" title="" target="_blank" rel="noopener"><i class='fas fa-fw fa-tag'></i> 标签 </a></div>
+		</div>
+	<a class="menu-item" href="/friends/"><i class='fas fa-fw fa-fan fa-link'></i> 友链 
+		</a><a class="menu-item" href="/about/"><i class='fas fa-fw fa-fan fa-book'></i> 关于 
+		</a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Kurong123&#39;s Blog">Kurong123&#39;s Blog</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title=""><i class='fas fa-fw fa-archive'></i>归档</a><a class="menu-item" href="/friends/" title=""><i class='fas fa-fw fa-fan fa-link'></i>友链</a><a class="menu-item" href="/about/" title=""><i class='fas fa-fw fa-fan fa-book'></i>关于</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">5.5LPC语言中的对象及相关常用Efun</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/705248010" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>Kurong123</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/lpmud/"><i class="far fa-folder fa-fw"></i>LPMUD</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar fa-fw"></i>&nbsp;<time datetime="2022-06-29">2022-06-29</time>&nbsp;<i class="far fa-calendar-plus fa-fw"></i>&nbsp;<time datetime="2022-06-29">2022-06-29</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 4976 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 10 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#551-模拟外部函数对象">5.5.1 模拟外部函数对象</a></li>
+    <li><a href="#552-主控对象">5.5.2 主控对象</a></li>
+    <li><a href="#553-玩家对象">5.5.3 玩家对象</a>
+      <ul>
+        <li><a href="#生物对象">生物对象</a></li>
+        <li><a href="#对象的加载">对象的加载</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="55-lpc语言中的对象及相关常用efun">5.5 LPC语言中的对象及相关常用Efun</h1>
+<p>我们已经知道在LPC中所有载入驱动程序的 <code>.c</code> 文件都是对象，所有对象中都可以存在以下 apply 方法：clean_up、create、heart_beat、id、init、move_or_destruct、reset，如果存在，这些方法会在特定条件下自动执行。如 <code>heart_beat()</code> 方法会在对象设置心跳后自动定期执行，<code>create()</code> 会在对象初始化时自动执行，<code>move_or_destruct</code> 会在对象环境要被摧毁时自动执行。具体用法后续章节细说，这里先大致了解一下即可。</p>
+<p>另外对象中有几种特殊的存在：模拟外部函数对象、主控对象、玩家对象和生物对象。</p>
+<h2 id="551-模拟外部函数对象">5.5.1 模拟外部函数对象</h2>
+<p>模拟外部函数对象是 mudlib 中必须存在的，文件位置在运行时配置文件中指定，本教程的 mudlib 中模拟外部函数对象是 <code>/system/kernel/simul_efun</code>，这个对象的作用上一章已经讲解。</p>
+<h2 id="552-主控对象">5.5.2 主控对象</h2>
+<p>主控对象也被成为主宰对象，也是 mudlib 中必须存在的，文件位置也通过运行时配置文件指定，本教程 mudlib 中主控对象是 <code>/system/kernel/master</code>，这个对象中存在最多的 apply 方法，提供系统核心服务，如果没有游戏也就废了。主要 apply 方法如下： author_file、compile_object、connect、crash、creator_file、domain_file、epilog、error_handler、flag、get_bb_uid、get_include_path、get_root_uid、log_error、object_name、preload、valid_bind、valid_database、valid_hide、valid_link、valid_object、valid_override、valid_read、valid_seteuid、valid_shadow、valid_socket、valid_write。上一章已经讲解了其中的 <code>valid_override()</code> 方法，其它方法会在后续章节讲解，这里先大致了解即可。</p>
+<h2 id="553-玩家对象">5.5.3 玩家对象</h2>
+<p>玩家对象就是通过客户端连线的对象，玩家对象中也有一些特殊的 apply 方法，如： logon、net_dead、process_input、receive_message、receive_snoop、write_prompt。这些 apply 方法的具体用法一样会在后续章节讲解。这里先补充几个玩家对象相关的外部函数：this_player()、interactive()、users()、userp()，他们的用法具体如下：</p>
+<blockquote>
+<p>名称</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">this_player() | this_user() - 返回当前玩家对象
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>语法</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">object this_player( int flag );
+object this_user( int flag );
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>描述</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">返回呼叫当前函数的玩家对象。需要注意的是：即使是从玩家对象本身呼叫 this_player() 和 this_object()，返回值也可能不同。如果使用 this_player(1)，返回呼叫此函数的玩家对象在某些情况下返回值和使用 this_player() 不同（比如系统管理员使用 command() 函数强制玩家使用指令时）。
+</code></pre></td></tr></table>
+</div>
+</div><hr>
+<blockquote>
+<p>名称</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">interactive() - 判断指定对象是否为可互动的（interactive）玩家
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>语法</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">int interactive( object ob );
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>描述</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-mysql" data-lang="mysql"><span class="err">如果</span><span class="w"> </span><span class="o">`</span><span class="n">ob</span><span class="o">`</span><span class="w"> </span><span class="err">是在线玩家返回非零值，如果是断线玩家或非玩家对象返回</span><span class="w"> </span><span class="mi">0</span><span class="err">。</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<blockquote>
+<p>名称</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">users() - 返回包括所有互动玩家的对象数组
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>语法</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">object *users( void );
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>描述</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">返回包括所有互动玩家的对象数组，注意不包括断线的玩家。
+</code></pre></td></tr></table>
+</div>
+</div><hr>
+<blockquote>
+<p>名称</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">userp() - 判断指定对象是否曾为可互动的（interactive）
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>语法</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">int userp( object arg);
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>描述</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-mysql" data-lang="mysql"><span class="err">如果</span><span class="w"> </span><span class="o">`</span><span class="n">arg</span><span class="o">`</span><span class="w"> </span><span class="err">曾经是玩家，返回</span><span class="w"> </span><span class="mi">1</span><span class="err">。</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><p>以上外部函数大家可以自己写代码测试，教程提供的 mudlib 中实现了 <code>users()</code> 外部函数的同名指令 <code>users</code> ，可以直接输入这个指令查看在线玩家对象列表。</p>
+<h3 id="生物对象">生物对象</h3>
+<p>生物对象是指可以使用命令的对象，表现出活着（living）的特性，所有玩家对象也必须是生物对象。在游戏中判断的依据是如果一个对象呼叫了 <code>enable_commands()</code> 外部函数，这个对象就活了，然后就可以添加指令和使用命令。和生物对象相关的外部函数：enable_commands()、disable_commands()、add_action()、living()、livings()、set_living_name()、named_livings()、find_living() 和 find_player()。</p>
+<blockquote>
+<p>名称</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">enable_commands() - 允许对象使用玩家命令
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>语法</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">已弃用:
+void enable_commands( void );
+
+从 FluffOS 3.0-alpha7.1 开始:
+void enable_commands( int setup_actions = 0 );
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>描述</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">enable_commands() 把 this_object() 标记为活的（living）对象（生物），并允许对象通过 command() 外部函数使用由 add_action() 外部函数增加的命令。当对象调用 enable_commands() 函数后，系统驱动（driver）还会在对象中寻找 catch_tell() 方法，如果找到，每次有消息发给对象（如通过外部函数 say()）时都会调用 catch_tell() 方法。(仅针对非玩家生物)。从 FluffOS  3.0-alpha7 开始，本函数接受整型参数，默认值为0，作用和旧版一样，仅仅是启用命令，但不设置动作。如果参数 setup_actions &gt; 0，驱动会调用对象所在环境及环境中所有中所有对象的 init() 方法。
+</code></pre></td></tr></table>
+</div>
+</div><hr>
+<blockquote>
+<p>名称</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">disable_commands() - 让一个活的（living）对象变成非活的（non-living）
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>语法</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">int disable_commands( void );
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>描述</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">让一个活着的对象变成非活着的状态，也就是说：add_action() 无效，living() 返回值为0，而且，如果对象是玩家，将变的无法使用任何指令（input_to()依然可用）。调用 disable_commands() 函数还有一个附加效果是清理掉此对象的所有行为指令，包括此对象本身定义的和来自其它对象的。
+</code></pre></td></tr></table>
+</div>
+</div><hr>
+<blockquote>
+<p>名称</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">living() - 检测给定对象是否是活的（living）
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>语法</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">int living( object ob );
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>描述</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-mysql" data-lang="mysql"><span class="err">如果对象</span><span class="w"> </span><span class="o">`</span><span class="n">ob</span><span class="o">`</span><span class="w"> </span><span class="err">是活的（</span><span class="n">living</span><span class="err">）返回</span><span class="w"> </span><span class="mi">1</span><span class="err">。关于</span><span class="w"> </span><span class="n">living</span><span class="w"> </span><span class="err">的定义：如果一个对象呼叫了</span><span class="w"> </span><span class="o">`</span><span class="nf">enable_commands</span><span class="p">()</span><span class="o">`</span><span class="w"> </span><span class="err">外部函数，这个对象就活了。</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<blockquote>
+<p>名称</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">livings() - 返回一个包括所有活着的(living)对象的数组
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>语法</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">object *livings( void );
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>描述</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">返回一个包括所有活着的对象指针的数组。关于什么对象算活的请看 living() 外部函数中的说明。
+</code></pre></td></tr></table>
+</div>
+</div><hr>
+<blockquote>
+<p>名称</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">set_living_name() - 为一个生物设置一个名字
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>语法</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">void set_living_name( string name );
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>描述</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">为一个生物设置名字，设置后可以使用 find_living() 外部函数找到这个对象。
+</code></pre></td></tr></table>
+</div>
+</div><hr>
+<blockquote>
+<p>名称</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">named_livings() - 返回所有已取名的生物对象
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>语法</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">object *named_livings();
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>描述</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">返回游戏中所有呼叫过 enable_commands() 和 set_living_name() 外部函数的对象的数组。
+</code></pre></td></tr></table>
+</div>
+</div><hr>
+<blockquote>
+<p>名称</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">find_living() - 查找与给定名字匹配的生物
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>语法</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">object find_living( string str );
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>描述</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-mysql" data-lang="mysql"><span class="err">首先查找标记为“活的”对象（即生物），然后查找</span><span class="n">ID</span><span class="w"> </span><span class="o">`</span><span class="n">str</span><span class="o">`</span><span class="err">。生物是曾经呼叫过</span><span class="w"> </span><span class="nf">enable_commands</span><span class="p">()</span><span class="w"> </span><span class="err">外部函数的对象，而且必须使用</span><span class="w"> </span><span class="nf">set_living_name</span><span class="p">()</span><span class="w"> </span><span class="err">外部函数设置了名字，这些生物的名字会被存入</span><span class="w"> </span><span class="n">hash</span><span class="w"> </span><span class="err">表方便快速搜索。</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<blockquote>
+<p>名称</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">find_player() - 通过名字查找游戏玩家
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>语法</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">object find_player( string str );
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>描述</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">和 find_living() 外部函数功能类似, 只是仅从玩家(interactive)或曾经是玩家的对象中寻找。
+</code></pre></td></tr></table>
+</div>
+</div><p>关于指令系统 add_action() 相关的使用需要结合 apply 方法 init() 会在后续章节专门讲解。对其它外部函数，为方便学习测试，本教程的 mudlib 中提供了指令 <code>enable_commands</code>、<code>disable_commands</code>、<code>livings</code>、<code>set_living_name</code>、<code>named_livings</code>、<code>find_living</code> 和 <code>find_player</code>，请自己直接使用这些指令测试功能。比如：<code>enable_commands /cmds/test/test</code> 直接让 <code>/cmds/test/test</code> 对象变成生物；<code>set_living_name /cmds/test/test test</code> 设置生物 <code>/cmds/test/test</code> 的名字为 <code>test</code>；<code>find_living test</code> 可以寻找名称为 <code>test</code> 的生物对象。</p>
+<h3 id="对象的加载">对象的加载</h3>
+<p>所有对象都需要由驱动程序编译并载入到游戏中。可以通过以下5中方式载入对象到游戏环境：</p>
+<ol>
+<li>load_object(filename) - 只载入原始对象</li>
+<li>find_object(filename, 1) - 结果同上</li>
+<li>new(filename, &hellip;) - 载入原始对象(如果未被载入)，并从原始对象复制一份出来，产生一个复制对象</li>
+<li>clone_object(filename, &hellip;) - 结果同上</li>
+<li>call_other(filename, func, &hellip;) 或 filename-&gt;func() - 与 1, 2 相同, 但载入或寻找到原始对象后，会立即呼叫该对象的方法 <code>func</code>, 使用 call_other(filename, &ldquo;???&quot;) 或是在 ??? 处填入任意不存在的方法名称，则只会载入对象，亦即与 1, 2 结果相同，值得注意的是，filename 必须是字符串型态才可进行载入对象的动作。</li>
+</ol>
+<p>注：标出 &hellip; 的部分目前不必理会，只需要知道该处可送入一群参数，也可以完全不需要送入参数，如 new(&quot;/obj/test&rdquo;)、new(&quot;/obj/test&quot;, 10)、new(&quot;/obj/test&quot;, 10, &ldquo;abcd&rdquo;, 1234, &ldquo;test&rdquo;)</p>
+<p>以上外部函数用法如下：</p>
+<blockquote>
+<p>名称</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">load_object() - 通过文件名查找或载入一个对象
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>语法</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">object load_object( string str );
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>描述</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-mysql" data-lang="mysql"><span class="err">通过文件名</span><span class="w"> </span><span class="o">`</span><span class="n">str</span><span class="o">`</span><span class="w"> </span><span class="err">查找游戏对象并返回对象指针，如果文件存在但对象未载入，载入并返回对象指针。如果对象不存在，返回</span><span class="w"> </span><span class="mi">0</span><span class="err">。</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<blockquote>
+<p>名称</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">find_object() - 通过文件名（file_name()）查找对象
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>语法</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">object find_object( string str );
+object find_object( string str, int flag);
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>描述</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-mysql" data-lang="mysql"><span class="err">通过文件名</span><span class="w"> </span><span class="o">`</span><span class="n">str</span><span class="o">`</span><span class="w"> </span><span class="err">查找游戏中已加载的对象。如果对象是复制对象，文件名可以通过</span><span class="w"> </span><span class="nf">file_name</span><span class="p">()</span><span class="w"> </span><span class="err">外部函数取得。如果对象不存在或未载入游戏，返回</span><span class="w"> </span><span class="mi">0</span><span class="err">，否则返回对象指针。如果可选参数</span><span class="w"> </span><span class="o">`</span><span class="n">flag</span><span class="o">`</span><span class="w"> </span><span class="err">为</span><span class="w"> </span><span class="mi">1</span><span class="err">，此函数的效果等同于</span><span class="w"> </span><span class="nf">load_object</span><span class="p">()</span><span class="err">。</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<blockquote>
+<p>名称</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">clone_object() - 加载一个对象的复制
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>语法</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">object clone_object( string name, mixed extra, ... );
+object new( string name, mixed extra, ... );
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>描述</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-mysql" data-lang="mysql"><span class="err">从文件</span><span class="w"> </span><span class="o">`</span><span class="n">name</span><span class="o">`</span><span class="w"> </span><span class="err">创建一个新的对象，并给予它一个唯一的编号（在文件名后附加</span><span class="c1">#XXX，XXX是整个游戏中独一无二的数字编号）。如果系统中没有加载文件名为 `name` 的对象（称为蓝图对象），调用本函数时先载入蓝图对象然后再复制这个对象并返回复制的对象（驱动程序会给复制对象设置一个 O_CLONE 标志），复制对象和蓝图对象共享代码，但可以有不同的变量。如果指定额外参数 `extra`，会传给要加载的对象的 create() 方法。
+</span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<blockquote>
+<p>名称</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">call_other() - 呼叫在其它对象中的函数（方法）
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>语法</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">unknown call_other( object ob, string func, ... );
+unknown call_other( object ob, mixed *args);
+unknown call_other( object *obs, string func, ... );
+unknown call_other( object *obs, mixed *args );
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>描述</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-mysql" data-lang="mysql"><span class="err">呼叫其它对象中的方法，因为返回值为调用方法的返回值，所以在编译阶段无法判断返回值的类型，最好在使用时做类型检查。字符串</span><span class="w"> </span><span class="o">`</span><span class="n">func</span><span class="o">`</span><span class="w"> </span><span class="err">是对象</span><span class="w"> </span><span class="o">`</span><span class="n">ob</span><span class="o">`</span><span class="w"> </span><span class="err">中被调用的方法名称，而第</span><span class="mi">3</span><span class="err">、</span><span class="mi">4</span><span class="err">……个等参数会做为第</span><span class="mi">1</span><span class="err">、</span><span class="mi">2</span><span class="err">……个参数按顺序传递给</span><span class="w"> </span><span class="o">`</span><span class="n">func</span><span class="o">`</span><span class="err">。</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="err">如果</span><span class="w"> </span><span class="n">call_other</span><span class="w"> </span><span class="err">函数第一个对象参数是数组，那么</span><span class="w"> </span><span class="n">call_other</span><span class="w"> </span><span class="err">会逐一呼叫它们的</span><span class="w"> </span><span class="o">`</span><span class="n">func</span><span class="o">`</span><span class="err">，返回值也是一个数组。</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="err">如果</span><span class="w"> </span><span class="n">call_other</span><span class="w"> </span><span class="err">函数的第二个参数是数组，那么数组的第一个元素必须是要调用的方法名字符串</span><span class="w"> </span><span class="o">`</span><span class="n">func</span><span class="o">`</span><span class="w"> </span><span class="p">,</span><span class="err">剩余的元素则是要传入方法的参数。</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><p>这里有一个使用 call_other() 更好的方式:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">object ob | object *obs -&gt; func ( ... );
+</code></pre></td></tr></table>
+</div>
+</div><p>如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">call_other(ob, &#34;query&#34;, &#34;name&#34;);
+</code></pre></td></tr></table>
+</div>
+</div><p>可以写成：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">ob-&gt;query(&#34;name&#34;);
+</code></pre></td></tr></table>
+</div>
+</div><p>如果第二个参数使用数组，以上示例可以写成：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">call_other(ob, ({ &#34;query&#34;, &#34;name&#34; }));
+</code></pre></td></tr></table>
+</div>
+</div><p>而第一个参数是数组的示例如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">users()-&gt;quit();
+</code></pre></td></tr></table>
+</div>
+</div><p>所有对象都必须先加载入游戏才能生效，我们使用任何指令时也都把这个指令对象载入了游戏，除了使用以上的外部函数加载对象外，我们还可以使用外部函数 <code>objects()</code> 获取所有已加载的对象，使用外部函数 <code>destruct()</code> 外部函数摧毁已加载对象，使用外部函数 <code>children()</code> 获取指定对象及其所有复制对象。具体用法如下：</p>
+<blockquote>
+<p>名称</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">objects - 返回包含游戏已加载的所有对象的数组
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>语法</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">object *objects( void );
+object *objects( string func, object ob );
+object *objects( function f );
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>描述</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-mysql" data-lang="mysql"><span class="err">返回</span><span class="w"> </span><span class="n">MUD</span><span class="w"> </span><span class="err">游戏中加载的所有对象的数组。请注意，如果系统设置的数组大小最大值太小，</span><span class="nf">objects</span><span class="p">()</span><span class="w"> </span><span class="err">返回的数组会被截断到允许的最大值，这种情况下，返回值也没什么用处了。</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="err">如果指定可选参数</span><span class="w"> </span><span class="o">`</span><span class="n">func</span><span class="o">`</span><span class="w"> </span><span class="err">和</span><span class="w"> </span><span class="o">`</span><span class="n">ob</span><span class="o">`</span><span class="err">，所有已加载的对象都会作为参数呼叫</span><span class="w"> </span><span class="n">ob</span><span class="o">-&gt;</span><span class="nf">func</span><span class="p">()</span><span class="err">，函数返回值为</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="err">的对象会被过滤掉。</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="err">第三种用法和第二种类似，只是参数改为函数指针。如：</span><span class="nf">objects</span><span class="p">(</span><span class="w"> </span><span class="p">(:</span><span class="w"> </span><span class="n">clonep</span><span class="w"> </span><span class="p">:)</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="err">返回游戏中所有复制对象的列表。</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<blockquote>
+<p>名称</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">destruct() - 从游戏中移除一个对象
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>语法</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">void destruct( object ob );
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>描述</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-mysql" data-lang="mysql"><span class="err">从游戏中完全销毁并移除对象</span><span class="w"> </span><span class="o">`</span><span class="n">ob</span><span class="o">`</span><span class="err">。在呼叫</span><span class="w"> </span><span class="nf">destruct</span><span class="p">()</span><span class="w"> </span><span class="err">后，如果对象是</span><span class="w"> </span><span class="nf">this_object</span><span class="p">()</span><span class="err">，</span><span class="nf">this_object</span><span class="p">()</span><span class="w"> </span><span class="err">的代码仍然会继续执行，但最好马上返回一个值，而且所有指向被销毁的对象的变量值都会变成</span><span class="w"> </span><span class="mi">0</span><span class="err">。</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="err">即将被销毁的对象的所有内容对象都会呼叫自己的</span><span class="w"> </span><span class="nf">move_or_destruct</span><span class="p">()</span><span class="w"> </span><span class="err">方法，如果呼叫</span><span class="w"> </span><span class="nf">move_or_destruct</span><span class="p">()</span><span class="w"> </span><span class="err">方法的对象不把自己移到即将被销毁的对象外，也会被一起销毁。</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<blockquote>
+<p>名称</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">children() - 返回包含指定对象的所有复制对象的数组
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>语法</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">object *children( string name );
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>描述</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-mysql" data-lang="mysql"><span class="err">这个外部函数返回一个文件名为</span><span class="w"> </span><span class="o">`</span><span class="n">name</span><span class="o">`</span><span class="w"> </span><span class="err">的对象及其所有复制对象组成的数组。</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><p>一个使用 children() 的示例是查找所有玩家对象：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">object *list;
+list = children(&#34;/system/object/user&#34;);
+</code></pre></td></tr></table>
+</div>
+</div><p>这让你能找到所有玩家对象（包括在线玩家和断线玩家，而 users() 外部函数仅报告在线玩家）。</p>
+<p>以上几个外部函数在本教程中也提供了同名指令 <code>new</code>、<code>objects</code>、<code>destruct</code>、<code>children</code> 可用，可以自己直接使用指令测试相应的功能。</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2022-06-29</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/5.5lpc%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E5%AF%B9%E8%B1%A1%E5%8F%8A%E7%9B%B8%E5%85%B3%E5%B8%B8%E7%94%A8efun/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://705248010.github.io/5.5lpc%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E5%AF%B9%E8%B1%A1%E5%8F%8A%E7%9B%B8%E5%85%B3%E5%B8%B8%E7%94%A8efun/" data-title="5.5LPC语言中的对象及相关常用Efun" data-via="xxxx" data-hashtags="LPC,MUD,“LPMUD”"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://705248010.github.io/5.5lpc%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E5%AF%B9%E8%B1%A1%E5%8F%8A%E7%9B%B8%E5%85%B3%E5%B8%B8%E7%94%A8efun/" data-hashtag="LPC"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://705248010.github.io/5.5lpc%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E5%AF%B9%E8%B1%A1%E5%8F%8A%E7%9B%B8%E5%85%B3%E5%B8%B8%E7%94%A8efun/" data-title="5.5LPC语言中的对象及相关常用Efun"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://705248010.github.io/5.5lpc%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E5%AF%B9%E8%B1%A1%E5%8F%8A%E7%9B%B8%E5%85%B3%E5%B8%B8%E7%94%A8efun/" data-title="5.5LPC语言中的对象及相关常用Efun" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></i></a><a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://705248010.github.io/5.5lpc%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E5%AF%B9%E8%B1%A1%E5%8F%8A%E7%9B%B8%E5%85%B3%E5%B8%B8%E7%94%A8efun/" data-title="5.5LPC语言中的对象及相关常用Efun" data-description=""><i class="fab fa-blogger fa-fw"></i></a><a href="javascript:void(0);" title="分享到 百度" data-sharer="baidu" data-url="https://705248010.github.io/5.5lpc%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E5%AF%B9%E8%B1%A1%E5%8F%8A%E7%9B%B8%E5%85%B3%E5%B8%B8%E7%94%A8efun/" data-title="5.5LPC语言中的对象及相关常用Efun"><i data-svg-src="/lib/simple-icons/icons/baidu.min.svg"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/lpc/">LPC</a>,&nbsp;<a href="/tags/mud/">MUD</a>,&nbsp;<a href="/tags/lpmud/">“LPMUD”</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/5.4%E6%B8%B8%E6%88%8F%E6%9C%80%E5%B8%B8%E7%94%A8%E7%9A%84%E5%A4%96%E9%83%A8%E5%87%BD%E6%95%B0/" class="prev" rel="prev" title="5.4游戏最常用的外部函数"><i class="fas fa-angle-left fa-fw"></i>5.4游戏最常用的外部函数</a>
+            <a href="/5.6lpc%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/" class="next" rel="next" title="5.6LPC语言中的面向对象编程">5.6LPC语言中的面向对象编程<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line"><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/705248010" target="_blank">Kurong123</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+        
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div>
+
+        <div class="sidebar_wo">
+            <div id="leimu">
+              <img src="https://cdn.jsdelivr.net/gh/lewky/lewky.github.io@master/images/b2t/leimuA.png" alt="雷姆" 
+              onmouseover="this.src='https://cdn.jsdelivr.net/gh/lewky/lewky.github.io@master/images/b2t/leimuB.png'" 
+              onmouseout="this.src='https://cdn.jsdelivr.net/gh/lewky/lewky.github.io@master/images/b2t/leimuA.png'" title="回到顶部">
+            </div>
+            <div class="sidebar_wo" id="lamu">
+              <img src="https://cdn.jsdelivr.net/gh/lewky/lewky.github.io@master/images/b2t/lamuA.png" alt="雷姆" 
+              onmouseover="this.src='https://cdn.jsdelivr.net/gh/lewky/lewky.github.io@master/images/b2t/lamuB.png'" 
+              onmouseout="this.src='https://cdn.jsdelivr.net/gh/lewky/lewky.github.io@master/images/b2t/lamuA.png'" title="回到底部">
+            </div>
+          </div><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@2.1.3/dist/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-backstretch@2.1.18/jquery.backstretch.min.js"></script><script type="text/javascript" src="/js/custom.js"></script></body>
+</html>
