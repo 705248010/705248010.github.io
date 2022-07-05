@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>8.9智能的message和变态的snoop - Kurong123&#39;s Blog</title><meta name="Description" content="Personal Blog"><meta property="og:title" content="8.9智能的message和变态的snoop" />
+<meta property="og:description" content="8.9 智能的 message 和变态的 snoop 智能的 message 在前面的基础教程中讲了游戏中的基本输出函数，能满足大多数需求，但是还有一个外部函数没有讲解，就是 message，" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://705248010.github.io/8.9%E6%99%BA%E8%83%BD%E7%9A%84message%E5%92%8C%E5%8F%98%E6%80%81%E7%9A%84snoop/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-07-05T23:35:42+08:00" />
+<meta property="article:modified_time" content="2022-07-05T23:35:42+08:00" />
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="8.9智能的message和变态的snoop"/>
+<meta name="twitter:description" content="8.9 智能的 message 和变态的 snoop 智能的 message 在前面的基础教程中讲了游戏中的基本输出函数，能满足大多数需求，但是还有一个外部函数没有讲解，就是 message，"/>
+<meta name="application-name" content="LoveIt">
+<meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="canonical" href="https://705248010.github.io/8.9%E6%99%BA%E8%83%BD%E7%9A%84message%E5%92%8C%E5%8F%98%E6%80%81%E7%9A%84snoop/" /><link rel="prev" href="https://705248010.github.io/8.8%E8%B0%93%E8%AF%8D%E8%AF%AD%E6%B3%95%E6%8C%87%E4%BB%A4%E7%B3%BB%E7%BB%9F%E4%BB%8B%E7%BB%8D/" /><link rel="next" href="https://705248010.github.io/8.11%E8%AE%A9%E4%BD%A0%E5%BF%83%E8%B7%B3heart_beat%E7%9A%84%E6%88%98%E6%96%97/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "8.9智能的message和变态的snoop",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/705248010.github.io\/8.9%E6%99%BA%E8%83%BD%E7%9A%84message%E5%92%8C%E5%8F%98%E6%80%81%E7%9A%84snoop\/"
+        },"genre": "posts","keywords": "LPC, MUD, “LPMUD”","wordcount":  2300 ,
+        "url": "https:\/\/705248010.github.io\/8.9%E6%99%BA%E8%83%BD%E7%9A%84message%E5%92%8C%E5%8F%98%E6%80%81%E7%9A%84snoop\/","datePublished": "2022-07-05T23:35:42+08:00","dateModified": "2022-07-05T23:35:42+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Kurong123"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <a href="https://github.com/705248010" class="github-corner" target="_blank" title="Follow me on GitHub" aria-label="Follow me on GitHub"><svg width="3.5rem" height="3.5rem" viewBox="0 0 250 250" style="fill:#70B7FD; color:#fff; position: absolute; top: 0; border: 0; left: 0; transform: scale(-1, 1);" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+        <div class="header-title">
+            <a href="/" title="Kurong123&#39;s Blog">Kurong123&#39;s Blog</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner">
+		<div class="dropdown">
+			<a href="/posts/" class="menu-item menu-more dropbtn" title="" ><i class='fas fa-fw fa-archive'></i> 归档 
+			</a>
+			<div class="menu-more-content dropdown-content"><a href="/categories/" title="" ><i class='fas fa-fw fa-th'></i> 分类 </a><a href="/tags/" title="" target="_blank" rel="noopener"><i class='fas fa-fw fa-tag'></i> 标签 </a></div>
+		</div>
+	<a class="menu-item" href="/friends/"><i class='fas fa-fw fa-fan fa-link'></i> 友链 
+		</a><a class="menu-item" href="/about/"><i class='fas fa-fw fa-fan fa-book'></i> 关于 
+		</a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Kurong123&#39;s Blog">Kurong123&#39;s Blog</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title=""><i class='fas fa-fw fa-archive'></i>归档</a><a class="menu-item" href="/friends/" title=""><i class='fas fa-fw fa-fan fa-link'></i>友链</a><a class="menu-item" href="/about/" title=""><i class='fas fa-fw fa-fan fa-book'></i>关于</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">8.9智能的message和变态的snoop</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/705248010" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>Kurong123</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/lpmud/"><i class="far fa-folder fa-fw"></i>LPMUD</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar fa-fw"></i>&nbsp;<time datetime="2022-07-05">2022-07-05</time>&nbsp;<i class="far fa-calendar-plus fa-fw"></i>&nbsp;<time datetime="2022-07-05">2022-07-05</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2300 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 5 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#智能的-message">智能的 message</a></li>
+    <li><a href="#变态的-snoop">变态的 snoop</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="89-智能的-message-和变态的-snoop">8.9 智能的 message 和变态的 snoop</h1>
+<h2 id="智能的-message">智能的 message</h2>
+<p>在前面的基础教程中讲了游戏中的基本输出函数，能满足大多数需求，但是还有一个外部函数没有讲解，就是 <code>message</code>，这个函数，这个函数的语法说明如下：</p>
+<blockquote>
+<p>名称</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">message() - 发送信息给活着的（living）对象
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>语法</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">void message( mixed class, string message, mixed target, mixed exclude );
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>描述</p>
+</blockquote>
+<p>message() 呼叫 target 参数列表中除 exclude 参数列表以外的所有对象的 receive_message(mixed class, string message) 方法，通过此方法向对象发送消息。</p>
+<p>参数 <code>class</code> 是消息的类型（用于客户端消息处理），例如：<code>combat</code>，<code>shout</code>, <code>emergency</code>等。</p>
+<p>参数 <code>message</code> 是需要发送的消息字符串。</p>
+<p>参数 <code>target</code> 是需要接收消息的对象列表，此参数数据类型既可以是单一对象字符串或者对象指针，也可以是一个对象数组。如果对象是非活着的，那么在此对象环境中的所有对象都会收到信息。</p>
+<p>可选参数 <code>exclude</code> 是不需要接收消息的对象列表，此参数数据类型可以是对象或对象数组。</p>
+<p>在游戏开发中，推荐使用这个外部函数来控制消息的输出，结合 apply 方法 <code>receive_message</code> 可以指定不同 <code>class</code> 的消息用不同的颜色输出，还可以实现让不同的人看到不同的结果的功能。比如 ROOM 中 A 和 B 战斗，C、D、E、F 旁观，G 昏迷，对 <code>A 向 B 发起了攻击，但是 B 轻松的躲开了 A 的攻击！</code> 这条信息，A～G看到的应该是这样的（假如 A 是男性，B 是女性）：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">A：你向 B 发起了攻击，但是她轻松的躲开了你的攻击！
+B： A 向你发起了攻击，但是你轻松的躲开了他的攻击！
+C、D、E、F： A 向 B 发起了攻击，但是 B 轻松的躲开了 A 的攻击！
+G：[不显示任何消息]
+</code></pre></td></tr></table>
+</div>
+</div><p>要针对不同玩家显示不同消息的解决方案是什么？在提出解决方案前，先简单说说战斗功能的实施方案，战斗是游戏的核心功能之一，开发时应该做为一种服务独立，可以参考 linux 系统中的守护进程（Daemon），实际游戏开发时，我们也是这样做的，比如开发一个名称为 <code>combat_d</code> 的战斗守护进程,玩家战斗时调用这个进程实现战斗信息显示、伤害处理、奖惩机制等。</p>
+<p>在以上情况下 A 是发起战斗的 this_player() 玩家，这条消息应该由 A 调用守护。</p>
+<blockquote>
+<p>基础方案</p>
+</blockquote>
+<p>直接把不同的信息发给不同的对象，比如守护进程做基础判断后：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">tell_object(A, &#34;你向 B 发起了攻击，但是她轻松的躲开了你的攻击！&#34;);
+tell_object(B, &#34;A 向你发起了攻击，但是你轻松的躲开了他的攻击！&#34;);
+tell_room(ROOM, &#34;A 向 B 发起了攻击，但是 B 轻松的躲开了 A 的攻击！&#34;, ({A, B, G}));
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>推荐方案</p>
+</blockquote>
+<p>A 做为发起战斗的 this_player()，和其他对象的关系可以分为：A - 我，B - 你，C～G - 他们。把信息做个处理成 <code>$ME 向 $YOU 发起了攻击，但是 $YOU 轻松的躲开了 $ME 的攻击！</code>,定义一个模拟外部函数，比如 <code>msg</code>，把我、你、他们和信息作为参数传递给这个函数，函数针对不同的对象对 <code>$ME</code> 和 <code>$YOU</code> 做不同的替换处理，然后把处理过的信息使用 <code>message</code> 发送给对象，最后在对象的 <code>receive_message</code> 控制显示。</p>
+<p>在本教程的最新代码中已经实现了模拟外部函数 <code>msg</code>，函数原型为 <code>varargs void msg(string type, string msg, object me, object you, object *exclude);</code>。</p>
+<p>现在还没有实现战斗系统，但是我们先模拟一个表情 <code>hi</code>，测试信息对不同人的显示相关功能。在 <code>/cmds/test/</code> 目录新建文件 <code>hi.c</code>，具体代码如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="c1">// hi.c
+</span><span class="c1"></span><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="n">object</span> <span class="n">me</span><span class="p">,</span> <span class="n">string</span> <span class="n">arg</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">object</span> <span class="n">ob</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">arg</span> <span class="o">&amp;&amp;</span><span class="n">ob</span> <span class="o">=</span> <span class="n">find_player</span><span class="p">(</span><span class="n">arg</span><span class="p">))</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">ob</span> <span class="o">==</span> <span class="n">me</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">msg</span><span class="p">(</span><span class="s">&#34;emote&#34;</span><span class="p">,</span> <span class="s">&#34;$ME热情的和$ME自己打招呼！&#34;</span><span class="p">,</span> <span class="n">me</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">else</span>
+        <span class="p">{</span>
+            <span class="n">msg</span><span class="p">(</span><span class="s">&#34;emote&#34;</span><span class="p">,</span> <span class="s">&#34;$ME热情的和$YOU打招呼！&#34;</span><span class="p">,</span> <span class="n">me</span><span class="p">,</span> <span class="n">ob</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">else</span>
+    <span class="p">{</span>
+        <span class="n">msg</span><span class="p">(</span><span class="s">&#34;emote&#34;</span><span class="p">,</span> <span class="s">&#34;$ME热情的和大家打招呼！&#34;</span><span class="p">,</span> <span class="n">me</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>请注意，这个看起来像表情的指令只是测试用，我们在正式的游戏中的表情动作系统不是这样实现的，具体方式在后续进阶教程会具体实现。我们输入指令 <code>hi</code> 试试，你会发现没有任何显示。这是当前玩家对象中没有 apply 方法 <code>receive_message</code>。</p>
+<p>为了不修改已有对教程代码，我们再次新建一个玩家对象来扩展功能，在 <code>/cmds/test/</code> 目录新建玩家对象 <code>user3.c</code>，具体代码如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="c1">// user3.c
+</span><span class="c1"></span><span class="cp">#include</span> <span class="cpf">&lt;ansi.h&gt;</span><span class="cp">
+</span><span class="cp"></span><span class="n">inherit</span> <span class="n">__DIR__</span> <span class="s">&#34;user2&#34;</span><span class="p">;</span>
+
+<span class="kt">void</span> <span class="nf">receive_message</span><span class="p">(</span><span class="n">string</span> <span class="n">type</span><span class="p">,</span> <span class="n">string</span> <span class="n">message</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">// 可以在此判断是否显示消息等
+</span><span class="c1"></span>    <span class="k">switch</span> <span class="p">(</span><span class="n">type</span><span class="p">)</span>
+    <span class="p">{</span>
+    <span class="k">case</span> <span class="s">&#34;emote&#34;</span><span class="o">:</span>
+        <span class="n">receive</span><span class="p">(</span><span class="n">HIM</span> <span class="o">+</span> <span class="n">message</span> <span class="o">+</span> <span class="s">&#34;</span><span class="se">\n</span><span class="s">&#34;</span> <span class="n">NOR</span><span class="p">);</span>
+        <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="s">&#34;success&#34;</span><span class="o">:</span>
+        <span class="n">receive</span><span class="p">(</span><span class="n">HIG</span> <span class="o">+</span> <span class="n">message</span> <span class="o">+</span> <span class="s">&#34;</span><span class="se">\n</span><span class="s">&#34;</span> <span class="n">NOR</span><span class="p">);</span>
+        <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="s">&#34;danger&#34;</span><span class="o">:</span>
+        <span class="n">receive</span><span class="p">(</span><span class="n">HIR</span> <span class="o">+</span> <span class="n">message</span> <span class="o">+</span> <span class="s">&#34;</span><span class="se">\n</span><span class="s">&#34;</span> <span class="n">NOR</span><span class="p">);</span>
+        <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="s">&#34;warning&#34;</span><span class="o">:</span>
+        <span class="n">receive</span><span class="p">(</span><span class="n">HIY</span> <span class="o">+</span> <span class="n">message</span> <span class="o">+</span> <span class="s">&#34;</span><span class="se">\n</span><span class="s">&#34;</span> <span class="n">NOR</span><span class="p">);</span>
+        <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="s">&#34;info&#34;</span><span class="o">:</span>
+        <span class="n">receive</span><span class="p">(</span><span class="n">HIC</span> <span class="o">+</span> <span class="n">message</span> <span class="o">+</span> <span class="s">&#34;</span><span class="se">\n</span><span class="s">&#34;</span> <span class="n">NOR</span><span class="p">);</span>
+        <span class="k">break</span><span class="p">;</span>
+    <span class="k">default</span><span class="o">:</span>
+        <span class="n">receive</span><span class="p">(</span><span class="n">HIW</span> <span class="o">+</span> <span class="n">message</span> <span class="o">+</span> <span class="s">&#34;</span><span class="se">\n</span><span class="s">&#34;</span> <span class="n">NOR</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">receive_snoop</span><span class="p">(</span><span class="n">string</span> <span class="n">message</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">receive</span><span class="p">(</span><span class="n">HBBLU</span> <span class="o">+</span> <span class="n">message</span> <span class="o">+</span> <span class="n">NOR</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>在这个玩家对象中，定义了2个玩家对象 apply 方法，<code>receive_message</code> 控制 <code>message</code> 外部函数的消息显示，<code>receive_snoop</code> 控制后面会讲到对 <code>snoop</code> 外部函数的消息显示。</p>
+<p>现在输入指令 <code>user3</code> 后看看吧，可以多登录几个玩家然后都切换到 <code>user3</code> 玩家对象后输入 <code>hi 玩家id</code> 看效果。</p>
+<h2 id="变态的-snoop">变态的 snoop</h2>
+<p>在游戏中有一个指令 <code>snoop</code> 可以获得别的玩家的游戏内容，就像你是这个玩家一样，不过类似旁观者模式。具体语法说明如下：</p>
+<blockquote>
+<p>名称</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">snoop() - 监听一个在线玩家
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>语法</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">varargs object snoop( object snooper, object snoopee );
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>描述</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-mysql" data-lang="mysql"><span class="err">当使用</span><span class="mi">2</span><span class="err">个参数时，对象</span><span class="w"> </span><span class="o">`</span><span class="n">snooper</span><span class="o">`</span><span class="w"> </span><span class="err">开始监听对象</span><span class="w"> </span><span class="o">`</span><span class="n">snoopee</span><span class="o">`</span><span class="err">。当第二个参数省略时，关闭</span><span class="w"> </span><span class="o">`</span><span class="n">snooper</span><span class="o">`</span><span class="w"> </span><span class="err">的所有监听。通常使用模拟外部函数控制</span><span class="w"> </span><span class="nf">snoop</span><span class="p">()</span><span class="w"> </span><span class="err">的安全性。如果函数执行成功，使用</span><span class="mi">2</span><span class="err">个参数时返回</span><span class="w"> </span><span class="o">`</span><span class="n">snoopee</span><span class="o">`</span><span class="err">，只有一个参数时返回</span><span class="w"> </span><span class="o">`</span><span class="n">snooper</span><span class="o">`</span><span class="err">。如果执行失败返回</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="err">。</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><p>这个外部函数需要配合 <code>receive_snoop</code> 使用，在上面的新的用户对象 <code>user3</code> 中已经实现了这个方法。</p>
+<p>和外部函数 <code>snoop</code> 相关的外部函数有 <code>query_snoop</code> 和 <code>query_snooping</code>，具体语法说明如下：</p>
+<blockquote>
+<p>名称</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">query_snoop() - 返回一个玩家对象的监听者
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>语法</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">object query_snoop( object ob );
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>描述</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">如果玩家对象 &#39;ob&#39; 正在被其他玩家监听，返回监听者，否则返回 0 。
+</code></pre></td></tr></table>
+</div>
+</div><hr>
+<blockquote>
+<p>名称</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">query_snooping() - 返回指定对象正在监听的对象
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>语法</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">object query_snooping( object ob );
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>描述</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-mysql" data-lang="mysql"><span class="err">如果玩家对象</span><span class="w"> </span><span class="o">`</span><span class="n">ob</span><span class="o">`</span><span class="w"> </span><span class="err">正在监听其他玩家对象，返回被监听的对象，否则返回</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="err">。</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><p>游戏教程代码中实现了监听指令 <code>snoop</code>、<code>query_snoop</code>、<code>query_snooping</code>。请登录至少二个玩家测试，如：<code>snoop abc xyz</code> 让玩家 abc 监听 xyz，监听者必须切换到 <code>user3</code> 对象才可以正常监听。</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2022-07-05</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/8.9%E6%99%BA%E8%83%BD%E7%9A%84message%E5%92%8C%E5%8F%98%E6%80%81%E7%9A%84snoop/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/lpc/">LPC</a>,&nbsp;<a href="/tags/mud/">MUD</a>,&nbsp;<a href="/tags/lpmud/">“LPMUD”</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/8.8%E8%B0%93%E8%AF%8D%E8%AF%AD%E6%B3%95%E6%8C%87%E4%BB%A4%E7%B3%BB%E7%BB%9F%E4%BB%8B%E7%BB%8D/" class="prev" rel="prev" title="8.8谓词语法指令系统介绍"><i class="fas fa-angle-left fa-fw"></i>8.8谓词语法指令系统介绍</a>
+            <a href="/8.11%E8%AE%A9%E4%BD%A0%E5%BF%83%E8%B7%B3heart_beat%E7%9A%84%E6%88%98%E6%96%97/" class="next" rel="next" title="8.11让你心跳（heart_beat）的战斗">8.11让你心跳（heart_beat）的战斗<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line"><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/705248010" target="_blank">Kurong123</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+        
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div>
+
+        <div class="sidebar_wo">
+            <div id="leimu">
+              <img src="https://cdn.jsdelivr.net/gh/lewky/lewky.github.io@master/images/b2t/leimuA.png" alt="雷姆" 
+              onmouseover="this.src='https://cdn.jsdelivr.net/gh/lewky/lewky.github.io@master/images/b2t/leimuB.png'" 
+              onmouseout="this.src='https://cdn.jsdelivr.net/gh/lewky/lewky.github.io@master/images/b2t/leimuA.png'" title="回到顶部">
+            </div>
+            <div class="sidebar_wo" id="lamu">
+              <img src="https://cdn.jsdelivr.net/gh/lewky/lewky.github.io@master/images/b2t/lamuA.png" alt="雷姆" 
+              onmouseover="this.src='https://cdn.jsdelivr.net/gh/lewky/lewky.github.io@master/images/b2t/lamuB.png'" 
+              onmouseout="this.src='https://cdn.jsdelivr.net/gh/lewky/lewky.github.io@master/images/b2t/lamuA.png'" title="回到底部">
+            </div>
+          </div><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@2.1.3/dist/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-backstretch@2.1.18/jquery.backstretch.min.js"></script><script type="text/javascript" src="/js/custom.js"></script></body>
+</html>

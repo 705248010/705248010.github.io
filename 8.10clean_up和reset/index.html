@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>8.10clean_up和reset - Kurong123&#39;s Blog</title><meta name="Description" content="Personal Blog"><meta property="og:title" content="8.10clean_up和reset" />
+<meta property="og:description" content="8.10 clean_up 和 reset 在玩游戏时我们应该有过这种经历：有的物品丢地上一段时间后会消失不见，有的NPC被杀死后过一段时间又会重生。在MUD开发中也有这种需求" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://705248010.github.io/8.10clean_up%E5%92%8Creset/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-07-05T23:36:14+08:00" />
+<meta property="article:modified_time" content="2022-07-05T23:36:14+08:00" />
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="8.10clean_up和reset"/>
+<meta name="twitter:description" content="8.10 clean_up 和 reset 在玩游戏时我们应该有过这种经历：有的物品丢地上一段时间后会消失不见，有的NPC被杀死后过一段时间又会重生。在MUD开发中也有这种需求"/>
+<meta name="application-name" content="LoveIt">
+<meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="canonical" href="https://705248010.github.io/8.10clean_up%E5%92%8Creset/" /><link rel="prev" href="https://705248010.github.io/8.11%E8%AE%A9%E4%BD%A0%E5%BF%83%E8%B7%B3heart_beat%E7%9A%84%E6%88%98%E6%96%97/" /><link rel="next" href="https://705248010.github.io/8.12%E5%9C%A8%E6%B8%B8%E6%88%8F%E7%8E%AF%E5%A2%83%E5%A2%9E%E5%8A%A0npc%E5%92%8C%E7%89%A9%E5%93%81/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "8.10clean_up和reset",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/705248010.github.io\/8.10clean_up%E5%92%8Creset\/"
+        },"genre": "posts","keywords": "LPC, MUD, “LPMUD”","wordcount":  1054 ,
+        "url": "https:\/\/705248010.github.io\/8.10clean_up%E5%92%8Creset\/","datePublished": "2022-07-05T23:36:14+08:00","dateModified": "2022-07-05T23:36:14+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Kurong123"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <a href="https://github.com/705248010" class="github-corner" target="_blank" title="Follow me on GitHub" aria-label="Follow me on GitHub"><svg width="3.5rem" height="3.5rem" viewBox="0 0 250 250" style="fill:#70B7FD; color:#fff; position: absolute; top: 0; border: 0; left: 0; transform: scale(-1, 1);" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+        <div class="header-title">
+            <a href="/" title="Kurong123&#39;s Blog">Kurong123&#39;s Blog</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner">
+		<div class="dropdown">
+			<a href="/posts/" class="menu-item menu-more dropbtn" title="" ><i class='fas fa-fw fa-archive'></i> 归档 
+			</a>
+			<div class="menu-more-content dropdown-content"><a href="/categories/" title="" ><i class='fas fa-fw fa-th'></i> 分类 </a><a href="/tags/" title="" target="_blank" rel="noopener"><i class='fas fa-fw fa-tag'></i> 标签 </a></div>
+		</div>
+	<a class="menu-item" href="/friends/"><i class='fas fa-fw fa-fan fa-link'></i> 友链 
+		</a><a class="menu-item" href="/about/"><i class='fas fa-fw fa-fan fa-book'></i> 关于 
+		</a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Kurong123&#39;s Blog">Kurong123&#39;s Blog</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title=""><i class='fas fa-fw fa-archive'></i>归档</a><a class="menu-item" href="/friends/" title=""><i class='fas fa-fw fa-fan fa-link'></i>友链</a><a class="menu-item" href="/about/" title=""><i class='fas fa-fw fa-fan fa-book'></i>关于</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">8.10clean_up和reset</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://github.com/705248010" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>Kurong123</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/lpmud/"><i class="far fa-folder fa-fw"></i>LPMUD</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar fa-fw"></i>&nbsp;<time datetime="2022-07-05">2022-07-05</time>&nbsp;<i class="far fa-calendar-plus fa-fw"></i>&nbsp;<time datetime="2022-07-05">2022-07-05</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1054 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents"></nav></div>
+            </div><div class="content" id="content"><h1 id="810-clean_up-和-reset">8.10 clean_up 和 reset</h1>
+<p>在玩游戏时我们应该有过这种经历：有的物品丢地上一段时间后会消失不见，有的NPC被杀死后过一段时间又会重生。在MUD开发中也有这种需求，怎么实现呢？这需要用到二个 apply 方法：<code>clean_up</code> 和 <code>reset</code>。这二个方法都是所有游戏对象中都可以实现的，具体语法说明如下：</p>
+<blockquote>
+<p>名称</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">clean_up - 在不活动(inactive)的对象中定期呼叫此方法
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>语法</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">int clean_up( int inherited );
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>描述</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-mysql" data-lang="mysql"><span class="err">驱动程序会定期呼叫所有已经一段时间不活跃的对象中的</span><span class="w"> </span><span class="nf">clean_up</span><span class="p">()</span><span class="w"> </span><span class="err">方法。这段时间的长短在运行时配置文件中指定。传递给函数的标识符</span><span class="w"> </span><span class="o">`</span><span class="n">inherited</span><span class="o">`</span><span class="w"> </span><span class="err">指明此对象是否被其它对象继承。</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="err">如果</span><span class="w"> </span><span class="nf">clean_up</span><span class="p">()</span><span class="w"> </span><span class="err">返回</span><span class="w"> </span><span class="mi">0</span><span class="err">，此方法在这个对象中永远不再重复呼叫，如果返回</span><span class="w"> </span><span class="mi">1</span><span class="err">，在指定的</span><span class="w"> </span><span class="nf">clean_up</span><span class="p">()</span><span class="w"> </span><span class="err">延迟时间后对象还是不活动时，会再次呼叫</span><span class="w"> </span><span class="nf">clean_up</span><span class="p">()</span><span class="w"> </span><span class="err">方法。</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="err">通常对象使用此方法摧毁自己以节省内存，不过一般不会摧毁已经被其它对象继承的对象。</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<blockquote>
+<p>名称</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">reset - 让对象做自我维护
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>语法</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">void reset( void );
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>描述</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">在每次重置间隔之后，所有对象会调用自己的 reset() 方法（如果有的话）。如果编译驱动时定义了 LAZY_RESETS ，只有玩家附加的对象才会呼叫 reset() 方法。 reset() 方法常用来重置游戏中的对象（宝物、怪物、机关等）。
+
+默认重置间隔时间（rest_time）在运行时配置文件中设置，实际每个对象的重置间隔不完全一样，具体为：
+
+reset_time = current_time + reset_time / 2 + random(reset_time / 2)
+</code></pre></td></tr></table>
+</div>
+</div><p>一般我们把 <code>clean_up</code> 作为单独的功能模块有所有需要定期摧毁的对象继承，在本教程的 <code>/inherit/clean_up.c</code> 中实现的就是这个功能，代码如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="c1">// clean_up.c
+</span><span class="c1"></span><span class="cp">#define NEVER_AGAIN 0
+</span><span class="cp">#define AGAIN 1
+</span><span class="cp"></span>
+<span class="kt">int</span> <span class="nf">clean_up</span><span class="p">(</span><span class="kt">int</span> <span class="n">inherited</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">object</span> <span class="o">*</span><span class="n">inv</span><span class="p">;</span>
+
+    <span class="c1">// 在线游戏玩家不清除
+</span><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="n">interactive</span><span class="p">(</span><span class="n">this_object</span><span class="p">()))</span>
+        <span class="k">return</span> <span class="n">AGAIN</span><span class="p">;</span>
+    <span class="c1">// 在环境中的对象不主动清除（通过清除环境来清理）
+</span><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="n">environment</span><span class="p">())</span>
+        <span class="k">return</span> <span class="n">AGAIN</span><span class="p">;</span>
+    <span class="c1">// 如果环境中有玩家则不清除环境
+</span><span class="c1"></span>    <span class="n">inv</span> <span class="o">=</span> <span class="n">all_inventory</span><span class="p">();</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">inv</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">--</span><span class="p">)</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">interactive</span><span class="p">(</span><span class="n">inv</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+            <span class="k">return</span> <span class="n">AGAIN</span><span class="p">;</span>
+
+    <span class="n">destruct</span><span class="p">(</span><span class="n">this_object</span><span class="p">());</span>
+    <span class="k">return</span> <span class="n">NEVER_AGAIN</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>把这个功能宏定义为 <code>CLEAN_UP</code>，需要定期摧毁的对象可以 <code>inherit CLEAN_UP;</code>，大家可以自己对测试代码加入继承实现定期清理的功能。</p>
+<p><code>reset</code> 方法基本是针对具体功能实现，MUD开发中主要是针对环境对象使用 <code>reset</code> 方法在环境中加入物品或NPC对象，目前主流MUD的实现使用类似如下代码指定环境中的对象和数量：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">set(&#34;objects&#34;, ([
+    __DIR__&#34;npc/xiaoer&#34; : 1,
+]));
+</code></pre></td></tr></table>
+</div>
+</div><p>在环境全局继承对象中通过 <code>reset()</code> 方法实现把以上代码指定的对象加载到环境中，并自定义一个方法 <code>setup()</code> 调用 <code>reset()</code> 方法。在环境初始化时使用 <code>setup()</code>加载对象，以后由驱动自动定期调用 <code>reset()</code> 重置环境中的对象。</p>
+<p><code>clean_up()</code> 和 <code>reset()</code> 的定期执行时间在运行时配置文件中指定，本教程中 <code>clean_up</code> 周期时间是 15 分钟，<code>reset</code> 的周期时间是 10 分钟，实际驱动呼叫 <code>reset</code> 时间周期是 <code>5 + random(5)</code> 分钟。</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2022-07-05</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/8.10clean_up%E5%92%8Creset/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/lpc/">LPC</a>,&nbsp;<a href="/tags/mud/">MUD</a>,&nbsp;<a href="/tags/lpmud/">“LPMUD”</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/8.11%E8%AE%A9%E4%BD%A0%E5%BF%83%E8%B7%B3heart_beat%E7%9A%84%E6%88%98%E6%96%97/" class="prev" rel="prev" title="8.11让你心跳（heart_beat）的战斗"><i class="fas fa-angle-left fa-fw"></i>8.11让你心跳（heart_beat）的战斗</a>
+            <a href="/8.12%E5%9C%A8%E6%B8%B8%E6%88%8F%E7%8E%AF%E5%A2%83%E5%A2%9E%E5%8A%A0npc%E5%92%8C%E7%89%A9%E5%93%81/" class="next" rel="next" title="8.12在游戏环境增加NPC和物品">8.12在游戏环境增加NPC和物品<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line"><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://github.com/705248010" target="_blank">Kurong123</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+        
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div>
+
+        <div class="sidebar_wo">
+            <div id="leimu">
+              <img src="https://cdn.jsdelivr.net/gh/lewky/lewky.github.io@master/images/b2t/leimuA.png" alt="雷姆" 
+              onmouseover="this.src='https://cdn.jsdelivr.net/gh/lewky/lewky.github.io@master/images/b2t/leimuB.png'" 
+              onmouseout="this.src='https://cdn.jsdelivr.net/gh/lewky/lewky.github.io@master/images/b2t/leimuA.png'" title="回到顶部">
+            </div>
+            <div class="sidebar_wo" id="lamu">
+              <img src="https://cdn.jsdelivr.net/gh/lewky/lewky.github.io@master/images/b2t/lamuA.png" alt="雷姆" 
+              onmouseover="this.src='https://cdn.jsdelivr.net/gh/lewky/lewky.github.io@master/images/b2t/lamuB.png'" 
+              onmouseout="this.src='https://cdn.jsdelivr.net/gh/lewky/lewky.github.io@master/images/b2t/lamuA.png'" title="回到底部">
+            </div>
+          </div><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@2.1.3/dist/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-backstretch@2.1.18/jquery.backstretch.min.js"></script><script type="text/javascript" src="/js/custom.js"></script></body>
+</html>
