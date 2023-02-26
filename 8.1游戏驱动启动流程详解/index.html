@@ -492,7 +492,15 @@ driver.exe config.cfg
 <li><code>valid_bind()</code>、<code>valid_database()</code>、<code>valid_hide()</code>、<code>valid_link()</code>、<code>valid_object()</code>、<code>valid_override()</code>、<code>valid_read()</code>、<code>valid_seteuid()</code>、<code>valid_shadow()</code>、<code>valid_socket()</code>、<code>valid_write()</code> valid 系列方法，这些方法都定义在主控对象中，其中 <code>valid_read()</code>、<code>valid_write()</code> 和 <code>valid_object()</code> 方法是读写文件和载入对象时自动调用，但不是必须实现的，如果主控对象中不存在这几个方法，默认相应功能全部允许执行，而其它 valid 方法必须在主控对象中实现，否则对应的外部函数功能无法正常使用。</li>
 </ol>
 <p>还有 <code>compile_object</code>、<code>crash</code>、<code>epilog</code>、<code>error_handler</code>、<code>get_include_path</code>、<code>log_error</code>、<code>object_name</code>、<code>preload</code> 等更多 apply 方法请看文档：https://wiki.mud.ren/index.php?title=Lpc:Apply</p>
-</div><div class="post-footer" id="post-footer">
+<div class="details admonition warning open">
+			<div class="details-summary admonition-title">
+				<i class="icon fas fa-exclamation-triangle fa-fwwarning"></i>警告<i class="details-icon fas fa-angle-right fa-fw"></i>
+		    </div>
+			<div class="details-content">
+				<div class="admonition-content">
+					本文最后更新于 <span class="timeago" datetime="2022-07-05T23:33:31" title="July 5, 2022">July 5, 2022</span>，文中内容可能已过时，请谨慎使用。</div>
+			</div>
+		 </div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">

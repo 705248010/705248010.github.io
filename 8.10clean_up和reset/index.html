@@ -274,7 +274,15 @@ reset_time = current_time + reset_time / 2 + random(reset_time / 2)
 </div>
 </div><p>在环境全局继承对象中通过 <code>reset()</code> 方法实现把以上代码指定的对象加载到环境中，并自定义一个方法 <code>setup()</code> 调用 <code>reset()</code> 方法。在环境初始化时使用 <code>setup()</code>加载对象，以后由驱动自动定期调用 <code>reset()</code> 重置环境中的对象。</p>
 <p><code>clean_up()</code> 和 <code>reset()</code> 的定期执行时间在运行时配置文件中指定，本教程中 <code>clean_up</code> 周期时间是 15 分钟，<code>reset</code> 的周期时间是 10 分钟，实际驱动呼叫 <code>reset</code> 时间周期是 <code>5 + random(5)</code> 分钟。</p>
-</div><div class="post-footer" id="post-footer">
+<div class="details admonition warning open">
+			<div class="details-summary admonition-title">
+				<i class="icon fas fa-exclamation-triangle fa-fwwarning"></i>警告<i class="details-icon fas fa-angle-right fa-fw"></i>
+		    </div>
+			<div class="details-content">
+				<div class="admonition-content">
+					本文最后更新于 <span class="timeago" datetime="2022-07-05T23:36:14" title="July 5, 2022">July 5, 2022</span>，文中内容可能已过时，请谨慎使用。</div>
+			</div>
+		 </div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">

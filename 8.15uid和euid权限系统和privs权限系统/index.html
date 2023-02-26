@@ -155,7 +155,15 @@
 <p>因为UID权限系统虽然非常强大，但实现起来比较复杂，搞不好就出漏洞了，除了UID方式，还有使用privs权限控制的方式，这是国外LIB使用比较多的鉴权方式，实现起来相对简单，主要是通过文件路径和目录判断是否有权限。</p>
 <p>privs相关efun只有二个：<code>set_privs</code> 和 <code>query_privs</code>，另外也有一个apply方法：<code>privs_file</code>。</p>
 <p>请注意：privs权限系统并不是简单的判断当前目录路径，如果你有某个目录的读写权限，这个目录下的文件复制到其它目录，你依然有这个被复制的文件的读写权限。</p>
-</div><div class="post-footer" id="post-footer">
+<div class="details admonition warning open">
+			<div class="details-summary admonition-title">
+				<i class="icon fas fa-exclamation-triangle fa-fwwarning"></i>警告<i class="details-icon fas fa-angle-right fa-fw"></i>
+		    </div>
+			<div class="details-content">
+				<div class="admonition-content">
+					本文最后更新于 <span class="timeago" datetime="2022-07-05T23:37:29" title="July 5, 2022">July 5, 2022</span>，文中内容可能已过时，请谨慎使用。</div>
+			</div>
+		 </div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">

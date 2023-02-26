@@ -544,7 +544,15 @@ object next_inventory( object ob );
 </div>
 </div><p>自己运行看看结果吧。需要再次强调的是 <code>next_inventory()</code> 这个外部函数，返回的是比指定对象先进入环境的对象。</p>
 <p>为方便后期学习和测试，项目把以上外部函数实现了同名指令<code>environment</code>、<code>all_inventory</code>、<code>deep_inventory</code>、<code>first_inventory</code>、<code>next_inventory</code>、<code>move_object</code>，方便通过指令测试。前5个指令如果不指定参数为默认对象当前玩家，如 <code>environment</code> 显示当前玩家所在环境，如果指定参数请用具体对象文件名，如 <code>all_inventory /system/object/void</code> 为显示对象 <code>/system/object/void</code> 中的所有内容对象。使用 <code>move_object</code> 可以把任意对象移动到其它环境，如 <code>move_object /cmds/test/test</code> 移动当前玩家到 <code>/cmds/test/test</code> 中，<code>move_object /cmds/test/test to /system/object/void</code> 把对象 <code>/cmds/test/test</code> 移动到 <code>/system/object/void</code> 中。</p>
-</div><div class="post-footer" id="post-footer">
+<div class="details admonition warning open">
+			<div class="details-summary admonition-title">
+				<i class="icon fas fa-exclamation-triangle fa-fwwarning"></i>警告<i class="details-icon fas fa-angle-right fa-fw"></i>
+		    </div>
+			<div class="details-content">
+				<div class="admonition-content">
+					本文最后更新于 <span class="timeago" datetime="2022-06-29T12:53:53" title="June 29, 2022">June 29, 2022</span>，文中内容可能已过时，请谨慎使用。</div>
+			</div>
+		 </div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
